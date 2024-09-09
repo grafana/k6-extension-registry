@@ -55,12 +55,13 @@ jobs:
 
       - name: registry.json
         id: registry
-        uses: grafana/k6registry@v0.1.19
+        uses: grafana/k6registry@v0.1.20
         with:
           in: "registry.yaml"
           api: "${{ env.HTDOCS_DIR }}"
           lint: "true"
           ref: "${{ env.BASE_URL }}/registry.json"
+          verbose: "true"
 
       - name: Cache Save
         uses: actions/cache/save@v4

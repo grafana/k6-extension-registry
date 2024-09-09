@@ -65,14 +65,14 @@ jobs:
 
       - name: Cache Save
         uses: actions/cache/save@v4
-        if: ${{ github.ref_name == 'main' && steps.registry.outputs.changed }}
+        if: ${{ github.ref_name == 'main' && steps.registry.outputs.changed == 'true'}}
         with:
           path: ${{ env.XDG_CACHE_HOME }}
           key: xdg-cache
 
       - name: Upload
         uses: actions/upload-artifact@v4
-        #        if: ${{ github.ref_name == 'main' && steps.registry.outputs.changed }}
+        if: ${{ github.ref_name == 'main' && steps.registry.outputs.changed == 'true' }}
         with:
           path: ${{ env.HTDOCS_DIR }}
           name: "htdocs"
@@ -82,7 +82,7 @@ jobs:
     runs-on: ubuntu-latest
     needs:
       - generate
-    #    if: ${{ github.ref_name == 'main' && needs.generate.outputs.changed == 'true' }}
+    if: ${{ github.ref_name == 'main' && needs.generate.outputs.changed == 'true' }}
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       HTDOCS_DIR: ${{ github.workspace }}/htdocs

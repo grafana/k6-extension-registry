@@ -115,7 +115,7 @@ jobs:
         id: pages
 
       - name: Generate Registry and Catalog
-        uses: grafana/k6registry@v0.1.36
+        uses: grafana/k6registry@v0.2.1
         id: generate
         with:
           in: "${{ inputs.source }}"

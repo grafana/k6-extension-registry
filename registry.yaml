@@ -137,7 +137,7 @@
   categories:
     - protocol
 - module: github.com/grafana/xk6-client-prometheus-remote
-  description: Test Prometheus Remote Write performance
+  description: Test Prometheus Remote Write-compatible endpoints
   tier: official
   products:
     - oss
@@ -179,7 +179,7 @@
     - misc
   constraints: ">0.4.0"
 - module: github.com/grafana/xk6-faker
-  description: Generate random fake data
+  description: Generate fake data in your tests
   tier: official
   imports:
     - k6/x/faker
@@ -199,7 +199,7 @@
     - kubernetes
   constraints: ">0.9.0"
 - module: github.com/grafana/xk6-loki
-  description: Client for load testing Loki
+  description: Test Grafana Loki log ingestion endpoints
   products:
     - oss
     - cloud
@@ -331,7 +331,7 @@
     - data
   constraints: ">=0.1.0"
 - module: github.com/grafana/xk6-ssh
-  description: SSH
+  description: Use SSH connections in your tests
   tier: official
   products:
     - oss

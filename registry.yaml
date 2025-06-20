@@ -527,3 +527,9 @@
   categories:
     - protocol
     - data
+- module: github.com/prmuthu/xk6-amqp
+  description: To publish and consume messages using AMQP protocol
+  imports:
+    - k6/x/amqp
+  categories:
+    - protocol

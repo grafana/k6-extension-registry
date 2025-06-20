@@ -1,101 +1,1851 @@
-<!DOCTYPE html><html lang=en> <head><link rel=stylesheet type=text/css href="https://fonts.googleapis.com/css?family=Overpass:300,400,600,800"><script src=https://code.jquery.com/jquery-3.4.1.min.js integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin=anonymous></script><link href=https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css rel=stylesheet integrity=sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T crossorigin=anonymous><script src=https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js integrity=sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM crossorigin=anonymous></script><link rel=stylesheet type=text/css href=schema_doc.css><script src=https://use.fontawesome.com/facf9fa52c.js></script><script src=schema_doc.min.js></script><meta charset=utf-8><title>Schema Docs</title></head> <body onload=anchorOnLoad(); id=root> <div class=breadcrumbs></div><span class="badge badge-dark value-type">Type: array</span><br> <span class=description><p>k6 Extension Registry.</p> <p>The k6 extension registry contains the most important properties of registered extensions.</p> </span> <span class="badge badge-info no-additional">No Additional Items</span><h4>Each item of this array must be:</h4> <div class=card> <div class="card-body items-definition" id=items> <div class=breadcrumbs>root <svg width=1em height=1em viewbox="0 0 16 16" class="bi bi-arrow-right-short" fill=currentColor xmlns=http://www.w3.org/2000/svg> <path fill-rule=evenodd d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/> </svg> <a href=#items onclick="anchorLink('items')">extension</a></div><span class="badge badge-dark value-type">Type: object</span><br> <span class=description><p>Properties of the registered k6 extension.</p> <p>Only those properties of the extensions are registered, which either cannot be detected automatically, or delegation to the extension is not allowed.</p> <p>Properties that are available using the repository manager API are intentionally not registered.</p> <p>The string like properties that are included in the generated Grafana documentation are intentionally not accessed via the API of the repository manager. It is not allowed to inject arbitrary text into the Grafana documentation site without approval. Therefore, these properties are registered (eg <code>description</code>)</p> </span> <span class="badge badge-info no-additional">No Additional Properties</span> <div class=accordion id=accordionitems_module> <div class=card> <div class=card-header id=headingitems_module> <h2 class=mb-0> <button class="btn btn-link property-name-button" type=button data-toggle=collapse data-target=#items_module aria-expanded aria-controls=items_module onclick="setAnchor('#items_module')"><span class=property-name>module</span> <span class="badge badge-warning required-property">Required</span></button> </h2> </div> <div id=items_module class="collapse property-definition-div" aria-labelledby=headingitems_module data-parent=#accordionitems_module> <div class="card-body pl-5"> <div class=breadcrumbs>root <svg width=1em height=1em viewbox="0 0 16 16" class="bi bi-arrow-right-short" fill=currentColor xmlns=http://www.w3.org/2000/svg> <path fill-rule=evenodd d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/> </svg> <a href=#items onclick="anchorLink('items')">root items</a> <svg width=1em height=1em viewbox="0 0 16 16" class="bi bi-arrow-right-short" fill=currentColor xmlns=http://www.w3.org/2000/svg> <path fill-rule=evenodd d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/> </svg> <a href=#items_module onclick="anchorLink('items_module')">module</a></div><span class="badge badge-dark value-type">Type: string</span><br> <span class=description><p>The extension&#39;s go module path.</p> <p>This is the unique identifier of the extension.<br> More info about module paths: https://go.dev/ref/mod#module-path</p> <p>The extension has no name property, the module path or part of it can be used as the extension name. For example, using the first two elements of the module path after the host name, the name <code>grafana/xk6-dashboard</code> can be formed from the module path <code>github.com/grafana/xk6-dashboard</code>. This is typically the repository owner name and the repository name in the repository manager.</p> <p>The extension has no URL property, a URL can be created from the module path that refers to the extension within the repository manager.</p> </span> <br> <div class="badge badge-secondary">Examples:</div> <br><div id=items_module_ex1 class="jumbotron examples"><div class=highlight><pre><span></span><span class=s2>&quot;github.com/grafana/xk6-dashboard&quot;</span>
-</pre></div> </div><div id=items_module_ex2 class="jumbotron examples"><div class=highlight><pre><span></span><span class=s2>&quot;github.com/szkiba/xk6-top&quot;</span>
-</pre></div> </div> </div> </div> </div> </div> <div class=accordion id=accordionitems_imports> <div class=card> <div class=card-header id=headingitems_imports> <h2 class=mb-0> <button class="btn btn-link property-name-button" type=button data-toggle=collapse data-target=#items_imports aria-expanded aria-controls=items_imports onclick="setAnchor('#items_imports')"><span class=property-name>imports</span></button> </h2> </div> <div id=items_imports class="collapse property-definition-div" aria-labelledby=headingitems_imports data-parent=#accordionitems_imports> <div class="card-body pl-5"> <div class=breadcrumbs>root <svg width=1em height=1em viewbox="0 0 16 16" class="bi bi-arrow-right-short" fill=currentColor xmlns=http://www.w3.org/2000/svg> <path fill-rule=evenodd d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/> </svg> <a href=#items onclick="anchorLink('items')">root items</a> <svg width=1em height=1em viewbox="0 0 16 16" class="bi bi-arrow-right-short" fill=currentColor xmlns=http://www.w3.org/2000/svg> <path fill-rule=evenodd d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/> </svg> <a href=#items_imports onclick="anchorLink('items_imports')">imports</a></div><span class="badge badge-dark value-type">Type: array of string</span><br> <span class=description><p>List of JavaScript import paths registered by the extension.</p> <p>Currently, paths must start with the prefix <code>k6/x/</code>.</p> <p>The extensions used by k6 scripts are automatically detected based on the values specified here, therefore it is important that the values used here are consistent with the values registered by the extension at runtime.</p> </span> <span class="badge badge-info no-additional">No Additional Items</span><h4>Each item of this array must be:</h4> <div class=card> <div class="card-body items-definition" id=items_imports_items> <div class=breadcrumbs>root <svg width=1em height=1em viewbox="0 0 16 16" class="bi bi-arrow-right-short" fill=currentColor xmlns=http://www.w3.org/2000/svg> <path fill-rule=evenodd d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/> </svg> <a href=#items onclick="anchorLink('items')">root items</a> <svg width=1em height=1em viewbox="0 0 16 16" class="bi bi-arrow-right-short" fill=currentColor xmlns=http://www.w3.org/2000/svg> <path fill-rule=evenodd d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/> </svg> <a href=#items_imports onclick="anchorLink('items_imports')">imports</a> <svg width=1em height=1em viewbox="0 0 16 16" class="bi bi-arrow-right-short" fill=currentColor xmlns=http://www.w3.org/2000/svg> <path fill-rule=evenodd d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/> </svg> <a href=#items_imports_items onclick="anchorLink('items_imports_items')">imports items</a></div><span class="badge badge-dark value-type">Type: string</span><br> <span class=pattern-value id=items_imports_items_pattern>Must match regular expression: <code>^k6/x/</code></span> </div> </div><br> <div class="badge badge-secondary">Examples:</div> <br><div id=items_imports_ex1 class="jumbotron examples"><div class=highlight><pre><span></span><span class=p>[</span>
-<span class=w>    </span><span class=s2>&quot;k6/x/csv&quot;</span><span class=p>,</span>
-<span class=w>    </span><span class=s2>&quot;k6/x/csv/stream&quot;</span>
-<span class=p>]</span>
-</pre></div> </div><div id=items_imports_ex2 class="jumbotron examples"><div class=highlight><pre><span></span><span class=p>[</span>
-<span class=w>    </span><span class=s2>&quot;k6/x/toml&quot;</span>
-<span class=p>]</span>
-</pre></div> </div> </div> </div> </div> </div> <div class=accordion id=accordionitems_outputs> <div class=card> <div class=card-header id=headingitems_outputs> <h2 class=mb-0> <button class="btn btn-link property-name-button" type=button data-toggle=collapse data-target=#items_outputs aria-expanded aria-controls=items_outputs onclick="setAnchor('#items_outputs')"><span class=property-name>outputs</span></button> </h2> </div> <div id=items_outputs class="collapse property-definition-div" aria-labelledby=headingitems_outputs data-parent=#accordionitems_outputs> <div class="card-body pl-5"> <div class=breadcrumbs>root <svg width=1em height=1em viewbox="0 0 16 16" class="bi bi-arrow-right-short" fill=currentColor xmlns=http://www.w3.org/2000/svg> <path fill-rule=evenodd d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/> </svg> <a href=#items onclick="anchorLink('items')">root items</a> <svg width=1em height=1em viewbox="0 0 16 16" class="bi bi-arrow-right-short" fill=currentColor xmlns=http://www.w3.org/2000/svg> <path fill-rule=evenodd d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/> </svg> <a href=#items_outputs onclick="anchorLink('items_outputs')">outputs</a></div><span class="badge badge-dark value-type">Type: array of string</span><br> <span class=description><p>List of output names registered by the extension.</p> <p>The extensions used by k6 scripts are automatically detected based on the values specified here, therefore it is important that the values used here are consistent with the values registered by the extension at runtime.</p> </span> <span class="badge badge-info no-additional">No Additional Items</span><h4>Each item of this array must be:</h4> <div class=card> <div class="card-body items-definition" id=items_outputs_items> <div class=breadcrumbs>root <svg width=1em height=1em viewbox="0 0 16 16" class="bi bi-arrow-right-short" fill=currentColor xmlns=http://www.w3.org/2000/svg> <path fill-rule=evenodd d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/> </svg> <a href=#items onclick="anchorLink('items')">root items</a> <svg width=1em height=1em viewbox="0 0 16 16" class="bi bi-arrow-right-short" fill=currentColor xmlns=http://www.w3.org/2000/svg> <path fill-rule=evenodd d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/> </svg> <a href=#items_outputs onclick="anchorLink('items_outputs')">outputs</a> <svg width=1em height=1em viewbox="0 0 16 16" class="bi bi-arrow-right-short" fill=currentColor xmlns=http://www.w3.org/2000/svg> <path fill-rule=evenodd d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/> </svg> <a href=#items_outputs_items onclick="anchorLink('items_outputs_items')">outputs items</a></div><span class="badge badge-dark value-type">Type: string</span><br> </div> </div><br> <div class="badge badge-secondary">Examples:</div> <br><div id=items_outputs_ex1 class="jumbotron examples"><div class=highlight><pre><span></span><span class=p>[</span>
-<span class=w>    </span><span class=s2>&quot;dashboard&quot;</span>
-<span class=p>]</span>
-</pre></div> </div><div id=items_outputs_ex2 class="jumbotron examples"><div class=highlight><pre><span></span><span class=p>[</span>
-<span class=w>    </span><span class=s2>&quot;plugin&quot;</span>
-<span class=p>]</span>
-</pre></div> </div> </div> </div> </div> </div> <div class=accordion id=accordionitems_description> <div class=card> <div class=card-header id=headingitems_description> <h2 class=mb-0> <button class="btn btn-link property-name-button" type=button data-toggle=collapse data-target=#items_description aria-expanded aria-controls=items_description onclick="setAnchor('#items_description')"><span class=property-name>description</span></button> </h2> </div> <div id=items_description class="collapse property-definition-div" aria-labelledby=headingitems_description data-parent=#accordionitems_description> <div class="card-body pl-5"> <div class=breadcrumbs>root <svg width=1em height=1em viewbox="0 0 16 16" class="bi bi-arrow-right-short" fill=currentColor xmlns=http://www.w3.org/2000/svg> <path fill-rule=evenodd d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/> </svg> <a href=#items onclick="anchorLink('items')">root items</a> <svg width=1em height=1em viewbox="0 0 16 16" class="bi bi-arrow-right-short" fill=currentColor xmlns=http://www.w3.org/2000/svg> <path fill-rule=evenodd d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/> </svg> <a href=#items_description onclick="anchorLink('items_description')">description</a></div><span class="badge badge-dark value-type">Type: string</span> <span class="badge badge-success default-value">Default: ""</span><br> <span class=description><p>Brief description of the extension.</p> </span> <br> <div class="badge badge-secondary">Example:</div> <br><div id=items_description_ex1 class="jumbotron examples"><div class=highlight><pre><span></span><span class=s2>&quot;This is a very cool extension, it displays the message &#39;Hello World!&#39;&quot;</span>
-</pre></div> </div> </div> </div> </div> </div> <div class=accordion id=accordionitems_versions> <div class=card> <div class=card-header id=headingitems_versions> <h2 class=mb-0> <button class="btn btn-link property-name-button" type=button data-toggle=collapse data-target=#items_versions aria-expanded aria-controls=items_versions onclick="setAnchor('#items_versions')"><span class=property-name>versions</span></button> </h2> </div> <div id=items_versions class="collapse property-definition-div" aria-labelledby=headingitems_versions data-parent=#accordionitems_versions> <div class="card-body pl-5"> <div class=breadcrumbs>root <svg width=1em height=1em viewbox="0 0 16 16" class="bi bi-arrow-right-short" fill=currentColor xmlns=http://www.w3.org/2000/svg> <path fill-rule=evenodd d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/> </svg> <a href=#items onclick="anchorLink('items')">root items</a> <svg width=1em height=1em viewbox="0 0 16 16" class="bi bi-arrow-right-short" fill=currentColor xmlns=http://www.w3.org/2000/svg> <path fill-rule=evenodd d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/> </svg> <a href=#items_versions onclick="anchorLink('items_versions')">versions</a></div><span class="badge badge-dark value-type">Type: array of string</span><br> <span class=description><p>List of supported versions.</p> <p>Versions are tags whose format meets the requirements of semantic versioning. Version tags often start with the letter <code>v</code>, which is not part of the semantic version.</p> </span> <span class="badge badge-info no-additional">No Additional Items</span><h4>Each item of this array must be:</h4> <div class=card> <div class="card-body items-definition" id=items_versions_items> <div class=breadcrumbs>root <svg width=1em height=1em viewbox="0 0 16 16" class="bi bi-arrow-right-short" fill=currentColor xmlns=http://www.w3.org/2000/svg> <path fill-rule=evenodd d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/> </svg> <a href=#items onclick="anchorLink('items')">root items</a> <svg width=1em height=1em viewbox="0 0 16 16" class="bi bi-arrow-right-short" fill=currentColor xmlns=http://www.w3.org/2000/svg> <path fill-rule=evenodd d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/> </svg> <a href=#items_versions onclick="anchorLink('items_versions')">versions</a> <svg width=1em height=1em viewbox="0 0 16 16" class="bi bi-arrow-right-short" fill=currentColor xmlns=http://www.w3.org/2000/svg> <path fill-rule=evenodd d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/> </svg> <a href=#items_versions_items onclick="anchorLink('items_versions_items')">versions items</a></div><span class="badge badge-dark value-type">Type: string</span><br> </div> </div><br> <div class="badge badge-secondary">Example:</div> <br><div id=items_versions_ex1 class="jumbotron examples"><div class=highlight><pre><span></span><span class=p>[</span>
-<span class=w>    </span><span class=s2>&quot;v0.1.0&quot;</span><span class=p>,</span>
-<span class=w>    </span><span class=s2>&quot;v0.2.0&quot;</span><span class=p>,</span>
-<span class=w>    </span><span class=s2>&quot;v0.2.1&quot;</span>
-<span class=p>]</span>
-</pre></div> </div> </div> </div> </div> </div> <div class=accordion id=accordionitems_cgo> <div class=card> <div class=card-header id=headingitems_cgo> <h2 class=mb-0> <button class="btn btn-link property-name-button" type=button data-toggle=collapse data-target=#items_cgo aria-expanded aria-controls=items_cgo onclick="setAnchor('#items_cgo')"><span class=property-name>cgo</span></button> </h2> </div> <div id=items_cgo class="collapse property-definition-div" aria-labelledby=headingitems_cgo data-parent=#accordionitems_cgo> <div class="card-body pl-5"> <div class=breadcrumbs>root <svg width=1em height=1em viewbox="0 0 16 16" class="bi bi-arrow-right-short" fill=currentColor xmlns=http://www.w3.org/2000/svg> <path fill-rule=evenodd d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/> </svg> <a href=#items onclick="anchorLink('items')">root items</a> <svg width=1em height=1em viewbox="0 0 16 16" class="bi bi-arrow-right-short" fill=currentColor xmlns=http://www.w3.org/2000/svg> <path fill-rule=evenodd d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/> </svg> <a href=#items_cgo onclick="anchorLink('items_cgo')">cgo</a></div><span class="badge badge-dark value-type">Type: boolean</span> <span class="badge badge-success default-value">Default: false</span><br> <span class=description><p>Flag indicating the need for cgo.</p> <p>The <code>cgo</code> property value <code>true</code> indicates that cgo must be enabled to build the extension.</p> </span> </div> </div> </div> </div> <div class=accordion id=accordionitems_constraints> <div class=card> <div class=card-header id=headingitems_constraints> <h2 class=mb-0> <button class="btn btn-link property-name-button" type=button data-toggle=collapse data-target=#items_constraints aria-expanded aria-controls=items_constraints onclick="setAnchor('#items_constraints')"><span class=property-name>constraints</span></button> </h2> </div> <div id=items_constraints class="collapse property-definition-div" aria-labelledby=headingitems_constraints data-parent=#accordionitems_constraints> <div class="card-body pl-5"> <div class=breadcrumbs>root <svg width=1em height=1em viewbox="0 0 16 16" class="bi bi-arrow-right-short" fill=currentColor xmlns=http://www.w3.org/2000/svg> <path fill-rule=evenodd d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/> </svg> <a href=#items onclick="anchorLink('items')">root items</a> <svg width=1em height=1em viewbox="0 0 16 16" class="bi bi-arrow-right-short" fill=currentColor xmlns=http://www.w3.org/2000/svg> <path fill-rule=evenodd d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/> </svg> <a href=#items_constraints onclick="anchorLink('items_constraints')">constraints</a></div><span class="badge badge-dark value-type">Type: string</span> <span class="badge badge-success default-value">Default: ""</span><br> <span class=description><p>Version constraints.</p> <p>Version constraints are primarily used to filter automatically detected versions.<br> It can also be used to filter the versions property imported from the origin registry.</p> </span><span class=pattern-value id=items_constraints_pattern>Must match regular expression: <code>[vxX*|,&amp;\^0-9.+-&gt;&lt;=, ~]+</code></span> <br> <div class="badge badge-secondary">Example:</div> <br><div id=items_constraints_ex1 class="jumbotron examples"><div class=highlight><pre><span></span><span class=p>[</span>
-<span class=w>    </span><span class=s2>&quot;&gt;=v0.4.0&quot;</span><span class=p>,</span>
-<span class=w>    </span><span class=s2>&quot;&gt;v0.50.0&quot;</span>
-<span class=p>]</span>
-</pre></div> </div> </div> </div> </div> </div> <div class=accordion id=accordionitems_repo> <div class=card> <div class=card-header id=headingitems_repo> <h2 class=mb-0> <button class="btn btn-link property-name-button" type=button data-toggle=collapse data-target=#items_repo aria-expanded aria-controls=items_repo onclick="setAnchor('#items_repo')"><span class=property-name>repo</span></button> </h2> </div> <div id=items_repo class="collapse property-definition-div" aria-labelledby=headingitems_repo data-parent=#accordionitems_repo> <div class="card-body pl-5"> <div class=breadcrumbs>root <svg width=1em height=1em viewbox="0 0 16 16" class="bi bi-arrow-right-short" fill=currentColor xmlns=http://www.w3.org/2000/svg> <path fill-rule=evenodd d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/> </svg> <a href=#items onclick="anchorLink('items')">root items</a> <svg width=1em height=1em viewbox="0 0 16 16" class="bi bi-arrow-right-short" fill=currentColor xmlns=http://www.w3.org/2000/svg> <path fill-rule=evenodd d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/> </svg> <a href=#items_repo onclick="anchorLink('items_repo')">repo</a></div><span class="badge badge-dark value-type">Type: object</span><br> <span class=description><p>Repository metadata.</p> <p>Metadata provided by the extension&#39;s git repository manager. Repository metadata are not registered, they are queried at runtime using the repository manager API.</p> </span> <div class=accordion id=accordionitems_repo_name> <div class=card> <div class=card-header id=headingitems_repo_name> <h2 class=mb-0> <button class="btn btn-link property-name-button" type=button data-toggle=collapse data-target=#items_repo_name aria-expanded aria-controls=items_repo_name onclick="setAnchor('#items_repo_name')"><span class=property-name>name</span> <span class="badge badge-warning required-property">Required</span></button> </h2> </div> <div id=items_repo_name class="collapse property-definition-div" aria-labelledby=headingitems_repo_name data-parent=#accordionitems_repo_name> <div class="card-body pl-5"> <div class=breadcrumbs>root <svg width=1em height=1em viewbox="0 0 16 16" class="bi bi-arrow-right-short" fill=currentColor xmlns=http://www.w3.org/2000/svg> <path fill-rule=evenodd d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/> </svg> <a href=#items onclick="anchorLink('items')">root items</a> <svg width=1em height=1em viewbox="0 0 16 16" class="bi bi-arrow-right-short" fill=currentColor xmlns=http://www.w3.org/2000/svg> <path fill-rule=evenodd d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/> </svg> <a href=#items_repo onclick="anchorLink('items_repo')">repo</a> <svg width=1em height=1em viewbox="0 0 16 16" class="bi bi-arrow-right-short" fill=currentColor xmlns=http://www.w3.org/2000/svg> <path fill-rule=evenodd d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/> </svg> <a href=#items_repo_name onclick="anchorLink('items_repo_name')">name</a></div><span class="badge badge-dark value-type">Type: string</span><br> <span class=description><p>The name of the repository.</p> </span> <br> <div class="badge badge-secondary">Examples:</div> <br><div id=items_repo_name_ex1 class="jumbotron examples"><div class=highlight><pre><span></span><span class=s2>&quot;xk6-dashboard&quot;</span>
-</pre></div> </div><div id=items_repo_name_ex2 class="jumbotron examples"><div class=highlight><pre><span></span><span class=s2>&quot;xk6-sql&quot;</span>
-</pre></div> </div> </div> </div> </div> </div> <div class=accordion id=accordionitems_repo_owner> <div class=card> <div class=card-header id=headingitems_repo_owner> <h2 class=mb-0> <button class="btn btn-link property-name-button" type=button data-toggle=collapse data-target=#items_repo_owner aria-expanded aria-controls=items_repo_owner onclick="setAnchor('#items_repo_owner')"><span class=property-name>owner</span> <span class="badge badge-warning required-property">Required</span></button> </h2> </div> <div id=items_repo_owner class="collapse property-definition-div" aria-labelledby=headingitems_repo_owner data-parent=#accordionitems_repo_owner> <div class="card-body pl-5"> <div class=breadcrumbs>root <svg width=1em height=1em viewbox="0 0 16 16" class="bi bi-arrow-right-short" fill=currentColor xmlns=http://www.w3.org/2000/svg> <path fill-rule=evenodd d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/> </svg> <a href=#items onclick="anchorLink('items')">root items</a> <svg width=1em height=1em viewbox="0 0 16 16" class="bi bi-arrow-right-short" fill=currentColor xmlns=http://www.w3.org/2000/svg> <path fill-rule=evenodd d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/> </svg> <a href=#items_repo onclick="anchorLink('items_repo')">repo</a> <svg width=1em height=1em viewbox="0 0 16 16" class="bi bi-arrow-right-short" fill=currentColor xmlns=http://www.w3.org/2000/svg> <path fill-rule=evenodd d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/> </svg> <a href=#items_repo_owner onclick="anchorLink('items_repo_owner')">owner</a></div><span class="badge badge-dark value-type">Type: string</span><br> <span class=description><p>The owner of the repository.</p> </span> <br> <div class="badge badge-secondary">Example:</div> <br><div id=items_repo_owner_ex1 class="jumbotron examples"><div class=highlight><pre><span></span><span class=s2>&quot;grafana&quot;</span>
-</pre></div> </div> </div> </div> </div> </div> <div class=accordion id=accordionitems_repo_url> <div class=card> <div class=card-header id=headingitems_repo_url> <h2 class=mb-0> <button class="btn btn-link property-name-button" type=button data-toggle=collapse data-target=#items_repo_url aria-expanded aria-controls=items_repo_url onclick="setAnchor('#items_repo_url')"><span class=property-name>url</span> <span class="badge badge-warning required-property">Required</span></button> </h2> </div> <div id=items_repo_url class="collapse property-definition-div" aria-labelledby=headingitems_repo_url data-parent=#accordionitems_repo_url> <div class="card-body pl-5"> <div class=breadcrumbs>root <svg width=1em height=1em viewbox="0 0 16 16" class="bi bi-arrow-right-short" fill=currentColor xmlns=http://www.w3.org/2000/svg> <path fill-rule=evenodd d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/> </svg> <a href=#items onclick="anchorLink('items')">root items</a> <svg width=1em height=1em viewbox="0 0 16 16" class="bi bi-arrow-right-short" fill=currentColor xmlns=http://www.w3.org/2000/svg> <path fill-rule=evenodd d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/> </svg> <a href=#items_repo onclick="anchorLink('items_repo')">repo</a> <svg width=1em height=1em viewbox="0 0 16 16" class="bi bi-arrow-right-short" fill=currentColor xmlns=http://www.w3.org/2000/svg> <path fill-rule=evenodd d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/> </svg> <a href=#items_repo_url onclick="anchorLink('items_repo_url')">url</a></div><span class="badge badge-dark value-type">Type: string</span><br> <span class=description><p>URL of the repository.</p> <p>The URL is provided by the repository manager and can be displayed in a browser.</p> </span> <br> <div class="badge badge-secondary">Example:</div> <br><div id=items_repo_url_ex1 class="jumbotron examples"><div class=highlight><pre><span></span><span class=s2>&quot;https://github.com/grafana/xk6-dashboard&quot;</span>
-</pre></div> </div> </div> </div> </div> </div> <div class=accordion id=accordionitems_repo_homepage> <div class=card> <div class=card-header id=headingitems_repo_homepage> <h2 class=mb-0> <button class="btn btn-link property-name-button" type=button data-toggle=collapse data-target=#items_repo_homepage aria-expanded aria-controls=items_repo_homepage onclick="setAnchor('#items_repo_homepage')"><span class=property-name>homepage</span></button> </h2> </div> <div id=items_repo_homepage class="collapse property-definition-div" aria-labelledby=headingitems_repo_homepage data-parent=#accordionitems_repo_homepage> <div class="card-body pl-5"> <div class=breadcrumbs>root <svg width=1em height=1em viewbox="0 0 16 16" class="bi bi-arrow-right-short" fill=currentColor xmlns=http://www.w3.org/2000/svg> <path fill-rule=evenodd d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/> </svg> <a href=#items onclick="anchorLink('items')">root items</a> <svg width=1em height=1em viewbox="0 0 16 16" class="bi bi-arrow-right-short" fill=currentColor xmlns=http://www.w3.org/2000/svg> <path fill-rule=evenodd d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/> </svg> <a href=#items_repo onclick="anchorLink('items_repo')">repo</a> <svg width=1em height=1em viewbox="0 0 16 16" class="bi bi-arrow-right-short" fill=currentColor xmlns=http://www.w3.org/2000/svg> <path fill-rule=evenodd d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/> </svg> <a href=#items_repo_homepage onclick="anchorLink('items_repo_homepage')">homepage</a></div><span class="badge badge-dark value-type">Type: string</span> <span class="badge badge-success default-value">Default: ""</span><br> <span class=description><p>The URL to the project homepage.</p> <p>If no homepage is set, the value is the same as the url property.</p> </span> <br> <div class="badge badge-secondary">Example:</div> <br><div id=items_repo_homepage_ex1 class="jumbotron examples"><div class=highlight><pre><span></span><span class=s2>&quot;https://github.com/grafana/xk6-dashboard&quot;</span>
-</pre></div> </div> </div> </div> </div> </div> <div class=accordion id=accordionitems_repo_description> <div class=card> <div class=card-header id=headingitems_repo_description> <h2 class=mb-0> <button class="btn btn-link property-name-button" type=button data-toggle=collapse data-target=#items_repo_description aria-expanded aria-controls=items_repo_description onclick="setAnchor('#items_repo_description')"><span class=property-name>description</span></button> </h2> </div> <div id=items_repo_description class="collapse property-definition-div" aria-labelledby=headingitems_repo_description data-parent=#accordionitems_repo_description> <div class="card-body pl-5"> <div class=breadcrumbs>root <svg width=1em height=1em viewbox="0 0 16 16" class="bi bi-arrow-right-short" fill=currentColor xmlns=http://www.w3.org/2000/svg> <path fill-rule=evenodd d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/> </svg> <a href=#items onclick="anchorLink('items')">root items</a> <svg width=1em height=1em viewbox="0 0 16 16" class="bi bi-arrow-right-short" fill=currentColor xmlns=http://www.w3.org/2000/svg> <path fill-rule=evenodd d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/> </svg> <a href=#items_repo onclick="anchorLink('items_repo')">repo</a> <svg width=1em height=1em viewbox="0 0 16 16" class="bi bi-arrow-right-short" fill=currentColor xmlns=http://www.w3.org/2000/svg> <path fill-rule=evenodd d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/> </svg> <a href=#items_repo_description onclick="anchorLink('items_repo_description')">description</a></div><span class="badge badge-dark value-type">Type: string</span> <span class="badge badge-success default-value">Default: ""</span><br> <span class=description><p>Repository description.</p> </span> <br> <div class="badge badge-secondary">Example:</div> <br><div id=items_repo_description_ex1 class="jumbotron examples"><div class=highlight><pre><span></span><span class=s2>&quot;This is a wonderful extension, it says &#39;Hello Wonderful World!&#39;&quot;</span>
-</pre></div> </div> </div> </div> </div> </div> <div class=accordion id=accordionitems_repo_stars> <div class=card> <div class=card-header id=headingitems_repo_stars> <h2 class=mb-0> <button class="btn btn-link property-name-button" type=button data-toggle=collapse data-target=#items_repo_stars aria-expanded aria-controls=items_repo_stars onclick="setAnchor('#items_repo_stars')"><span class=property-name>stars</span></button> </h2> </div> <div id=items_repo_stars class="collapse property-definition-div" aria-labelledby=headingitems_repo_stars data-parent=#accordionitems_repo_stars> <div class="card-body pl-5"> <div class=breadcrumbs>root <svg width=1em height=1em viewbox="0 0 16 16" class="bi bi-arrow-right-short" fill=currentColor xmlns=http://www.w3.org/2000/svg> <path fill-rule=evenodd d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/> </svg> <a href=#items onclick="anchorLink('items')">root items</a> <svg width=1em height=1em viewbox="0 0 16 16" class="bi bi-arrow-right-short" fill=currentColor xmlns=http://www.w3.org/2000/svg> <path fill-rule=evenodd d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/> </svg> <a href=#items_repo onclick="anchorLink('items_repo')">repo</a> <svg width=1em height=1em viewbox="0 0 16 16" class="bi bi-arrow-right-short" fill=currentColor xmlns=http://www.w3.org/2000/svg> <path fill-rule=evenodd d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/> </svg> <a href=#items_repo_stars onclick="anchorLink('items_repo_stars')">stars</a></div><span class="badge badge-dark value-type">Type: integer</span> <span class="badge badge-success default-value">Default: "0"</span><br> <span class=description><p>The number of stars in the extension&#39;s repository.</p> <p>The extension&#39;s popularity is indicated by how many users have starred the extension&#39;s repository.</p> </span> <br> <div class="badge badge-secondary">Examples:</div> <br><div id=items_repo_stars_ex1 class="jumbotron examples"><div class=highlight><pre><span></span><span class=mf>365</span>
-</pre></div> </div><div id=items_repo_stars_ex2 class="jumbotron examples"><div class=highlight><pre><span></span><span class=mf>202</span>
-</pre></div> </div> </div> </div> </div> </div> <div class=accordion id=accordionitems_repo_topics> <div class=card> <div class=card-header id=headingitems_repo_topics> <h2 class=mb-0> <button class="btn btn-link property-name-button" type=button data-toggle=collapse data-target=#items_repo_topics aria-expanded aria-controls=items_repo_topics onclick="setAnchor('#items_repo_topics')"><span class=property-name>topics</span></button> </h2> </div> <div id=items_repo_topics class="collapse property-definition-div" aria-labelledby=headingitems_repo_topics data-parent=#accordionitems_repo_topics> <div class="card-body pl-5"> <div class=breadcrumbs>root <svg width=1em height=1em viewbox="0 0 16 16" class="bi bi-arrow-right-short" fill=currentColor xmlns=http://www.w3.org/2000/svg> <path fill-rule=evenodd d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/> </svg> <a href=#items onclick="anchorLink('items')">root items</a> <svg width=1em height=1em viewbox="0 0 16 16" class="bi bi-arrow-right-short" fill=currentColor xmlns=http://www.w3.org/2000/svg> <path fill-rule=evenodd d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/> </svg> <a href=#items_repo onclick="anchorLink('items_repo')">repo</a> <svg width=1em height=1em viewbox="0 0 16 16" class="bi bi-arrow-right-short" fill=currentColor xmlns=http://www.w3.org/2000/svg> <path fill-rule=evenodd d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/> </svg> <a href=#items_repo_topics onclick="anchorLink('items_repo_topics')">topics</a></div><span class="badge badge-dark value-type">Type: array of string</span><br> <span class=description><p>Repository topics.</p> <p>Topics make it easier to find the repository. It is recommended to set the xk6 topic to the extensions repository.</p> </span> <span class="badge badge-info no-additional">No Additional Items</span><h4>Each item of this array must be:</h4> <div class=card> <div class="card-body items-definition" id=items_repo_topics_items> <div class=breadcrumbs>root <svg width=1em height=1em viewbox="0 0 16 16" class="bi bi-arrow-right-short" fill=currentColor xmlns=http://www.w3.org/2000/svg> <path fill-rule=evenodd d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/> </svg> <a href=#items onclick="anchorLink('items')">root items</a> <svg width=1em height=1em viewbox="0 0 16 16" class="bi bi-arrow-right-short" fill=currentColor xmlns=http://www.w3.org/2000/svg> <path fill-rule=evenodd d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/> </svg> <a href=#items_repo onclick="anchorLink('items_repo')">repo</a> <svg width=1em height=1em viewbox="0 0 16 16" class="bi bi-arrow-right-short" fill=currentColor xmlns=http://www.w3.org/2000/svg> <path fill-rule=evenodd d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/> </svg> <a href=#items_repo_topics onclick="anchorLink('items_repo_topics')">topics</a> <svg width=1em height=1em viewbox="0 0 16 16" class="bi bi-arrow-right-short" fill=currentColor xmlns=http://www.w3.org/2000/svg> <path fill-rule=evenodd d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/> </svg> <a href=#items_repo_topics_items onclick="anchorLink('items_repo_topics_items')">topics items</a></div><span class="badge badge-dark value-type">Type: string</span><br> </div> </div><br> <div class="badge badge-secondary">Examples:</div> <br><div id=items_repo_topics_ex1 class="jumbotron examples"><div class=highlight><pre><span></span><span class=p>[</span>
-<span class=w>    </span><span class=s2>&quot;xk6&quot;</span><span class=p>,</span>
-<span class=w>    </span><span class=s2>&quot;testing&quot;</span>
-<span class=p>]</span>
-</pre></div> </div><div id=items_repo_topics_ex2 class="jumbotron examples"><div class=highlight><pre><span></span><span class=p>[</span>
-<span class=w>    </span><span class=s2>&quot;xk6&quot;</span>
-<span class=p>]</span>
-</pre></div> </div> </div> </div> </div> </div> <div class=accordion id=accordionitems_repo_public> <div class=card> <div class=card-header id=headingitems_repo_public> <h2 class=mb-0> <button class="btn btn-link property-name-button" type=button data-toggle=collapse data-target=#items_repo_public aria-expanded aria-controls=items_repo_public onclick="setAnchor('#items_repo_public')"><span class=property-name>public</span></button> </h2> </div> <div id=items_repo_public class="collapse property-definition-div" aria-labelledby=headingitems_repo_public data-parent=#accordionitems_repo_public> <div class="card-body pl-5"> <div class=breadcrumbs>root <svg width=1em height=1em viewbox="0 0 16 16" class="bi bi-arrow-right-short" fill=currentColor xmlns=http://www.w3.org/2000/svg> <path fill-rule=evenodd d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/> </svg> <a href=#items onclick="anchorLink('items')">root items</a> <svg width=1em height=1em viewbox="0 0 16 16" class="bi bi-arrow-right-short" fill=currentColor xmlns=http://www.w3.org/2000/svg> <path fill-rule=evenodd d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/> </svg> <a href=#items_repo onclick="anchorLink('items_repo')">repo</a> <svg width=1em height=1em viewbox="0 0 16 16" class="bi bi-arrow-right-short" fill=currentColor xmlns=http://www.w3.org/2000/svg> <path fill-rule=evenodd d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/> </svg> <a href=#items_repo_public onclick="anchorLink('items_repo_public')">public</a></div><span class="badge badge-dark value-type">Type: boolean</span> <span class="badge badge-success default-value">Default: "false"</span><br> <span class=description><p>Public repository flag.</p> <p>A <code>true</code> value indicates that the repository is public, available to anyone.</p> </span> <br> <div class="badge badge-secondary">Example:</div> <br><div id=items_repo_public_ex1 class="jumbotron examples"><div class=highlight><pre><span></span><span class=kc>true</span>
-</pre></div> </div> </div> </div> </div> </div> <div class=accordion id=accordionitems_repo_license> <div class=card> <div class=card-header id=headingitems_repo_license> <h2 class=mb-0> <button class="btn btn-link property-name-button" type=button data-toggle=collapse data-target=#items_repo_license aria-expanded aria-controls=items_repo_license onclick="setAnchor('#items_repo_license')"><span class=property-name>license</span></button> </h2> </div> <div id=items_repo_license class="collapse property-definition-div" aria-labelledby=headingitems_repo_license data-parent=#accordionitems_repo_license> <div class="card-body pl-5"> <div class=breadcrumbs>root <svg width=1em height=1em viewbox="0 0 16 16" class="bi bi-arrow-right-short" fill=currentColor xmlns=http://www.w3.org/2000/svg> <path fill-rule=evenodd d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/> </svg> <a href=#items onclick="anchorLink('items')">root items</a> <svg width=1em height=1em viewbox="0 0 16 16" class="bi bi-arrow-right-short" fill=currentColor xmlns=http://www.w3.org/2000/svg> <path fill-rule=evenodd d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/> </svg> <a href=#items_repo onclick="anchorLink('items_repo')">repo</a> <svg width=1em height=1em viewbox="0 0 16 16" class="bi bi-arrow-right-short" fill=currentColor xmlns=http://www.w3.org/2000/svg> <path fill-rule=evenodd d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/> </svg> <a href=#items_repo_license onclick="anchorLink('items_repo_license')">license</a></div><span class="badge badge-dark value-type">Type: string</span> <span class="badge badge-success default-value">Default: ""</span><br> <span class=description><p>The SPDX ID of the extension&#39;s license.</p> <p>For more information about SPDX, visit https://spdx.org/licenses/</p> </span> <br> <div class="badge badge-secondary">Examples:</div> <br><div id=items_repo_license_ex1 class="jumbotron examples"><div class=highlight><pre><span></span><span class=s2>&quot;AGPL-3.0-only&quot;</span>
-</pre></div> </div><div id=items_repo_license_ex2 class="jumbotron examples"><div class=highlight><pre><span></span><span class=s2>&quot;MIT&quot;</span>
-</pre></div> </div> </div> </div> </div> </div> <div class=accordion id=accordionitems_repo_archived> <div class=card> <div class=card-header id=headingitems_repo_archived> <h2 class=mb-0> <button class="btn btn-link property-name-button" type=button data-toggle=collapse data-target=#items_repo_archived aria-expanded aria-controls=items_repo_archived onclick="setAnchor('#items_repo_archived')"><span class=property-name>archived</span></button> </h2> </div> <div id=items_repo_archived class="collapse property-definition-div" aria-labelledby=headingitems_repo_archived data-parent=#accordionitems_repo_archived> <div class="card-body pl-5"> <div class=breadcrumbs>root <svg width=1em height=1em viewbox="0 0 16 16" class="bi bi-arrow-right-short" fill=currentColor xmlns=http://www.w3.org/2000/svg> <path fill-rule=evenodd d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/> </svg> <a href=#items onclick="anchorLink('items')">root items</a> <svg width=1em height=1em viewbox="0 0 16 16" class="bi bi-arrow-right-short" fill=currentColor xmlns=http://www.w3.org/2000/svg> <path fill-rule=evenodd d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/> </svg> <a href=#items_repo onclick="anchorLink('items_repo')">repo</a> <svg width=1em height=1em viewbox="0 0 16 16" class="bi bi-arrow-right-short" fill=currentColor xmlns=http://www.w3.org/2000/svg> <path fill-rule=evenodd d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/> </svg> <a href=#items_repo_archived onclick="anchorLink('items_repo_archived')">archived</a></div><span class="badge badge-dark value-type">Type: boolean</span> <span class="badge badge-success default-value">Default: "false"</span><br> <span class=description><p>Archived repository flag.</p> <p>A <code>true</code> value indicates that the repository is archived, read only.</p> <p>If a repository is archived, it usually means that the owner has no intention of maintaining it. Such extensions should be removed from the registry.</p> </span> </div> </div> </div> </div> <div class=accordion id=accordionitems_repo_timestamp> <div class=card> <div class=card-header id=headingitems_repo_timestamp> <h2 class=mb-0> <button class="btn btn-link property-name-button" type=button data-toggle=collapse data-target=#items_repo_timestamp aria-expanded aria-controls=items_repo_timestamp onclick="setAnchor('#items_repo_timestamp')"><span class=property-name>timestamp</span></button> </h2> </div> <div id=items_repo_timestamp class="collapse property-definition-div" aria-labelledby=headingitems_repo_timestamp data-parent=#accordionitems_repo_timestamp> <div class="card-body pl-5"> <div class=breadcrumbs>root <svg width=1em height=1em viewbox="0 0 16 16" class="bi bi-arrow-right-short" fill=currentColor xmlns=http://www.w3.org/2000/svg> <path fill-rule=evenodd d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/> </svg> <a href=#items onclick="anchorLink('items')">root items</a> <svg width=1em height=1em viewbox="0 0 16 16" class="bi bi-arrow-right-short" fill=currentColor xmlns=http://www.w3.org/2000/svg> <path fill-rule=evenodd d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/> </svg> <a href=#items_repo onclick="anchorLink('items_repo')">repo</a> <svg width=1em height=1em viewbox="0 0 16 16" class="bi bi-arrow-right-short" fill=currentColor xmlns=http://www.w3.org/2000/svg> <path fill-rule=evenodd d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/> </svg> <a href=#items_repo_timestamp onclick="anchorLink('items_repo_timestamp')">timestamp</a></div><span class="badge badge-dark value-type">Type: number</span> <span class="badge badge-success default-value">Default: 0</span><br> <span class=description><p>Last modification timestamp.</p> <p>The timestamp property contains the timestamp of the last modification of the repository in UNIX time format (the number of non-leap seconds that have elapsed since 00:00:00 UTC on 1st January 1970).<br> Its value depends on the repository manager, in the case of GitHub it contains the time of the last push operation, in the case of GitLab the time of the last repository activity.</p> </span> <br> <div class="badge badge-secondary">Examples:</div> <br><div id=items_repo_timestamp_ex1 class="jumbotron examples"><div class=highlight><pre><span></span><span class=mf>1725277028</span>
-</pre></div> </div><div id=items_repo_timestamp_ex2 class="jumbotron examples"><div class=highlight><pre><span></span><span class=mf>1690893368</span>
-</pre></div> </div> </div> </div> </div> </div> <div class=accordion id=accordionitems_repo_clone_url> <div class=card> <div class=card-header id=headingitems_repo_clone_url> <h2 class=mb-0> <button class="btn btn-link property-name-button" type=button data-toggle=collapse data-target=#items_repo_clone_url aria-expanded aria-controls=items_repo_clone_url onclick="setAnchor('#items_repo_clone_url')"><span class=property-name>clone_url</span></button> </h2> </div> <div id=items_repo_clone_url class="collapse property-definition-div" aria-labelledby=headingitems_repo_clone_url data-parent=#accordionitems_repo_clone_url> <div class="card-body pl-5"> <div class=breadcrumbs>root <svg width=1em height=1em viewbox="0 0 16 16" class="bi bi-arrow-right-short" fill=currentColor xmlns=http://www.w3.org/2000/svg> <path fill-rule=evenodd d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/> </svg> <a href=#items onclick="anchorLink('items')">root items</a> <svg width=1em height=1em viewbox="0 0 16 16" class="bi bi-arrow-right-short" fill=currentColor xmlns=http://www.w3.org/2000/svg> <path fill-rule=evenodd d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/> </svg> <a href=#items_repo onclick="anchorLink('items_repo')">repo</a> <svg width=1em height=1em viewbox="0 0 16 16" class="bi bi-arrow-right-short" fill=currentColor xmlns=http://www.w3.org/2000/svg> <path fill-rule=evenodd d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/> </svg> <a href=#items_repo_clone_url onclick="anchorLink('items_repo_clone_url')">clone_url</a></div><span class="badge badge-dark value-type">Type: string</span> <span class="badge badge-success default-value">Default: ""</span><br> <span class=description><p>URL for the git clone operation.</p> <p>The clone_url property contains a (typically HTTP) URL, which is used to clone the repository.</p> </span> <br> <div class="badge badge-secondary">Examples:</div> <br><div id=items_repo_clone_url_ex1 class="jumbotron examples"><div class=highlight><pre><span></span><span class=s2>&quot;https://github.com/grafana/xk6-dashboard.git&quot;</span>
-</pre></div> </div><div id=items_repo_clone_url_ex2 class="jumbotron examples"><div class=highlight><pre><span></span><span class=s2>&quot;https://github.com/grafana/xk6-sql.git&quot;</span>
-</pre></div> </div> </div> </div> </div> </div> </div> </div> </div> </div> <div class=accordion id=accordionitems_tier> <div class=card> <div class=card-header id=headingitems_tier> <h2 class=mb-0> <button class="btn btn-link property-name-button" type=button data-toggle=collapse data-target=#items_tier aria-expanded aria-controls=items_tier onclick="setAnchor('#items_tier')"><span class=property-name>tier</span></button> </h2> </div> <div id=items_tier class="collapse property-definition-div" aria-labelledby=headingitems_tier data-parent=#accordionitems_tier> <div class="card-body pl-5"> <div class=breadcrumbs>root <svg width=1em height=1em viewbox="0 0 16 16" class="bi bi-arrow-right-short" fill=currentColor xmlns=http://www.w3.org/2000/svg> <path fill-rule=evenodd d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/> </svg> <a href=#items onclick="anchorLink('items')">root items</a> <svg width=1em height=1em viewbox="0 0 16 16" class="bi bi-arrow-right-short" fill=currentColor xmlns=http://www.w3.org/2000/svg> <path fill-rule=evenodd d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/> </svg> <a href=#items_tier onclick="anchorLink('items_tier')">tier</a></div><span class="badge badge-dark value-type">Type: enum (of string)</span> <span class="badge badge-success default-value">Default: "community"</span><br> <span class=description><p>Maintainer of the extension.</p> <p>Possible values:</p> <ul> <li>official: Extensions owned, maintained, and designated by Grafana as &#34;official&#34;</li> <li>partner: Extensions written, maintained, validated, and published by third-party companies against their own projects.</li> <li>community: Extensions are listed on the Registry by individual maintainers, groups of maintainers, or other members of the k6 community.</li> </ul> <p>Extensions owned by the <code>grafana</code> GitHub organization are not officially supported by Grafana by default.<br> There are several k6 extensions owned by the <code>grafana</code> GitHub organization, which were created for experimental or example purposes only.<br> The <code>official</code> tier value is needed so that officially supported extensions can be distinguished from them.</p> <p>If it is missing from the registry source, it will be set with the default &#34;community&#34; value during generation.</p> </span> <div class=enum-value id=items_tier_enum> <h4>Must be one of:</h4> <ul class=list-group><li class="list-group-item enum-item">"official"</li><li class="list-group-item enum-item">"partner"</li><li class="list-group-item enum-item">"community"</li></ul> </div> <br> <div class="badge badge-secondary">Examples:</div> <br><div id=items_tier_ex1 class="jumbotron examples"><div class=highlight><pre><span></span><span class=s2>&quot;community&quot;</span>
-</pre></div> </div><div id=items_tier_ex2 class="jumbotron examples"><div class=highlight><pre><span></span><span class=s2>&quot;official&quot;</span>
-</pre></div> </div> </div> </div> </div> </div> <div class=accordion id=accordionitems_products> <div class=card> <div class=card-header id=headingitems_products> <h2 class=mb-0> <button class="btn btn-link property-name-button" type=button data-toggle=collapse data-target=#items_products aria-expanded aria-controls=items_products onclick="setAnchor('#items_products')"><span class=property-name>products</span></button> </h2> </div> <div id=items_products class="collapse property-definition-div" aria-labelledby=headingitems_products data-parent=#accordionitems_products> <div class="card-body pl-5"> <div class=breadcrumbs>root <svg width=1em height=1em viewbox="0 0 16 16" class="bi bi-arrow-right-short" fill=currentColor xmlns=http://www.w3.org/2000/svg> <path fill-rule=evenodd d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/> </svg> <a href=#items onclick="anchorLink('items')">root items</a> <svg width=1em height=1em viewbox="0 0 16 16" class="bi bi-arrow-right-short" fill=currentColor xmlns=http://www.w3.org/2000/svg> <path fill-rule=evenodd d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/> </svg> <a href=#items_products onclick="anchorLink('items_products')">products</a></div><span class="badge badge-dark value-type">Type: array</span><br> <span class=description><p>Products in which the extension can be used.</p> <p>Some extensions are not available in all k6 products.<br> This may be for a technological or business reason, or the functionality of the extension may not make sense in the given product.</p> <p>Possible values:</p> <ul> <li>oss: Extensions are available in k6 OSS</li> <li>cloud: Extensions are available in Grafana Cloud k6</li> <li>synthetic: Extensions are available in Grafana Synthetic Monitoring</li> </ul> <p>If the property is missing or empty in the source of the registry, it means that the extension is only available in the k6 OSS product.<br> In this case, the registry will be filled in accordingly during generation.</p> </span> <span class="badge badge-info no-additional">No Additional Items</span><h4>Each item of this array must be:</h4> <div class=card> <div class="card-body items-definition" id=items_products_items> <div class=breadcrumbs>root <svg width=1em height=1em viewbox="0 0 16 16" class="bi bi-arrow-right-short" fill=currentColor xmlns=http://www.w3.org/2000/svg> <path fill-rule=evenodd d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/> </svg> <a href=#items onclick="anchorLink('items')">root items</a> <svg width=1em height=1em viewbox="0 0 16 16" class="bi bi-arrow-right-short" fill=currentColor xmlns=http://www.w3.org/2000/svg> <path fill-rule=evenodd d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/> </svg> <a href=#items_products onclick="anchorLink('items_products')">products</a> <svg width=1em height=1em viewbox="0 0 16 16" class="bi bi-arrow-right-short" fill=currentColor xmlns=http://www.w3.org/2000/svg> <path fill-rule=evenodd d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/> </svg> <a href=#items_products_items onclick="anchorLink('items_products_items')">product</a></div><span class="badge badge-dark value-type">Type: enum (of string)</span><br> <span class=description><p>Products in which the extension can be used.</p> <p>Some extensions are not available in all k6 products.<br> This may be for a technological or business reason, or the functionality of the extension may not make sense in the given product.</p> <p>Possible values:</p> <ul> <li>oss: Extensions are available in k6 OSS</li> <li>cloud: Extensions are available in Grafana Cloud k6</li> <li>synthetic: Extensions are available in Grafana Synthetic Monitoring</li> </ul> <p>If it is missing from the registry source, it will be set with the default <code>[&amp;#34;community&amp;#34;]</code> value during generation.</p> </span> <div class=enum-value id=items_products_items_enum> <h4>Must be one of:</h4> <ul class=list-group><li class="list-group-item enum-item">"oss"</li><li class="list-group-item enum-item">"cloud"</li><li class="list-group-item enum-item">"synthetic"</li></ul> </div> <br> <div class="badge badge-secondary">Examples:</div> <br><div id=items_products_items_ex1 class="jumbotron examples"><div class=highlight><pre><span></span><span class=p>[</span>
-<span class=w>    </span><span class=s2>&quot;cloud&quot;</span><span class=p>,</span>
-<span class=w>    </span><span class=s2>&quot;synthetic&quot;</span><span class=p>,</span>
-<span class=w>    </span><span class=s2>&quot;oss&quot;</span>
-<span class=p>]</span>
-</pre></div> </div><div id=items_products_items_ex2 class="jumbotron examples"><div class=highlight><pre><span></span><span class=p>[</span>
-<span class=w>    </span><span class=s2>&quot;cloud&quot;</span>
-<span class=p>]</span>
-</pre></div> </div><div id=items_products_items_ex3 class="jumbotron examples"><div class=highlight><pre><span></span><span class=p>[</span>
-<span class=w>    </span><span class=s2>&quot;oss&quot;</span>
-<span class=p>]</span>
-</pre></div> </div> </div> </div><br> <div class="badge badge-secondary">Examples:</div> <br><div id=items_products_ex1 class="jumbotron examples"><div class=highlight><pre><span></span><span class=p>[</span>
-<span class=w>    </span><span class=s2>&quot;cloud&quot;</span><span class=p>,</span>
-<span class=w>    </span><span class=s2>&quot;synthetic&quot;</span><span class=p>,</span>
-<span class=w>    </span><span class=s2>&quot;oss&quot;</span>
-<span class=p>]</span>
-</pre></div> </div><div id=items_products_ex2 class="jumbotron examples"><div class=highlight><pre><span></span><span class=p>[</span>
-<span class=w>    </span><span class=s2>&quot;cloud&quot;</span>
-<span class=p>]</span>
-</pre></div> </div><div id=items_products_ex3 class="jumbotron examples"><div class=highlight><pre><span></span><span class=p>[</span>
-<span class=w>    </span><span class=s2>&quot;oss&quot;</span>
-<span class=p>]</span>
-</pre></div> </div> </div> </div> </div> </div> <div class=accordion id=accordionitems_categories> <div class=card> <div class=card-header id=headingitems_categories> <h2 class=mb-0> <button class="btn btn-link property-name-button" type=button data-toggle=collapse data-target=#items_categories aria-expanded aria-controls=items_categories onclick="setAnchor('#items_categories')"><span class=property-name>categories</span></button> </h2> </div> <div id=items_categories class="collapse property-definition-div" aria-labelledby=headingitems_categories data-parent=#accordionitems_categories> <div class="card-body pl-5"> <div class=breadcrumbs>root <svg width=1em height=1em viewbox="0 0 16 16" class="bi bi-arrow-right-short" fill=currentColor xmlns=http://www.w3.org/2000/svg> <path fill-rule=evenodd d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/> </svg> <a href=#items onclick="anchorLink('items')">root items</a> <svg width=1em height=1em viewbox="0 0 16 16" class="bi bi-arrow-right-short" fill=currentColor xmlns=http://www.w3.org/2000/svg> <path fill-rule=evenodd d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/> </svg> <a href=#items_categories onclick="anchorLink('items_categories')">categories</a></div><span class="badge badge-dark value-type">Type: array</span><br> <span class=description><p>The categories to which the extension belongs.</p> <p>If the property is missing or empty in the registry source, the default value is <code>[&amp;#34;misc&amp;#34;]</code>.</p> </span> <span class="badge badge-info no-additional">No Additional Items</span><h4>Each item of this array must be:</h4> <div class=card> <div class="card-body items-definition" id=items_categories_items> <div class=breadcrumbs>root <svg width=1em height=1em viewbox="0 0 16 16" class="bi bi-arrow-right-short" fill=currentColor xmlns=http://www.w3.org/2000/svg> <path fill-rule=evenodd d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/> </svg> <a href=#items onclick="anchorLink('items')">root items</a> <svg width=1em height=1em viewbox="0 0 16 16" class="bi bi-arrow-right-short" fill=currentColor xmlns=http://www.w3.org/2000/svg> <path fill-rule=evenodd d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/> </svg> <a href=#items_categories onclick="anchorLink('items_categories')">categories</a> <svg width=1em height=1em viewbox="0 0 16 16" class="bi bi-arrow-right-short" fill=currentColor xmlns=http://www.w3.org/2000/svg> <path fill-rule=evenodd d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/> </svg> <a href=#items_categories_items onclick="anchorLink('items_categories_items')">category</a></div><span class="badge badge-dark value-type">Type: enum (of string)</span><br> <span class=description><p>The categories to which the extension belongs.</p> <p>If it is missing from the registry source, it will be set with the default <code>[&amp;#34;misc&amp;#34;]</code> value during generation.</p> </span> <div class=enum-value id=items_categories_items_enum> <h4>Must be one of:</h4> <ul class=list-group><li class="list-group-item enum-item">"authentication"</li><li class="list-group-item enum-item">"browser"</li><li class="list-group-item enum-item">"data"</li><li class="list-group-item enum-item">"kubernetes"</li><li class="list-group-item enum-item">"messaging"</li><li class="list-group-item enum-item">"misc"</li><li class="list-group-item enum-item">"observability"</li><li class="list-group-item enum-item">"protocol"</li><li class="list-group-item enum-item">"reporting"</li></ul> </div> <br> <div class="badge badge-secondary">Examples:</div> <br><div id=items_categories_items_ex1 class="jumbotron examples"><div class=highlight><pre><span></span><span class=p>[</span>
-<span class=w>    </span><span class=s2>&quot;data&quot;</span><span class=p>,</span>
-<span class=w>    </span><span class=s2>&quot;reporting&quot;</span>
-<span class=p>]</span>
-</pre></div> </div><div id=items_categories_items_ex2 class="jumbotron examples"><div class=highlight><pre><span></span><span class=p>[</span>
-<span class=w>    </span><span class=s2>&quot;observability&quot;</span><span class=p>,</span>
-<span class=w>    </span><span class=s2>&quot;protocol&quot;</span>
-<span class=p>]</span>
-</pre></div> </div> </div> </div><br> <div class="badge badge-secondary">Examples:</div> <br><div id=items_categories_ex1 class="jumbotron examples"><div class=highlight><pre><span></span><span class=p>[</span>
-<span class=w>    </span><span class=s2>&quot;data&quot;</span><span class=p>,</span>
-<span class=w>    </span><span class=s2>&quot;reporting&quot;</span>
-<span class=p>]</span>
-</pre></div> </div><div id=items_categories_ex2 class="jumbotron examples"><div class=highlight><pre><span></span><span class=p>[</span>
-<span class=w>    </span><span class=s2>&quot;observability&quot;</span><span class=p>,</span>
-<span class=w>    </span><span class=s2>&quot;protocol&quot;</span>
-<span class=p>]</span>
-</pre></div> </div> </div> </div> </div> </div> <div class=accordion id=accordionitems_compliance> <div class=card> <div class=card-header id=headingitems_compliance> <h2 class=mb-0> <button class="btn btn-link property-name-button" type=button data-toggle=collapse data-target=#items_compliance aria-expanded aria-controls=items_compliance onclick="setAnchor('#items_compliance')"><span class=property-name>compliance</span></button> </h2> </div> <div id=items_compliance class="collapse property-definition-div" aria-labelledby=headingitems_compliance data-parent=#accordionitems_compliance> <div class="card-body pl-5"> <div class=breadcrumbs>root <svg width=1em height=1em viewbox="0 0 16 16" class="bi bi-arrow-right-short" fill=currentColor xmlns=http://www.w3.org/2000/svg> <path fill-rule=evenodd d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/> </svg> <a href=#items onclick="anchorLink('items')">root items</a> <svg width=1em height=1em viewbox="0 0 16 16" class="bi bi-arrow-right-short" fill=currentColor xmlns=http://www.w3.org/2000/svg> <path fill-rule=evenodd d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/> </svg> <a href=#items_compliance onclick="anchorLink('items_compliance')">compliance</a></div><span class="badge badge-dark value-type">Type: object</span><br> <span class=description><p>The result of the extension&#39;s k6 compliance checks.</p> </span> <span class="badge badge-info no-additional">No Additional Properties</span> <div class=accordion id=accordionitems_compliance_level> <div class=card> <div class=card-header id=headingitems_compliance_level> <h2 class=mb-0> <button class="btn btn-link property-name-button" type=button data-toggle=collapse data-target=#items_compliance_level aria-expanded aria-controls=items_compliance_level onclick="setAnchor('#items_compliance_level')"><span class=property-name>level</span> <span class="badge badge-warning required-property">Required</span></button> </h2> </div> <div id=items_compliance_level class="collapse property-definition-div" aria-labelledby=headingitems_compliance_level data-parent=#accordionitems_compliance_level> <div class="card-body pl-5"> <div class=breadcrumbs>root <svg width=1em height=1em viewbox="0 0 16 16" class="bi bi-arrow-right-short" fill=currentColor xmlns=http://www.w3.org/2000/svg> <path fill-rule=evenodd d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/> </svg> <a href=#items onclick="anchorLink('items')">root items</a> <svg width=1em height=1em viewbox="0 0 16 16" class="bi bi-arrow-right-short" fill=currentColor xmlns=http://www.w3.org/2000/svg> <path fill-rule=evenodd d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/> </svg> <a href=#items_compliance onclick="anchorLink('items_compliance')">compliance</a> <svg width=1em height=1em viewbox="0 0 16 16" class="bi bi-arrow-right-short" fill=currentColor xmlns=http://www.w3.org/2000/svg> <path fill-rule=evenodd d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/> </svg> <a href=#items_compliance_level onclick="anchorLink('items_compliance_level')">level</a></div><span class="badge badge-dark value-type">Type: integer</span><br> <span class=description><p>Compliance expressed as a percentage.</p> <p>The <code>level</code> property contains a percentage of how well the extension complies with best practices.<br> The value of the <code>level</code> can be between <code>0-100</code> and is determined by the weighted and normalized sum of the scores of the compliance checks.</p> </span> <p><span class="badge badge-light restriction numeric-restriction" id=items_compliance_level_number>Value must be greater or equal to <code>0</code> and lesser or equal to <code>100</code></span></p> <br> <div class="badge badge-secondary">Examples:</div> <br><div id=items_compliance_level_ex1 class="jumbotron examples"><div class=highlight><pre><span></span><span class=mf>87</span>
-</pre></div> </div><div id=items_compliance_level_ex2 class="jumbotron examples"><div class=highlight><pre><span></span><span class=mf>34</span>
-</pre></div> </div><div id=items_compliance_level_ex3 class="jumbotron examples"><div class=highlight><pre><span></span><span class=mf>100</span>
-</pre></div> </div> </div> </div> </div> </div> <div class=accordion id=accordionitems_compliance_grade> <div class=card> <div class=card-header id=headingitems_compliance_grade> <h2 class=mb-0> <button class="btn btn-link property-name-button" type=button data-toggle=collapse data-target=#items_compliance_grade aria-expanded aria-controls=items_compliance_grade onclick="setAnchor('#items_compliance_grade')"><span class=property-name>grade</span> <span class="badge badge-warning required-property">Required</span></button> </h2> </div> <div id=items_compliance_grade class="collapse property-definition-div" aria-labelledby=headingitems_compliance_grade data-parent=#accordionitems_compliance_grade> <div class="card-body pl-5"> <div class=breadcrumbs>root <svg width=1em height=1em viewbox="0 0 16 16" class="bi bi-arrow-right-short" fill=currentColor xmlns=http://www.w3.org/2000/svg> <path fill-rule=evenodd d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/> </svg> <a href=#items onclick="anchorLink('items')">root items</a> <svg width=1em height=1em viewbox="0 0 16 16" class="bi bi-arrow-right-short" fill=currentColor xmlns=http://www.w3.org/2000/svg> <path fill-rule=evenodd d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/> </svg> <a href=#items_compliance onclick="anchorLink('items_compliance')">compliance</a> <svg width=1em height=1em viewbox="0 0 16 16" class="bi bi-arrow-right-short" fill=currentColor xmlns=http://www.w3.org/2000/svg> <path fill-rule=evenodd d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/> </svg> <a href=#items_compliance_grade onclick="anchorLink('items_compliance_grade')">grade</a></div><span class="badge badge-dark value-type">Type: enum (of string)</span><br> <span class=description><p>Compliance expressed as a grade.</p> <p>The <code>grade</code> property contains a grade (A-F) of how well the extension complies with best practices.<br> The value of the <code>grade</code> can be <code>A</code>,<code>B</code>,<code>C</code>,<code>D</code>,<code>E</code>,<code>F</code> and is calculated from the <code>level</code> property.</p> </span> <div class=enum-value id=items_compliance_grade_enum> <h4>Must be one of:</h4> <ul class=list-group><li class="list-group-item enum-item">"A"</li><li class="list-group-item enum-item">"B"</li><li class="list-group-item enum-item">"C"</li><li class="list-group-item enum-item">"D"</li><li class="list-group-item enum-item">"E"</li><li class="list-group-item enum-item">"F"</li><li class="list-group-item enum-item">"G"</li></ul> </div> <br> <div class="badge badge-secondary">Examples:</div> <br><div id=items_compliance_grade_ex1 class="jumbotron examples"><div class=highlight><pre><span></span><span class=s2>&quot;C&quot;</span>
-</pre></div> </div><div id=items_compliance_grade_ex2 class="jumbotron examples"><div class=highlight><pre><span></span><span class=s2>&quot;A&quot;</span>
-</pre></div> </div> </div> </div> </div> </div> <div class=accordion id=accordionitems_compliance_issues> <div class=card> <div class=card-header id=headingitems_compliance_issues> <h2 class=mb-0> <button class="btn btn-link property-name-button" type=button data-toggle=collapse data-target=#items_compliance_issues aria-expanded aria-controls=items_compliance_issues onclick="setAnchor('#items_compliance_issues')"><span class=property-name>issues</span></button> </h2> </div> <div id=items_compliance_issues class="collapse property-definition-div" aria-labelledby=headingitems_compliance_issues data-parent=#accordionitems_compliance_issues> <div class="card-body pl-5"> <div class=breadcrumbs>root <svg width=1em height=1em viewbox="0 0 16 16" class="bi bi-arrow-right-short" fill=currentColor xmlns=http://www.w3.org/2000/svg> <path fill-rule=evenodd d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/> </svg> <a href=#items onclick="anchorLink('items')">root items</a> <svg width=1em height=1em viewbox="0 0 16 16" class="bi bi-arrow-right-short" fill=currentColor xmlns=http://www.w3.org/2000/svg> <path fill-rule=evenodd d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/> </svg> <a href=#items_compliance onclick="anchorLink('items_compliance')">compliance</a> <svg width=1em height=1em viewbox="0 0 16 16" class="bi bi-arrow-right-short" fill=currentColor xmlns=http://www.w3.org/2000/svg> <path fill-rule=evenodd d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/> </svg> <a href=#items_compliance_issues onclick="anchorLink('items_compliance_issues')">issues</a></div><span class="badge badge-dark value-type">Type: array of string</span><br> <span class=description><p>A list of compliance check IDs that failed.</p> <p>The `issues`` property is primarily used for debugging. It contains the (implementation-dependent) identifiers of those compliance checks that failed.</p> </span> <span class="badge badge-info no-additional">No Additional Items</span><h4>Each item of this array must be:</h4> <div class=card> <div class="card-body items-definition" id=items_compliance_issues_items> <div class=breadcrumbs>root <svg width=1em height=1em viewbox="0 0 16 16" class="bi bi-arrow-right-short" fill=currentColor xmlns=http://www.w3.org/2000/svg> <path fill-rule=evenodd d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/> </svg> <a href=#items onclick="anchorLink('items')">root items</a> <svg width=1em height=1em viewbox="0 0 16 16" class="bi bi-arrow-right-short" fill=currentColor xmlns=http://www.w3.org/2000/svg> <path fill-rule=evenodd d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/> </svg> <a href=#items_compliance onclick="anchorLink('items_compliance')">compliance</a> <svg width=1em height=1em viewbox="0 0 16 16" class="bi bi-arrow-right-short" fill=currentColor xmlns=http://www.w3.org/2000/svg> <path fill-rule=evenodd d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/> </svg> <a href=#items_compliance_issues onclick="anchorLink('items_compliance_issues')">issues</a> <svg width=1em height=1em viewbox="0 0 16 16" class="bi bi-arrow-right-short" fill=currentColor xmlns=http://www.w3.org/2000/svg> <path fill-rule=evenodd d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/> </svg> <a href=#items_compliance_issues_items onclick="anchorLink('items_compliance_issues_items')">issues items</a></div><span class="badge badge-dark value-type">Type: string</span><br> </div> </div><br> <div class="badge badge-secondary">Examples:</div> <br><div id=items_compliance_issues_ex1 class="jumbotron examples"><div class=highlight><pre><span></span><span class=p>[</span>
-<span class=w>    </span><span class=s2>&quot;build&quot;</span><span class=p>,</span>
-<span class=w>    </span><span class=s2>&quot;smoke&quot;</span>
-<span class=p>]</span>
-</pre></div> </div><div id=items_compliance_issues_ex2 class="jumbotron examples"><div class=highlight><pre><span></span><span class=p>[</span>
-<span class=w>    </span><span class=s2>&quot;readme&quot;</span><span class=p>,</span>
-<span class=w>    </span><span class=s2>&quot;versions&quot;</span>
-<span class=p>]</span>
-</pre></div> </div> </div> </div> </div> </div> </div> </div> </div> </div> </div> </div> </body> </html>
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Overpass:300,400,600,800">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+	<link rel="stylesheet" type="text/css" href="schema_doc.css">
+    <script src="https://use.fontawesome.com/facf9fa52c.js"></script>
+    <script src="schema_doc.min.js"></script>
+    <meta charset="utf-8"/>
+    <title>Schema Docs</title>
+</head>
+<body onload="anchorOnLoad();" id="root">
+
+    <div class="breadcrumbs"></div><span class="badge badge-dark value-type">Type: array</span><br/>
+<span class="description"><p>k6 Extension Registry.</p>
+
+<p>The k6 extension registry contains the most important properties of registered extensions.</p>
+</span>
+
+    
+        
+
+        
+        
+
+         <span class="badge badge-info no-additional">No Additional Items</span><h4>Each item of this array must be:</h4>
+    <div class="card">
+        <div class="card-body items-definition" id="items">
+            
+
+    <div class="breadcrumbs">root
+        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path
+                fill-rule="evenodd"
+                d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+            />
+        </svg>
+    <a href="#items" onclick="anchorLink('items')">extension</a></div><span class="badge badge-dark value-type">Type: object</span><br/>
+<span class="description"><p>Properties of the registered k6 extension.</p>
+
+<p>Only those properties of the extensions are registered, which either cannot be detected automatically, or delegation to the extension is not allowed.</p>
+
+<p>Properties that are available using the repository manager API are intentionally not registered.</p>
+
+<p>The string like properties that are included in the generated Grafana documentation are intentionally not accessed via the API of the repository manager. It is not allowed to inject arbitrary text into the Grafana documentation site without approval. Therefore, these properties are registered (eg <code>description</code>)</p>
+</span>
+
+     <span class="badge badge-info no-additional">No Additional Properties</span>
+        
+
+        
+        
+
+        
+<div class="accordion" id="accordionitems_module">
+    <div class="card">
+        <div class="card-header" id="headingitems_module">
+            <h2 class="mb-0">
+                <button class="btn btn-link property-name-button" type="button" data-toggle="collapse" data-target="#items_module"
+                        aria-expanded="" aria-controls="items_module" onclick="setAnchor('#items_module')"><span class="property-name">module</span> <span class="badge badge-warning required-property">Required</span></button>
+            </h2>
+        </div>
+
+        <div id="items_module"
+             class="collapse property-definition-div" aria-labelledby="headingitems_module"
+             data-parent="#accordionitems_module">
+            <div class="card-body pl-5">
+
+    <div class="breadcrumbs">root
+        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path
+                fill-rule="evenodd"
+                d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+            />
+        </svg>
+    <a href="#items" onclick="anchorLink('items')">root items</a>
+        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path
+                fill-rule="evenodd"
+                d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+            />
+        </svg>
+    <a href="#items_module" onclick="anchorLink('items_module')">module</a></div><span class="badge badge-dark value-type">Type: string</span><br/>
+<span class="description"><p>The extension's go module path.</p>
+
+<p>This is the unique identifier of the extension.<br />
+More info about module paths: https://go.dev/ref/mod#module-path</p>
+
+<p>The extension has no name property, the module path or part of it can be used as the extension name. For example, using the first two elements of the module path after the host name, the name <code>grafana/xk6-dashboard</code> can be formed from the module path <code>github.com/grafana/xk6-dashboard</code>. This is typically the repository owner name and the repository name in the repository manager.</p>
+
+<p>The extension has no URL property, a URL can be created from the module path that refers to the extension within the repository manager.</p>
+</span>
+        
+
+        
+        
+
+        <br/>
+<div class="badge badge-secondary">Examples:</div>
+<br/><div id="items_module_ex1" class="jumbotron examples"><div class="highlight"><pre><span></span><span class="s2">&quot;github.com/grafana/xk6-dashboard&quot;</span>
+</pre></div>
+</div><div id="items_module_ex2" class="jumbotron examples"><div class="highlight"><pre><span></span><span class="s2">&quot;github.com/szkiba/xk6-top&quot;</span>
+</pre></div>
+</div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="accordion" id="accordionitems_imports">
+    <div class="card">
+        <div class="card-header" id="headingitems_imports">
+            <h2 class="mb-0">
+                <button class="btn btn-link property-name-button" type="button" data-toggle="collapse" data-target="#items_imports"
+                        aria-expanded="" aria-controls="items_imports" onclick="setAnchor('#items_imports')"><span class="property-name">imports</span></button>
+            </h2>
+        </div>
+
+        <div id="items_imports"
+             class="collapse property-definition-div" aria-labelledby="headingitems_imports"
+             data-parent="#accordionitems_imports">
+            <div class="card-body pl-5">
+
+    <div class="breadcrumbs">root
+        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path
+                fill-rule="evenodd"
+                d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+            />
+        </svg>
+    <a href="#items" onclick="anchorLink('items')">root items</a>
+        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path
+                fill-rule="evenodd"
+                d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+            />
+        </svg>
+    <a href="#items_imports" onclick="anchorLink('items_imports')">imports</a></div><span class="badge badge-dark value-type">Type: array of string</span><br/>
+<span class="description"><p>List of JavaScript import paths registered by the extension.</p>
+
+<p>Currently, paths must start with the prefix <code>k6/x/</code>.</p>
+
+<p>The extensions used by k6 scripts are automatically detected based on the values specified here, therefore it is important that the values used here are consistent with the values registered by the extension at runtime.</p>
+</span>
+        
+
+        
+        
+
+         <span class="badge badge-info no-additional">No Additional Items</span><h4>Each item of this array must be:</h4>
+    <div class="card">
+        <div class="card-body items-definition" id="items_imports_items">
+            
+
+    <div class="breadcrumbs">root
+        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path
+                fill-rule="evenodd"
+                d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+            />
+        </svg>
+    <a href="#items" onclick="anchorLink('items')">root items</a>
+        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path
+                fill-rule="evenodd"
+                d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+            />
+        </svg>
+    <a href="#items_imports" onclick="anchorLink('items_imports')">imports</a>
+        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path
+                fill-rule="evenodd"
+                d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+            />
+        </svg>
+    <a href="#items_imports_items" onclick="anchorLink('items_imports_items')">imports items</a></div><span class="badge badge-dark value-type">Type: string</span><br/>
+<span class="pattern-value" id="items_imports_items_pattern">Must match regular expression: <code>^k6$|^k6/x/</code></span>
+        
+
+        
+        
+
+        
+        </div>
+    </div><br/>
+<div class="badge badge-secondary">Examples:</div>
+<br/><div id="items_imports_ex1" class="jumbotron examples"><div class="highlight"><pre><span></span><span class="p">[</span>
+<span class="w">    </span><span class="s2">&quot;k6/x/csv&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;k6/x/csv/stream&quot;</span>
+<span class="p">]</span>
+</pre></div>
+</div><div id="items_imports_ex2" class="jumbotron examples"><div class="highlight"><pre><span></span><span class="p">[</span>
+<span class="w">    </span><span class="s2">&quot;k6/x/toml&quot;</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="accordion" id="accordionitems_outputs">
+    <div class="card">
+        <div class="card-header" id="headingitems_outputs">
+            <h2 class="mb-0">
+                <button class="btn btn-link property-name-button" type="button" data-toggle="collapse" data-target="#items_outputs"
+                        aria-expanded="" aria-controls="items_outputs" onclick="setAnchor('#items_outputs')"><span class="property-name">outputs</span></button>
+            </h2>
+        </div>
+
+        <div id="items_outputs"
+             class="collapse property-definition-div" aria-labelledby="headingitems_outputs"
+             data-parent="#accordionitems_outputs">
+            <div class="card-body pl-5">
+
+    <div class="breadcrumbs">root
+        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path
+                fill-rule="evenodd"
+                d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+            />
+        </svg>
+    <a href="#items" onclick="anchorLink('items')">root items</a>
+        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path
+                fill-rule="evenodd"
+                d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+            />
+        </svg>
+    <a href="#items_outputs" onclick="anchorLink('items_outputs')">outputs</a></div><span class="badge badge-dark value-type">Type: array of string</span><br/>
+<span class="description"><p>List of output names registered by the extension.</p>
+
+<p>The extensions used by k6 scripts are automatically detected based on the values specified here, therefore it is important that the values used here are consistent with the values registered by the extension at runtime.</p>
+</span>
+        
+
+        
+        
+
+         <span class="badge badge-info no-additional">No Additional Items</span><h4>Each item of this array must be:</h4>
+    <div class="card">
+        <div class="card-body items-definition" id="items_outputs_items">
+            
+
+    <div class="breadcrumbs">root
+        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path
+                fill-rule="evenodd"
+                d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+            />
+        </svg>
+    <a href="#items" onclick="anchorLink('items')">root items</a>
+        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path
+                fill-rule="evenodd"
+                d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+            />
+        </svg>
+    <a href="#items_outputs" onclick="anchorLink('items_outputs')">outputs</a>
+        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path
+                fill-rule="evenodd"
+                d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+            />
+        </svg>
+    <a href="#items_outputs_items" onclick="anchorLink('items_outputs_items')">outputs items</a></div><span class="badge badge-dark value-type">Type: string</span><br/>
+
+        
+
+        
+        
+
+        
+        </div>
+    </div><br/>
+<div class="badge badge-secondary">Examples:</div>
+<br/><div id="items_outputs_ex1" class="jumbotron examples"><div class="highlight"><pre><span></span><span class="p">[</span>
+<span class="w">    </span><span class="s2">&quot;dashboard&quot;</span>
+<span class="p">]</span>
+</pre></div>
+</div><div id="items_outputs_ex2" class="jumbotron examples"><div class="highlight"><pre><span></span><span class="p">[</span>
+<span class="w">    </span><span class="s2">&quot;plugin&quot;</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="accordion" id="accordionitems_description">
+    <div class="card">
+        <div class="card-header" id="headingitems_description">
+            <h2 class="mb-0">
+                <button class="btn btn-link property-name-button" type="button" data-toggle="collapse" data-target="#items_description"
+                        aria-expanded="" aria-controls="items_description" onclick="setAnchor('#items_description')"><span class="property-name">description</span></button>
+            </h2>
+        </div>
+
+        <div id="items_description"
+             class="collapse property-definition-div" aria-labelledby="headingitems_description"
+             data-parent="#accordionitems_description">
+            <div class="card-body pl-5">
+
+    <div class="breadcrumbs">root
+        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path
+                fill-rule="evenodd"
+                d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+            />
+        </svg>
+    <a href="#items" onclick="anchorLink('items')">root items</a>
+        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path
+                fill-rule="evenodd"
+                d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+            />
+        </svg>
+    <a href="#items_description" onclick="anchorLink('items_description')">description</a></div><span class="badge badge-dark value-type">Type: string</span> <span class="badge badge-success default-value">Default: ""</span><br/>
+<span class="description"><p>Brief description of the extension.</p>
+</span>
+        
+
+        
+        
+
+        <br/>
+<div class="badge badge-secondary">Example:</div>
+<br/><div id="items_description_ex1" class="jumbotron examples"><div class="highlight"><pre><span></span><span class="s2">&quot;This is a very cool extension, it displays the message &#39;Hello World!&#39;&quot;</span>
+</pre></div>
+</div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="accordion" id="accordionitems_versions">
+    <div class="card">
+        <div class="card-header" id="headingitems_versions">
+            <h2 class="mb-0">
+                <button class="btn btn-link property-name-button" type="button" data-toggle="collapse" data-target="#items_versions"
+                        aria-expanded="" aria-controls="items_versions" onclick="setAnchor('#items_versions')"><span class="property-name">versions</span></button>
+            </h2>
+        </div>
+
+        <div id="items_versions"
+             class="collapse property-definition-div" aria-labelledby="headingitems_versions"
+             data-parent="#accordionitems_versions">
+            <div class="card-body pl-5">
+
+    <div class="breadcrumbs">root
+        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path
+                fill-rule="evenodd"
+                d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+            />
+        </svg>
+    <a href="#items" onclick="anchorLink('items')">root items</a>
+        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path
+                fill-rule="evenodd"
+                d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+            />
+        </svg>
+    <a href="#items_versions" onclick="anchorLink('items_versions')">versions</a></div><span class="badge badge-dark value-type">Type: array of string</span><br/>
+<span class="description"><p>List of supported versions.</p>
+
+<p>Versions are tags whose format meets the requirements of semantic versioning. Version tags often start with the letter <code>v</code>, which is not part of the semantic version.</p>
+</span>
+        
+
+        
+        
+
+         <span class="badge badge-info no-additional">No Additional Items</span><h4>Each item of this array must be:</h4>
+    <div class="card">
+        <div class="card-body items-definition" id="items_versions_items">
+            
+
+    <div class="breadcrumbs">root
+        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path
+                fill-rule="evenodd"
+                d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+            />
+        </svg>
+    <a href="#items" onclick="anchorLink('items')">root items</a>
+        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path
+                fill-rule="evenodd"
+                d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+            />
+        </svg>
+    <a href="#items_versions" onclick="anchorLink('items_versions')">versions</a>
+        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path
+                fill-rule="evenodd"
+                d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+            />
+        </svg>
+    <a href="#items_versions_items" onclick="anchorLink('items_versions_items')">versions items</a></div><span class="badge badge-dark value-type">Type: string</span><br/>
+
+        
+
+        
+        
+
+        
+        </div>
+    </div><br/>
+<div class="badge badge-secondary">Example:</div>
+<br/><div id="items_versions_ex1" class="jumbotron examples"><div class="highlight"><pre><span></span><span class="p">[</span>
+<span class="w">    </span><span class="s2">&quot;v0.1.0&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;v0.2.0&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;v0.2.1&quot;</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="accordion" id="accordionitems_cgo">
+    <div class="card">
+        <div class="card-header" id="headingitems_cgo">
+            <h2 class="mb-0">
+                <button class="btn btn-link property-name-button" type="button" data-toggle="collapse" data-target="#items_cgo"
+                        aria-expanded="" aria-controls="items_cgo" onclick="setAnchor('#items_cgo')"><span class="property-name">cgo</span></button>
+            </h2>
+        </div>
+
+        <div id="items_cgo"
+             class="collapse property-definition-div" aria-labelledby="headingitems_cgo"
+             data-parent="#accordionitems_cgo">
+            <div class="card-body pl-5">
+
+    <div class="breadcrumbs">root
+        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path
+                fill-rule="evenodd"
+                d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+            />
+        </svg>
+    <a href="#items" onclick="anchorLink('items')">root items</a>
+        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path
+                fill-rule="evenodd"
+                d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+            />
+        </svg>
+    <a href="#items_cgo" onclick="anchorLink('items_cgo')">cgo</a></div><span class="badge badge-dark value-type">Type: boolean</span> <span class="badge badge-success default-value">Default: false</span><br/>
+<span class="description"><p>Flag indicating the need for cgo.</p>
+
+<p>The <code>cgo</code> property value <code>true</code> indicates that cgo must be enabled to build the extension.</p>
+</span>
+        
+
+        
+        
+
+        
+            </div>
+        </div>
+    </div>
+</div>
+<div class="accordion" id="accordionitems_constraints">
+    <div class="card">
+        <div class="card-header" id="headingitems_constraints">
+            <h2 class="mb-0">
+                <button class="btn btn-link property-name-button" type="button" data-toggle="collapse" data-target="#items_constraints"
+                        aria-expanded="" aria-controls="items_constraints" onclick="setAnchor('#items_constraints')"><span class="property-name">constraints</span></button>
+            </h2>
+        </div>
+
+        <div id="items_constraints"
+             class="collapse property-definition-div" aria-labelledby="headingitems_constraints"
+             data-parent="#accordionitems_constraints">
+            <div class="card-body pl-5">
+
+    <div class="breadcrumbs">root
+        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path
+                fill-rule="evenodd"
+                d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+            />
+        </svg>
+    <a href="#items" onclick="anchorLink('items')">root items</a>
+        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path
+                fill-rule="evenodd"
+                d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+            />
+        </svg>
+    <a href="#items_constraints" onclick="anchorLink('items_constraints')">constraints</a></div><span class="badge badge-dark value-type">Type: string</span> <span class="badge badge-success default-value">Default: ""</span><br/>
+<span class="description"><p>Version constraints.</p>
+
+<p>Version constraints are primarily used to filter automatically detected versions.<br />
+It can also be used to filter the versions property imported from the origin registry.</p>
+</span><span class="pattern-value" id="items_constraints_pattern">Must match regular expression: <code>[vxX*|,&amp;\^0-9.+-&gt;&lt;=, ~]+</code></span>
+        
+
+        
+        
+
+        <br/>
+<div class="badge badge-secondary">Example:</div>
+<br/><div id="items_constraints_ex1" class="jumbotron examples"><div class="highlight"><pre><span></span><span class="p">[</span>
+<span class="w">    </span><span class="s2">&quot;&gt;=v0.4.0&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;&gt;v0.50.0&quot;</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="accordion" id="accordionitems_repo">
+    <div class="card">
+        <div class="card-header" id="headingitems_repo">
+            <h2 class="mb-0">
+                <button class="btn btn-link property-name-button" type="button" data-toggle="collapse" data-target="#items_repo"
+                        aria-expanded="" aria-controls="items_repo" onclick="setAnchor('#items_repo')"><span class="property-name">repo</span></button>
+            </h2>
+        </div>
+
+        <div id="items_repo"
+             class="collapse property-definition-div" aria-labelledby="headingitems_repo"
+             data-parent="#accordionitems_repo">
+            <div class="card-body pl-5">
+
+    <div class="breadcrumbs">root
+        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path
+                fill-rule="evenodd"
+                d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+            />
+        </svg>
+    <a href="#items" onclick="anchorLink('items')">root items</a>
+        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path
+                fill-rule="evenodd"
+                d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+            />
+        </svg>
+    <a href="#items_repo" onclick="anchorLink('items_repo')">repo</a></div><span class="badge badge-dark value-type">Type: object</span><br/>
+<span class="description"><p>Repository metadata.</p>
+
+<p>Metadata provided by the extension's git repository manager. Repository metadata are not registered, they are queried at runtime using the repository manager API.</p>
+</span>
+
+    
+        
+
+        
+        
+
+        
+<div class="accordion" id="accordionitems_repo_name">
+    <div class="card">
+        <div class="card-header" id="headingitems_repo_name">
+            <h2 class="mb-0">
+                <button class="btn btn-link property-name-button" type="button" data-toggle="collapse" data-target="#items_repo_name"
+                        aria-expanded="" aria-controls="items_repo_name" onclick="setAnchor('#items_repo_name')"><span class="property-name">name</span> <span class="badge badge-warning required-property">Required</span></button>
+            </h2>
+        </div>
+
+        <div id="items_repo_name"
+             class="collapse property-definition-div" aria-labelledby="headingitems_repo_name"
+             data-parent="#accordionitems_repo_name">
+            <div class="card-body pl-5">
+
+    <div class="breadcrumbs">root
+        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path
+                fill-rule="evenodd"
+                d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+            />
+        </svg>
+    <a href="#items" onclick="anchorLink('items')">root items</a>
+        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path
+                fill-rule="evenodd"
+                d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+            />
+        </svg>
+    <a href="#items_repo" onclick="anchorLink('items_repo')">repo</a>
+        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path
+                fill-rule="evenodd"
+                d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+            />
+        </svg>
+    <a href="#items_repo_name" onclick="anchorLink('items_repo_name')">name</a></div><span class="badge badge-dark value-type">Type: string</span><br/>
+<span class="description"><p>The name of the repository.</p>
+</span>
+        
+
+        
+        
+
+        <br/>
+<div class="badge badge-secondary">Examples:</div>
+<br/><div id="items_repo_name_ex1" class="jumbotron examples"><div class="highlight"><pre><span></span><span class="s2">&quot;xk6-dashboard&quot;</span>
+</pre></div>
+</div><div id="items_repo_name_ex2" class="jumbotron examples"><div class="highlight"><pre><span></span><span class="s2">&quot;xk6-sql&quot;</span>
+</pre></div>
+</div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="accordion" id="accordionitems_repo_owner">
+    <div class="card">
+        <div class="card-header" id="headingitems_repo_owner">
+            <h2 class="mb-0">
+                <button class="btn btn-link property-name-button" type="button" data-toggle="collapse" data-target="#items_repo_owner"
+                        aria-expanded="" aria-controls="items_repo_owner" onclick="setAnchor('#items_repo_owner')"><span class="property-name">owner</span> <span class="badge badge-warning required-property">Required</span></button>
+            </h2>
+        </div>
+
+        <div id="items_repo_owner"
+             class="collapse property-definition-div" aria-labelledby="headingitems_repo_owner"
+             data-parent="#accordionitems_repo_owner">
+            <div class="card-body pl-5">
+
+    <div class="breadcrumbs">root
+        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path
+                fill-rule="evenodd"
+                d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+            />
+        </svg>
+    <a href="#items" onclick="anchorLink('items')">root items</a>
+        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path
+                fill-rule="evenodd"
+                d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+            />
+        </svg>
+    <a href="#items_repo" onclick="anchorLink('items_repo')">repo</a>
+        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path
+                fill-rule="evenodd"
+                d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+            />
+        </svg>
+    <a href="#items_repo_owner" onclick="anchorLink('items_repo_owner')">owner</a></div><span class="badge badge-dark value-type">Type: string</span><br/>
+<span class="description"><p>The owner of the repository.</p>
+</span>
+        
+
+        
+        
+
+        <br/>
+<div class="badge badge-secondary">Example:</div>
+<br/><div id="items_repo_owner_ex1" class="jumbotron examples"><div class="highlight"><pre><span></span><span class="s2">&quot;grafana&quot;</span>
+</pre></div>
+</div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="accordion" id="accordionitems_repo_url">
+    <div class="card">
+        <div class="card-header" id="headingitems_repo_url">
+            <h2 class="mb-0">
+                <button class="btn btn-link property-name-button" type="button" data-toggle="collapse" data-target="#items_repo_url"
+                        aria-expanded="" aria-controls="items_repo_url" onclick="setAnchor('#items_repo_url')"><span class="property-name">url</span> <span class="badge badge-warning required-property">Required</span></button>
+            </h2>
+        </div>
+
+        <div id="items_repo_url"
+             class="collapse property-definition-div" aria-labelledby="headingitems_repo_url"
+             data-parent="#accordionitems_repo_url">
+            <div class="card-body pl-5">
+
+    <div class="breadcrumbs">root
+        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path
+                fill-rule="evenodd"
+                d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+            />
+        </svg>
+    <a href="#items" onclick="anchorLink('items')">root items</a>
+        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path
+                fill-rule="evenodd"
+                d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+            />
+        </svg>
+    <a href="#items_repo" onclick="anchorLink('items_repo')">repo</a>
+        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path
+                fill-rule="evenodd"
+                d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+            />
+        </svg>
+    <a href="#items_repo_url" onclick="anchorLink('items_repo_url')">url</a></div><span class="badge badge-dark value-type">Type: string</span><br/>
+<span class="description"><p>URL of the repository.</p>
+
+<p>The URL is provided by the repository manager and can be displayed in a browser.</p>
+</span>
+        
+
+        
+        
+
+        <br/>
+<div class="badge badge-secondary">Example:</div>
+<br/><div id="items_repo_url_ex1" class="jumbotron examples"><div class="highlight"><pre><span></span><span class="s2">&quot;https://github.com/grafana/xk6-dashboard&quot;</span>
+</pre></div>
+</div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="accordion" id="accordionitems_repo_homepage">
+    <div class="card">
+        <div class="card-header" id="headingitems_repo_homepage">
+            <h2 class="mb-0">
+                <button class="btn btn-link property-name-button" type="button" data-toggle="collapse" data-target="#items_repo_homepage"
+                        aria-expanded="" aria-controls="items_repo_homepage" onclick="setAnchor('#items_repo_homepage')"><span class="property-name">homepage</span></button>
+            </h2>
+        </div>
+
+        <div id="items_repo_homepage"
+             class="collapse property-definition-div" aria-labelledby="headingitems_repo_homepage"
+             data-parent="#accordionitems_repo_homepage">
+            <div class="card-body pl-5">
+
+    <div class="breadcrumbs">root
+        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path
+                fill-rule="evenodd"
+                d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+            />
+        </svg>
+    <a href="#items" onclick="anchorLink('items')">root items</a>
+        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path
+                fill-rule="evenodd"
+                d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+            />
+        </svg>
+    <a href="#items_repo" onclick="anchorLink('items_repo')">repo</a>
+        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path
+                fill-rule="evenodd"
+                d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+            />
+        </svg>
+    <a href="#items_repo_homepage" onclick="anchorLink('items_repo_homepage')">homepage</a></div><span class="badge badge-dark value-type">Type: string</span> <span class="badge badge-success default-value">Default: ""</span><br/>
+<span class="description"><p>The URL to the project homepage.</p>
+
+<p>If no homepage is set, the value is the same as the url property.</p>
+</span>
+        
+
+        
+        
+
+        <br/>
+<div class="badge badge-secondary">Example:</div>
+<br/><div id="items_repo_homepage_ex1" class="jumbotron examples"><div class="highlight"><pre><span></span><span class="s2">&quot;https://github.com/grafana/xk6-dashboard&quot;</span>
+</pre></div>
+</div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="accordion" id="accordionitems_repo_description">
+    <div class="card">
+        <div class="card-header" id="headingitems_repo_description">
+            <h2 class="mb-0">
+                <button class="btn btn-link property-name-button" type="button" data-toggle="collapse" data-target="#items_repo_description"
+                        aria-expanded="" aria-controls="items_repo_description" onclick="setAnchor('#items_repo_description')"><span class="property-name">description</span></button>
+            </h2>
+        </div>
+
+        <div id="items_repo_description"
+             class="collapse property-definition-div" aria-labelledby="headingitems_repo_description"
+             data-parent="#accordionitems_repo_description">
+            <div class="card-body pl-5">
+
+    <div class="breadcrumbs">root
+        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path
+                fill-rule="evenodd"
+                d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+            />
+        </svg>
+    <a href="#items" onclick="anchorLink('items')">root items</a>
+        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path
+                fill-rule="evenodd"
+                d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+            />
+        </svg>
+    <a href="#items_repo" onclick="anchorLink('items_repo')">repo</a>
+        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path
+                fill-rule="evenodd"
+                d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+            />
+        </svg>
+    <a href="#items_repo_description" onclick="anchorLink('items_repo_description')">description</a></div><span class="badge badge-dark value-type">Type: string</span> <span class="badge badge-success default-value">Default: ""</span><br/>
+<span class="description"><p>Repository description.</p>
+</span>
+        
+
+        
+        
+
+        <br/>
+<div class="badge badge-secondary">Example:</div>
+<br/><div id="items_repo_description_ex1" class="jumbotron examples"><div class="highlight"><pre><span></span><span class="s2">&quot;This is a wonderful extension, it says &#39;Hello Wonderful World!&#39;&quot;</span>
+</pre></div>
+</div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="accordion" id="accordionitems_repo_stars">
+    <div class="card">
+        <div class="card-header" id="headingitems_repo_stars">
+            <h2 class="mb-0">
+                <button class="btn btn-link property-name-button" type="button" data-toggle="collapse" data-target="#items_repo_stars"
+                        aria-expanded="" aria-controls="items_repo_stars" onclick="setAnchor('#items_repo_stars')"><span class="property-name">stars</span></button>
+            </h2>
+        </div>
+
+        <div id="items_repo_stars"
+             class="collapse property-definition-div" aria-labelledby="headingitems_repo_stars"
+             data-parent="#accordionitems_repo_stars">
+            <div class="card-body pl-5">
+
+    <div class="breadcrumbs">root
+        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path
+                fill-rule="evenodd"
+                d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+            />
+        </svg>
+    <a href="#items" onclick="anchorLink('items')">root items</a>
+        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path
+                fill-rule="evenodd"
+                d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+            />
+        </svg>
+    <a href="#items_repo" onclick="anchorLink('items_repo')">repo</a>
+        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path
+                fill-rule="evenodd"
+                d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+            />
+        </svg>
+    <a href="#items_repo_stars" onclick="anchorLink('items_repo_stars')">stars</a></div><span class="badge badge-dark value-type">Type: integer</span> <span class="badge badge-success default-value">Default: "0"</span><br/>
+<span class="description"><p>The number of stars in the extension's repository.</p>
+
+<p>The extension's popularity is indicated by how many users have starred the extension's repository.</p>
+</span>
+        
+
+        
+        
+
+        <br/>
+<div class="badge badge-secondary">Examples:</div>
+<br/><div id="items_repo_stars_ex1" class="jumbotron examples"><div class="highlight"><pre><span></span><span class="mf">365</span>
+</pre></div>
+</div><div id="items_repo_stars_ex2" class="jumbotron examples"><div class="highlight"><pre><span></span><span class="mf">202</span>
+</pre></div>
+</div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="accordion" id="accordionitems_repo_topics">
+    <div class="card">
+        <div class="card-header" id="headingitems_repo_topics">
+            <h2 class="mb-0">
+                <button class="btn btn-link property-name-button" type="button" data-toggle="collapse" data-target="#items_repo_topics"
+                        aria-expanded="" aria-controls="items_repo_topics" onclick="setAnchor('#items_repo_topics')"><span class="property-name">topics</span></button>
+            </h2>
+        </div>
+
+        <div id="items_repo_topics"
+             class="collapse property-definition-div" aria-labelledby="headingitems_repo_topics"
+             data-parent="#accordionitems_repo_topics">
+            <div class="card-body pl-5">
+
+    <div class="breadcrumbs">root
+        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path
+                fill-rule="evenodd"
+                d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+            />
+        </svg>
+    <a href="#items" onclick="anchorLink('items')">root items</a>
+        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path
+                fill-rule="evenodd"
+                d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+            />
+        </svg>
+    <a href="#items_repo" onclick="anchorLink('items_repo')">repo</a>
+        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path
+                fill-rule="evenodd"
+                d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+            />
+        </svg>
+    <a href="#items_repo_topics" onclick="anchorLink('items_repo_topics')">topics</a></div><span class="badge badge-dark value-type">Type: array of string</span><br/>
+<span class="description"><p>Repository topics.</p>
+
+<p>Topics make it easier to find the repository. It is recommended to set the xk6 topic to the extensions repository.</p>
+</span>
+        
+
+        
+        
+
+         <span class="badge badge-info no-additional">No Additional Items</span><h4>Each item of this array must be:</h4>
+    <div class="card">
+        <div class="card-body items-definition" id="items_repo_topics_items">
+            
+
+    <div class="breadcrumbs">root
+        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path
+                fill-rule="evenodd"
+                d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+            />
+        </svg>
+    <a href="#items" onclick="anchorLink('items')">root items</a>
+        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path
+                fill-rule="evenodd"
+                d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+            />
+        </svg>
+    <a href="#items_repo" onclick="anchorLink('items_repo')">repo</a>
+        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path
+                fill-rule="evenodd"
+                d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+            />
+        </svg>
+    <a href="#items_repo_topics" onclick="anchorLink('items_repo_topics')">topics</a>
+        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path
+                fill-rule="evenodd"
+                d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+            />
+        </svg>
+    <a href="#items_repo_topics_items" onclick="anchorLink('items_repo_topics_items')">topics items</a></div><span class="badge badge-dark value-type">Type: string</span><br/>
+
+        
+
+        
+        
+
+        
+        </div>
+    </div><br/>
+<div class="badge badge-secondary">Examples:</div>
+<br/><div id="items_repo_topics_ex1" class="jumbotron examples"><div class="highlight"><pre><span></span><span class="p">[</span>
+<span class="w">    </span><span class="s2">&quot;xk6&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;testing&quot;</span>
+<span class="p">]</span>
+</pre></div>
+</div><div id="items_repo_topics_ex2" class="jumbotron examples"><div class="highlight"><pre><span></span><span class="p">[</span>
+<span class="w">    </span><span class="s2">&quot;xk6&quot;</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="accordion" id="accordionitems_repo_public">
+    <div class="card">
+        <div class="card-header" id="headingitems_repo_public">
+            <h2 class="mb-0">
+                <button class="btn btn-link property-name-button" type="button" data-toggle="collapse" data-target="#items_repo_public"
+                        aria-expanded="" aria-controls="items_repo_public" onclick="setAnchor('#items_repo_public')"><span class="property-name">public</span></button>
+            </h2>
+        </div>
+
+        <div id="items_repo_public"
+             class="collapse property-definition-div" aria-labelledby="headingitems_repo_public"
+             data-parent="#accordionitems_repo_public">
+            <div class="card-body pl-5">
+
+    <div class="breadcrumbs">root
+        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path
+                fill-rule="evenodd"
+                d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+            />
+        </svg>
+    <a href="#items" onclick="anchorLink('items')">root items</a>
+        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path
+                fill-rule="evenodd"
+                d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+            />
+        </svg>
+    <a href="#items_repo" onclick="anchorLink('items_repo')">repo</a>
+        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path
+                fill-rule="evenodd"
+                d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+            />
+        </svg>
+    <a href="#items_repo_public" onclick="anchorLink('items_repo_public')">public</a></div><span class="badge badge-dark value-type">Type: boolean</span> <span class="badge badge-success default-value">Default: "false"</span><br/>
+<span class="description"><p>Public repository flag.</p>
+
+<p>A <code>true</code> value indicates that the repository is public, available to anyone.</p>
+</span>
+        
+
+        
+        
+
+        <br/>
+<div class="badge badge-secondary">Example:</div>
+<br/><div id="items_repo_public_ex1" class="jumbotron examples"><div class="highlight"><pre><span></span><span class="kc">true</span>
+</pre></div>
+</div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="accordion" id="accordionitems_repo_license">
+    <div class="card">
+        <div class="card-header" id="headingitems_repo_license">
+            <h2 class="mb-0">
+                <button class="btn btn-link property-name-button" type="button" data-toggle="collapse" data-target="#items_repo_license"
+                        aria-expanded="" aria-controls="items_repo_license" onclick="setAnchor('#items_repo_license')"><span class="property-name">license</span></button>
+            </h2>
+        </div>
+
+        <div id="items_repo_license"
+             class="collapse property-definition-div" aria-labelledby="headingitems_repo_license"
+             data-parent="#accordionitems_repo_license">
+            <div class="card-body pl-5">
+
+    <div class="breadcrumbs">root
+        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path
+                fill-rule="evenodd"
+                d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+            />
+        </svg>
+    <a href="#items" onclick="anchorLink('items')">root items</a>
+        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path
+                fill-rule="evenodd"
+                d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+            />
+        </svg>
+    <a href="#items_repo" onclick="anchorLink('items_repo')">repo</a>
+        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path
+                fill-rule="evenodd"
+                d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+            />
+        </svg>
+    <a href="#items_repo_license" onclick="anchorLink('items_repo_license')">license</a></div><span class="badge badge-dark value-type">Type: string</span> <span class="badge badge-success default-value">Default: ""</span><br/>
+<span class="description"><p>The SPDX ID of the extension's license.</p>
+
+<p>For more information about SPDX, visit https://spdx.org/licenses/</p>
+</span>
+        
+
+        
+        
+
+        <br/>
+<div class="badge badge-secondary">Examples:</div>
+<br/><div id="items_repo_license_ex1" class="jumbotron examples"><div class="highlight"><pre><span></span><span class="s2">&quot;AGPL-3.0-only&quot;</span>
+</pre></div>
+</div><div id="items_repo_license_ex2" class="jumbotron examples"><div class="highlight"><pre><span></span><span class="s2">&quot;MIT&quot;</span>
+</pre></div>
+</div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="accordion" id="accordionitems_repo_archived">
+    <div class="card">
+        <div class="card-header" id="headingitems_repo_archived">
+            <h2 class="mb-0">
+                <button class="btn btn-link property-name-button" type="button" data-toggle="collapse" data-target="#items_repo_archived"
+                        aria-expanded="" aria-controls="items_repo_archived" onclick="setAnchor('#items_repo_archived')"><span class="property-name">archived</span></button>
+            </h2>
+        </div>
+
+        <div id="items_repo_archived"
+             class="collapse property-definition-div" aria-labelledby="headingitems_repo_archived"
+             data-parent="#accordionitems_repo_archived">
+            <div class="card-body pl-5">
+
+    <div class="breadcrumbs">root
+        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path
+                fill-rule="evenodd"
+                d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+            />
+        </svg>
+    <a href="#items" onclick="anchorLink('items')">root items</a>
+        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path
+                fill-rule="evenodd"
+                d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+            />
+        </svg>
+    <a href="#items_repo" onclick="anchorLink('items_repo')">repo</a>
+        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path
+                fill-rule="evenodd"
+                d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+            />
+        </svg>
+    <a href="#items_repo_archived" onclick="anchorLink('items_repo_archived')">archived</a></div><span class="badge badge-dark value-type">Type: boolean</span> <span class="badge badge-success default-value">Default: "false"</span><br/>
+<span class="description"><p>Archived repository flag.</p>
+
+<p>A <code>true</code> value indicates that the repository is archived, read only.</p>
+
+<p>If a repository is archived, it usually means that the owner has no intention of maintaining it. Such extensions should be removed from the registry.</p>
+</span>
+        
+
+        
+        
+
+        
+            </div>
+        </div>
+    </div>
+</div>
+<div class="accordion" id="accordionitems_repo_timestamp">
+    <div class="card">
+        <div class="card-header" id="headingitems_repo_timestamp">
+            <h2 class="mb-0">
+                <button class="btn btn-link property-name-button" type="button" data-toggle="collapse" data-target="#items_repo_timestamp"
+                        aria-expanded="" aria-controls="items_repo_timestamp" onclick="setAnchor('#items_repo_timestamp')"><span class="property-name">timestamp</span></button>
+            </h2>
+        </div>
+
+        <div id="items_repo_timestamp"
+             class="collapse property-definition-div" aria-labelledby="headingitems_repo_timestamp"
+             data-parent="#accordionitems_repo_timestamp">
+            <div class="card-body pl-5">
+
+    <div class="breadcrumbs">root
+        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path
+                fill-rule="evenodd"
+                d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+            />
+        </svg>
+    <a href="#items" onclick="anchorLink('items')">root items</a>
+        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path
+                fill-rule="evenodd"
+                d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+            />
+        </svg>
+    <a href="#items_repo" onclick="anchorLink('items_repo')">repo</a>
+        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path
+                fill-rule="evenodd"
+                d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+            />
+        </svg>
+    <a href="#items_repo_timestamp" onclick="anchorLink('items_repo_timestamp')">timestamp</a></div><span class="badge badge-dark value-type">Type: number</span> <span class="badge badge-success default-value">Default: 0</span><br/>
+<span class="description"><p>Last modification timestamp.</p>
+
+<p>The timestamp property contains the timestamp of the last modification of the repository in UNIX time format (the number of non-leap seconds that have elapsed since 00:00:00 UTC on 1st January 1970).<br />
+Its value depends on the repository manager, in the case of GitHub it contains the time of the last push operation, in the case of GitLab the time of the last repository activity.</p>
+</span>
+        
+
+        
+        
+
+        <br/>
+<div class="badge badge-secondary">Examples:</div>
+<br/><div id="items_repo_timestamp_ex1" class="jumbotron examples"><div class="highlight"><pre><span></span><span class="mf">1725277028</span>
+</pre></div>
+</div><div id="items_repo_timestamp_ex2" class="jumbotron examples"><div class="highlight"><pre><span></span><span class="mf">1690893368</span>
+</pre></div>
+</div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="accordion" id="accordionitems_repo_clone_url">
+    <div class="card">
+        <div class="card-header" id="headingitems_repo_clone_url">
+            <h2 class="mb-0">
+                <button class="btn btn-link property-name-button" type="button" data-toggle="collapse" data-target="#items_repo_clone_url"
+                        aria-expanded="" aria-controls="items_repo_clone_url" onclick="setAnchor('#items_repo_clone_url')"><span class="property-name">clone_url</span></button>
+            </h2>
+        </div>
+
+        <div id="items_repo_clone_url"
+             class="collapse property-definition-div" aria-labelledby="headingitems_repo_clone_url"
+             data-parent="#accordionitems_repo_clone_url">
+            <div class="card-body pl-5">
+
+    <div class="breadcrumbs">root
+        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path
+                fill-rule="evenodd"
+                d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+            />
+        </svg>
+    <a href="#items" onclick="anchorLink('items')">root items</a>
+        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path
+                fill-rule="evenodd"
+                d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+            />
+        </svg>
+    <a href="#items_repo" onclick="anchorLink('items_repo')">repo</a>
+        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path
+                fill-rule="evenodd"
+                d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+            />
+        </svg>
+    <a href="#items_repo_clone_url" onclick="anchorLink('items_repo_clone_url')">clone_url</a></div><span class="badge badge-dark value-type">Type: string</span> <span class="badge badge-success default-value">Default: ""</span><br/>
+<span class="description"><p>URL for the git clone operation.</p>
+
+<p>The clone_url property contains a (typically HTTP) URL, which is used to clone the repository.</p>
+</span>
+        
+
+        
+        
+
+        <br/>
+<div class="badge badge-secondary">Examples:</div>
+<br/><div id="items_repo_clone_url_ex1" class="jumbotron examples"><div class="highlight"><pre><span></span><span class="s2">&quot;https://github.com/grafana/xk6-dashboard.git&quot;</span>
+</pre></div>
+</div><div id="items_repo_clone_url_ex2" class="jumbotron examples"><div class="highlight"><pre><span></span><span class="s2">&quot;https://github.com/grafana/xk6-sql.git&quot;</span>
+</pre></div>
+</div>
+            </div>
+        </div>
+    </div>
+</div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="accordion" id="accordionitems_tier">
+    <div class="card">
+        <div class="card-header" id="headingitems_tier">
+            <h2 class="mb-0">
+                <button class="btn btn-link property-name-button" type="button" data-toggle="collapse" data-target="#items_tier"
+                        aria-expanded="" aria-controls="items_tier" onclick="setAnchor('#items_tier')"><span class="property-name">tier</span></button>
+            </h2>
+        </div>
+
+        <div id="items_tier"
+             class="collapse property-definition-div" aria-labelledby="headingitems_tier"
+             data-parent="#accordionitems_tier">
+            <div class="card-body pl-5">
+
+    <div class="breadcrumbs">root
+        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path
+                fill-rule="evenodd"
+                d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+            />
+        </svg>
+    <a href="#items" onclick="anchorLink('items')">root items</a>
+        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path
+                fill-rule="evenodd"
+                d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+            />
+        </svg>
+    <a href="#items_tier" onclick="anchorLink('items_tier')">tier</a></div><span class="badge badge-dark value-type">Type: enum (of string)</span> <span class="badge badge-success default-value">Default: "community"</span><br/>
+<span class="description"><p>Maintainer of the extension.</p>
+
+<p>Possible values:</p>
+
+<ul>
+<li>official: Extensions owned, maintained, and designated by Grafana as "official"</li>
+<li>partner: Extensions written, maintained, validated, and published by third-party companies against their own projects.</li>
+<li>community: Extensions are listed on the Registry by individual maintainers, groups of maintainers, or other members of the k6 community.</li>
+</ul>
+
+<p>Extensions owned by the <code>grafana</code> GitHub organization are not officially supported by Grafana by default.<br />
+There are several k6 extensions owned by the <code>grafana</code> GitHub organization, which were created for experimental or example purposes only.<br />
+The <code>official</code> tier value is needed so that officially supported extensions can be distinguished from them.</p>
+
+<p>If it is missing from the registry source, it will be set with the default "community" value during generation.</p>
+</span>
+
+    <div class="enum-value" id="items_tier_enum">
+            <h4>Must be one of:</h4>
+            <ul class="list-group"><li class="list-group-item enum-item">"official"</li><li class="list-group-item enum-item">"partner"</li><li class="list-group-item enum-item">"community"</li></ul>
+            </div>
+        
+
+        
+        
+
+        <br/>
+<div class="badge badge-secondary">Examples:</div>
+<br/><div id="items_tier_ex1" class="jumbotron examples"><div class="highlight"><pre><span></span><span class="s2">&quot;community&quot;</span>
+</pre></div>
+</div><div id="items_tier_ex2" class="jumbotron examples"><div class="highlight"><pre><span></span><span class="s2">&quot;official&quot;</span>
+</pre></div>
+</div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="accordion" id="accordionitems_products">
+    <div class="card">
+        <div class="card-header" id="headingitems_products">
+            <h2 class="mb-0">
+                <button class="btn btn-link property-name-button" type="button" data-toggle="collapse" data-target="#items_products"
+                        aria-expanded="" aria-controls="items_products" onclick="setAnchor('#items_products')"><span class="property-name">products</span></button>
+            </h2>
+        </div>
+
+        <div id="items_products"
+             class="collapse property-definition-div" aria-labelledby="headingitems_products"
+             data-parent="#accordionitems_products">
+            <div class="card-body pl-5">
+
+    <div class="breadcrumbs">root
+        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path
+                fill-rule="evenodd"
+                d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+            />
+        </svg>
+    <a href="#items" onclick="anchorLink('items')">root items</a>
+        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path
+                fill-rule="evenodd"
+                d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+            />
+        </svg>
+    <a href="#items_products" onclick="anchorLink('items_products')">products</a></div><span class="badge badge-dark value-type">Type: array</span><br/>
+<span class="description"><p>Products in which the extension can be used.</p>
+
+<p>Some extensions are not available in all k6 products.<br />
+This may be for a technological or business reason, or the functionality of the extension may not make sense in the given product.</p>
+
+<p>Possible values:</p>
+
+<ul>
+<li>oss: Extensions are available in k6 OSS</li>
+<li>cloud: Extensions are available in Grafana Cloud k6</li>
+<li>synthetic: Extensions are available in Grafana Synthetic Monitoring</li>
+</ul>
+
+<p>If the property is missing or empty in the source of the registry, it means that the extension is only available in the k6 OSS product.<br />
+In this case, the registry will be filled in accordingly during generation.</p>
+</span>
+        
+
+        
+        
+
+         <span class="badge badge-info no-additional">No Additional Items</span><h4>Each item of this array must be:</h4>
+    <div class="card">
+        <div class="card-body items-definition" id="items_products_items">
+            
+
+    <div class="breadcrumbs">root
+        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path
+                fill-rule="evenodd"
+                d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+            />
+        </svg>
+    <a href="#items" onclick="anchorLink('items')">root items</a>
+        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path
+                fill-rule="evenodd"
+                d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+            />
+        </svg>
+    <a href="#items_products" onclick="anchorLink('items_products')">products</a>
+        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path
+                fill-rule="evenodd"
+                d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+            />
+        </svg>
+    <a href="#items_products_items" onclick="anchorLink('items_products_items')">product</a></div><span class="badge badge-dark value-type">Type: enum (of string)</span><br/>
+<span class="description"><p>Products in which the extension can be used.</p>
+
+<p>Some extensions are not available in all k6 products.<br />
+This may be for a technological or business reason, or the functionality of the extension may not make sense in the given product.</p>
+
+<p>Possible values:</p>
+
+<ul>
+<li>oss: Extensions are available in k6 OSS</li>
+<li>cloud: Extensions are available in Grafana Cloud k6</li>
+<li>synthetic: Extensions are available in Grafana Synthetic Monitoring</li>
+</ul>
+
+<p>If it is missing from the registry source, it will be set with the default <code>["community"]</code> value during generation.</p>
+</span>
+
+    <div class="enum-value" id="items_products_items_enum">
+            <h4>Must be one of:</h4>
+            <ul class="list-group"><li class="list-group-item enum-item">"oss"</li><li class="list-group-item enum-item">"cloud"</li><li class="list-group-item enum-item">"synthetic"</li></ul>
+            </div>
+        
+
+        
+        
+
+        <br/>
+<div class="badge badge-secondary">Examples:</div>
+<br/><div id="items_products_items_ex1" class="jumbotron examples"><div class="highlight"><pre><span></span><span class="p">[</span>
+<span class="w">    </span><span class="s2">&quot;cloud&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;synthetic&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;oss&quot;</span>
+<span class="p">]</span>
+</pre></div>
+</div><div id="items_products_items_ex2" class="jumbotron examples"><div class="highlight"><pre><span></span><span class="p">[</span>
+<span class="w">    </span><span class="s2">&quot;cloud&quot;</span>
+<span class="p">]</span>
+</pre></div>
+</div><div id="items_products_items_ex3" class="jumbotron examples"><div class="highlight"><pre><span></span><span class="p">[</span>
+<span class="w">    </span><span class="s2">&quot;oss&quot;</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+        </div>
+    </div><br/>
+<div class="badge badge-secondary">Examples:</div>
+<br/><div id="items_products_ex1" class="jumbotron examples"><div class="highlight"><pre><span></span><span class="p">[</span>
+<span class="w">    </span><span class="s2">&quot;cloud&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;synthetic&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;oss&quot;</span>
+<span class="p">]</span>
+</pre></div>
+</div><div id="items_products_ex2" class="jumbotron examples"><div class="highlight"><pre><span></span><span class="p">[</span>
+<span class="w">    </span><span class="s2">&quot;cloud&quot;</span>
+<span class="p">]</span>
+</pre></div>
+</div><div id="items_products_ex3" class="jumbotron examples"><div class="highlight"><pre><span></span><span class="p">[</span>
+<span class="w">    </span><span class="s2">&quot;oss&quot;</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="accordion" id="accordionitems_categories">
+    <div class="card">
+        <div class="card-header" id="headingitems_categories">
+            <h2 class="mb-0">
+                <button class="btn btn-link property-name-button" type="button" data-toggle="collapse" data-target="#items_categories"
+                        aria-expanded="" aria-controls="items_categories" onclick="setAnchor('#items_categories')"><span class="property-name">categories</span></button>
+            </h2>
+        </div>
+
+        <div id="items_categories"
+             class="collapse property-definition-div" aria-labelledby="headingitems_categories"
+             data-parent="#accordionitems_categories">
+            <div class="card-body pl-5">
+
+    <div class="breadcrumbs">root
+        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path
+                fill-rule="evenodd"
+                d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+            />
+        </svg>
+    <a href="#items" onclick="anchorLink('items')">root items</a>
+        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path
+                fill-rule="evenodd"
+                d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+            />
+        </svg>
+    <a href="#items_categories" onclick="anchorLink('items_categories')">categories</a></div><span class="badge badge-dark value-type">Type: array</span><br/>
+<span class="description"><p>The categories to which the extension belongs.</p>
+
+<p>If the property is missing or empty in the registry source, the default value is <code>["misc"]</code>.</p>
+</span>
+        
+
+        
+        
+
+         <span class="badge badge-info no-additional">No Additional Items</span><h4>Each item of this array must be:</h4>
+    <div class="card">
+        <div class="card-body items-definition" id="items_categories_items">
+            
+
+    <div class="breadcrumbs">root
+        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path
+                fill-rule="evenodd"
+                d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+            />
+        </svg>
+    <a href="#items" onclick="anchorLink('items')">root items</a>
+        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path
+                fill-rule="evenodd"
+                d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+            />
+        </svg>
+    <a href="#items_categories" onclick="anchorLink('items_categories')">categories</a>
+        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path
+                fill-rule="evenodd"
+                d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+            />
+        </svg>
+    <a href="#items_categories_items" onclick="anchorLink('items_categories_items')">category</a></div><span class="badge badge-dark value-type">Type: enum (of string)</span><br/>
+<span class="description"><p>The categories to which the extension belongs.</p>
+
+<p>If it is missing from the registry source, it will be set with the default <code>["misc"]</code> value during generation.</p>
+</span>
+
+    <div class="enum-value" id="items_categories_items_enum">
+            <h4>Must be one of:</h4>
+            <ul class="list-group"><li class="list-group-item enum-item">"authentication"</li><li class="list-group-item enum-item">"browser"</li><li class="list-group-item enum-item">"data"</li><li class="list-group-item enum-item">"kubernetes"</li><li class="list-group-item enum-item">"messaging"</li><li class="list-group-item enum-item">"misc"</li><li class="list-group-item enum-item">"observability"</li><li class="list-group-item enum-item">"protocol"</li><li class="list-group-item enum-item">"reporting"</li></ul>
+            </div>
+        
+
+        
+        
+
+        <br/>
+<div class="badge badge-secondary">Examples:</div>
+<br/><div id="items_categories_items_ex1" class="jumbotron examples"><div class="highlight"><pre><span></span><span class="p">[</span>
+<span class="w">    </span><span class="s2">&quot;data&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;reporting&quot;</span>
+<span class="p">]</span>
+</pre></div>
+</div><div id="items_categories_items_ex2" class="jumbotron examples"><div class="highlight"><pre><span></span><span class="p">[</span>
+<span class="w">    </span><span class="s2">&quot;observability&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;protocol&quot;</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+        </div>
+    </div><br/>
+<div class="badge badge-secondary">Examples:</div>
+<br/><div id="items_categories_ex1" class="jumbotron examples"><div class="highlight"><pre><span></span><span class="p">[</span>
+<span class="w">    </span><span class="s2">&quot;data&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;reporting&quot;</span>
+<span class="p">]</span>
+</pre></div>
+</div><div id="items_categories_ex2" class="jumbotron examples"><div class="highlight"><pre><span></span><span class="p">[</span>
+<span class="w">    </span><span class="s2">&quot;observability&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;protocol&quot;</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="accordion" id="accordionitems_compliance">
+    <div class="card">
+        <div class="card-header" id="headingitems_compliance">
+            <h2 class="mb-0">
+                <button class="btn btn-link property-name-button" type="button" data-toggle="collapse" data-target="#items_compliance"
+                        aria-expanded="" aria-controls="items_compliance" onclick="setAnchor('#items_compliance')"><span class="property-name">compliance</span></button>
+            </h2>
+        </div>
+
+        <div id="items_compliance"
+             class="collapse property-definition-div" aria-labelledby="headingitems_compliance"
+             data-parent="#accordionitems_compliance">
+            <div class="card-body pl-5">
+
+    <div class="breadcrumbs">root
+        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path
+                fill-rule="evenodd"
+                d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+            />
+        </svg>
+    <a href="#items" onclick="anchorLink('items')">root items</a>
+        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path
+                fill-rule="evenodd"
+                d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+            />
+        </svg>
+    <a href="#items_compliance" onclick="anchorLink('items_compliance')">compliance</a></div><span class="badge badge-dark value-type">Type: object</span><br/>
+<span class="description"><p>The result of the extension's k6 compliance checks.</p>
+</span>
+
+     <span class="badge badge-info no-additional">No Additional Properties</span>
+        
+
+        
+        
+
+        
+<div class="accordion" id="accordionitems_compliance_level">
+    <div class="card">
+        <div class="card-header" id="headingitems_compliance_level">
+            <h2 class="mb-0">
+                <button class="btn btn-link property-name-button" type="button" data-toggle="collapse" data-target="#items_compliance_level"
+                        aria-expanded="" aria-controls="items_compliance_level" onclick="setAnchor('#items_compliance_level')"><span class="property-name">level</span> <span class="badge badge-warning required-property">Required</span></button>
+            </h2>
+        </div>
+
+        <div id="items_compliance_level"
+             class="collapse property-definition-div" aria-labelledby="headingitems_compliance_level"
+             data-parent="#accordionitems_compliance_level">
+            <div class="card-body pl-5">
+
+    <div class="breadcrumbs">root
+        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path
+                fill-rule="evenodd"
+                d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+            />
+        </svg>
+    <a href="#items" onclick="anchorLink('items')">root items</a>
+        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path
+                fill-rule="evenodd"
+                d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+            />
+        </svg>
+    <a href="#items_compliance" onclick="anchorLink('items_compliance')">compliance</a>
+        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path
+                fill-rule="evenodd"
+                d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+            />
+        </svg>
+    <a href="#items_compliance_level" onclick="anchorLink('items_compliance_level')">level</a></div><span class="badge badge-dark value-type">Type: integer</span><br/>
+<span class="description"><p>Compliance expressed as a percentage.</p>
+
+<p>The <code>level</code> property contains a percentage of how well the extension complies with best practices.<br />
+The value of the <code>level</code> can be between <code>0-100</code> and is determined by the weighted and normalized sum of the scores of the compliance checks.</p>
+</span>
+        
+
+        
+        <p><span class="badge badge-light restriction numeric-restriction" id="items_compliance_level_number">Value must be greater or equal to <code>0</code> and lesser or equal to <code>100</code></span></p>
+
+        <br/>
+<div class="badge badge-secondary">Examples:</div>
+<br/><div id="items_compliance_level_ex1" class="jumbotron examples"><div class="highlight"><pre><span></span><span class="mf">87</span>
+</pre></div>
+</div><div id="items_compliance_level_ex2" class="jumbotron examples"><div class="highlight"><pre><span></span><span class="mf">34</span>
+</pre></div>
+</div><div id="items_compliance_level_ex3" class="jumbotron examples"><div class="highlight"><pre><span></span><span class="mf">100</span>
+</pre></div>
+</div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="accordion" id="accordionitems_compliance_grade">
+    <div class="card">
+        <div class="card-header" id="headingitems_compliance_grade">
+            <h2 class="mb-0">
+                <button class="btn btn-link property-name-button" type="button" data-toggle="collapse" data-target="#items_compliance_grade"
+                        aria-expanded="" aria-controls="items_compliance_grade" onclick="setAnchor('#items_compliance_grade')"><span class="property-name">grade</span> <span class="badge badge-warning required-property">Required</span></button>
+            </h2>
+        </div>
+
+        <div id="items_compliance_grade"
+             class="collapse property-definition-div" aria-labelledby="headingitems_compliance_grade"
+             data-parent="#accordionitems_compliance_grade">
+            <div class="card-body pl-5">
+
+    <div class="breadcrumbs">root
+        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path
+                fill-rule="evenodd"
+                d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+            />
+        </svg>
+    <a href="#items" onclick="anchorLink('items')">root items</a>
+        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path
+                fill-rule="evenodd"
+                d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+            />
+        </svg>
+    <a href="#items_compliance" onclick="anchorLink('items_compliance')">compliance</a>
+        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path
+                fill-rule="evenodd"
+                d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+            />
+        </svg>
+    <a href="#items_compliance_grade" onclick="anchorLink('items_compliance_grade')">grade</a></div><span class="badge badge-dark value-type">Type: enum (of string)</span><br/>
+<span class="description"><p>Compliance expressed as a grade.</p>
+
+<p>The <code>grade</code> property contains a grade (A-F) of how well the extension complies with best practices.<br />
+The value of the <code>grade</code> can be <code>A</code>,<code>B</code>,<code>C</code>,<code>D</code>,<code>E</code>,<code>F</code> and is calculated from the <code>level</code> property.</p>
+</span>
+
+    <div class="enum-value" id="items_compliance_grade_enum">
+            <h4>Must be one of:</h4>
+            <ul class="list-group"><li class="list-group-item enum-item">"A"</li><li class="list-group-item enum-item">"B"</li><li class="list-group-item enum-item">"C"</li><li class="list-group-item enum-item">"D"</li><li class="list-group-item enum-item">"E"</li><li class="list-group-item enum-item">"F"</li><li class="list-group-item enum-item">"G"</li></ul>
+            </div>
+        
+
+        
+        
+
+        <br/>
+<div class="badge badge-secondary">Examples:</div>
+<br/><div id="items_compliance_grade_ex1" class="jumbotron examples"><div class="highlight"><pre><span></span><span class="s2">&quot;C&quot;</span>
+</pre></div>
+</div><div id="items_compliance_grade_ex2" class="jumbotron examples"><div class="highlight"><pre><span></span><span class="s2">&quot;A&quot;</span>
+</pre></div>
+</div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="accordion" id="accordionitems_compliance_issues">
+    <div class="card">
+        <div class="card-header" id="headingitems_compliance_issues">
+            <h2 class="mb-0">
+                <button class="btn btn-link property-name-button" type="button" data-toggle="collapse" data-target="#items_compliance_issues"
+                        aria-expanded="" aria-controls="items_compliance_issues" onclick="setAnchor('#items_compliance_issues')"><span class="property-name">issues</span></button>
+            </h2>
+        </div>
+
+        <div id="items_compliance_issues"
+             class="collapse property-definition-div" aria-labelledby="headingitems_compliance_issues"
+             data-parent="#accordionitems_compliance_issues">
+            <div class="card-body pl-5">
+
+    <div class="breadcrumbs">root
+        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path
+                fill-rule="evenodd"
+                d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+            />
+        </svg>
+    <a href="#items" onclick="anchorLink('items')">root items</a>
+        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path
+                fill-rule="evenodd"
+                d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+            />
+        </svg>
+    <a href="#items_compliance" onclick="anchorLink('items_compliance')">compliance</a>
+        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path
+                fill-rule="evenodd"
+                d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+            />
+        </svg>
+    <a href="#items_compliance_issues" onclick="anchorLink('items_compliance_issues')">issues</a></div><span class="badge badge-dark value-type">Type: array of string</span><br/>
+<span class="description"><p>A list of compliance check IDs that failed.</p>
+
+<p>The `issues`` property is primarily used for debugging. It contains the (implementation-dependent) identifiers of those compliance checks that failed.</p>
+</span>
+        
+
+        
+        
+
+         <span class="badge badge-info no-additional">No Additional Items</span><h4>Each item of this array must be:</h4>
+    <div class="card">
+        <div class="card-body items-definition" id="items_compliance_issues_items">
+            
+
+    <div class="breadcrumbs">root
+        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path
+                fill-rule="evenodd"
+                d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+            />
+        </svg>
+    <a href="#items" onclick="anchorLink('items')">root items</a>
+        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path
+                fill-rule="evenodd"
+                d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+            />
+        </svg>
+    <a href="#items_compliance" onclick="anchorLink('items_compliance')">compliance</a>
+        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path
+                fill-rule="evenodd"
+                d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+            />
+        </svg>
+    <a href="#items_compliance_issues" onclick="anchorLink('items_compliance_issues')">issues</a>
+        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path
+                fill-rule="evenodd"
+                d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+            />
+        </svg>
+    <a href="#items_compliance_issues_items" onclick="anchorLink('items_compliance_issues_items')">issues items</a></div><span class="badge badge-dark value-type">Type: string</span><br/>
+
+        
+
+        
+        
+
+        
+        </div>
+    </div><br/>
+<div class="badge badge-secondary">Examples:</div>
+<br/><div id="items_compliance_issues_ex1" class="jumbotron examples"><div class="highlight"><pre><span></span><span class="p">[</span>
+<span class="w">    </span><span class="s2">&quot;build&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;smoke&quot;</span>
+<span class="p">]</span>
+</pre></div>
+</div><div id="items_compliance_issues_ex2" class="jumbotron examples"><div class="highlight"><pre><span></span><span class="p">[</span>
+<span class="w">    </span><span class="s2">&quot;readme&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;versions&quot;</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+            </div>
+        </div>
+    </div>
+</div>
+            </div>
+        </div>
+    </div>
+</div>
+        </div>
+    </div>
+
+    </body>
+</html>

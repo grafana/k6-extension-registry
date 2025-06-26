@@ -277,6 +277,9 @@
   categories:
     - data
   constraints: ">=1.0.0"
+  products:
+    - oss
+    - cloud
 - module: github.com/grafana/xk6-sql-driver-azuresql
   description: xk6-sql driver extension for Microsoft Azure SQL database support
   imports:

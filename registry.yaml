@@ -271,6 +271,9 @@
   categories:
     - data
   constraints: ">=1.0.0"
+  products:
+    - oss
+    - cloud
 - module: github.com/grafana/xk6-sql-driver-azuresql
   description: xk6-sql driver extension for Microsoft Azure SQL database support
   imports:
@@ -278,6 +281,9 @@
   categories:
     - data
   constraints: ">=0.1.0"
+  products:
+    - oss
+    - cloud
 - module: github.com/grafana/xk6-sql-driver-clickhouse
   description: xk6-sql driver extension for ClickHouse database support
   imports:
@@ -285,6 +291,9 @@
   categories:
     - data
   constraints: ">=0.1.0"
+  products:
+    - oss
+    - cloud
 - module: github.com/grafana/xk6-sql-driver-mysql
   description: xk6-sql driver extension for MySQL database support
   tier: official
@@ -293,6 +302,9 @@
   categories:
     - data
   constraints: ">=0.1.0"
+  products:
+    - oss
+    - cloud
 - module: github.com/grafana/xk6-sql-driver-postgres
   description: xk6-sql driver extension for Postgres database support
   tier: official
@@ -301,6 +313,9 @@
   categories:
     - data
   constraints: ">=0.1.0"
+  products:
+    - oss
+    - cloud
 - module: github.com/grafana/xk6-sql-driver-sqlite3
   description: xk6-sql driver extension for SQLite v3 database support
   tier: official
@@ -317,6 +332,9 @@
   categories:
     - data
   constraints: ">=0.1.0"
+  products:
+    - oss
+    - cloud
 - module: github.com/grafana/xk6-sql-driver-ramsql
   description: xk6-sql driver extension for RamSQL database support
   imports:
@@ -324,6 +342,9 @@
   categories:
     - data
   constraints: ">=0.1.0"
+  products:
+    - oss
+    - cloud
 - module: github.com/grafana/xk6-ssh
   description: Use SSH connections in your tests
   tier: official

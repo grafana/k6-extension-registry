@@ -548,3 +548,11 @@
     - k6/x/amqp
   categories:
     - protocol
+- module: github.com/kressnick25/xk6-ldap
+  description: Load-testing for the LDAP protocol
+  imports:
+    - k6/x/ldap
+  categories:
+    - protocol
+    - data
+

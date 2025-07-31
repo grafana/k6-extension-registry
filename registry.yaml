@@ -548,3 +548,9 @@
     - k6/x/amqp
   categories:
     - protocol
+- module: github.com/prmuthu/xk6-temporal
+  description: To start & send signals to Temporal workflows
+  imports:
+    - k6/x/temporal
+  categories:
+    - messaging

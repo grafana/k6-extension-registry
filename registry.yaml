@@ -280,7 +280,9 @@
     - k6/x/sql/driver/azuresql
   categories:
     - data
-  constraints: ">=0.1.0"
+  versions:
+    - "0.1.0"
+    - "0.1.1"
   products:
     - oss
     - cloud
@@ -290,7 +292,9 @@
     - k6/x/sql/driver/clickhouse
   categories:
     - data
-  constraints: ">=0.1.0"
+  versions:
+    - "0.1.0"
+    - "0.1.1"
   products:
     - oss
     - cloud
@@ -331,7 +335,9 @@
     - k6/x/sql/driver/sqlserver
   categories:
     - data
-  constraints: ">=0.1.0"
+  versions:
+    - "0.1.0"
+    - "0.1.1"
   products:
     - oss
     - cloud
@@ -400,7 +406,11 @@
     - k6/x/kafka
   categories:
     - messaging
-  constraints: ">=0.30.0"
+  versions:
+    - "1.0.0"
+  products:
+    - oss
+    - cloud
 - module: github.com/nicholasvuono/xk6-playwright
   description: Browser automation and end-to-end web testing using Playwright
   imports:
@@ -419,6 +429,12 @@
     - k6/x/sse
   categories:
     - protocol
+  versions:
+    - "0.1.10"
+    - "0.1.11"
+  products:
+    - oss
+    - cloud
 - module: github.com/pmalhaire/xk6-mqtt
   description: MQTT extension
   imports:

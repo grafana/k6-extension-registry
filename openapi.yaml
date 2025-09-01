@@ -124,51 +124,24 @@ paths:
                     # HELP registry_grade_c_count Number of C-grade extensions.
                     # TYPE registry_grade_c_count counter
                     registry_grade_c_count 44 1733941259568
-                    # HELP registry_product_cloud_count Number of extensions available in Grafana Cloud k6.
-                    # TYPE registry_product_cloud_count counter
-                    registry_product_cloud_count 4 1733941259568
-                    # HELP registry_category_observability_count Number of extensions in the 'observability' category.
-                    # TYPE registry_category_observability_count counter
-                    registry_category_observability_count 12 1733941259568
                     # HELP registry_extension_count The total number of extensions.
                     # TYPE registry_extension_count counter
                     registry_extension_count 71 1733941259568
                     # HELP registry_issue_smoke_count Number of extensions without smoke test script.
                     # TYPE registry_issue_smoke_count counter
                     registry_issue_smoke_count 49 1733941259568
-                    # HELP registry_category_misc_count Number of extensions in the 'misc' category.
-                    # TYPE registry_category_misc_count counter
-                    registry_category_misc_count 14 1733941259568
                     # HELP registry_tier_unofficial_count Number of unofficial extensions.
                     # TYPE registry_tier_unofficial_count counter
                     registry_tier_unofficial_count 11 1733941259568
-                    # HELP registry_category_kubernetes_count Number of extensions in the 'kubernetes' category.
-                    # TYPE registry_category_kubernetes_count counter
-                    registry_category_kubernetes_count 2 1733941259568
-                    # HELP registry_category_reporting_count Number of extensions in the 'reporting' category.
-                    # TYPE registry_category_reporting_count counter
-                    registry_category_reporting_count 13 1733941259568
                     # HELP registry_issue_build_count Number of extensions not buildable with the latest k6 version.
                     # TYPE registry_issue_build_count counter
                     registry_issue_build_count 3 1733941259568
-                    # HELP registry_category_browser_count Number of extensions in the 'browser' category.
-                    # TYPE registry_category_browser_count counter
-                    registry_category_browser_count 1 1733941259568
-                    # HELP registry_category_data_count Number of extensions in the 'data' category.
-                    # TYPE registry_category_data_count counter
-                    registry_category_data_count 24 1733941259568
                     # HELP registry_grade_b_count Number of B-grade extensions.
                     # TYPE registry_grade_b_count counter
                     registry_grade_b_count 2 1733941259568
                     # HELP registry_grade_e_count Number of E-grade extensions.
                     # TYPE registry_grade_e_count counter
                     registry_grade_e_count 1 1733941259568
-                    # HELP registry_product_oss_count Number of extensions available in Grafana k6.
-                    # TYPE registry_product_oss_count counter
-                    registry_product_oss_count 70 1733941259568
-                    # HELP registry_product_synthetic_count Number of extensions available in Synthetic Monitoring.
-                    # TYPE registry_product_synthetic_count counter
-                    registry_product_synthetic_count 2 1733941259568
                     # HELP registry_cgo_count Number of extensions requiring cgo.
                     # TYPE registry_cgo_count counter
                     registry_cgo_count 1 1733941259568
@@ -178,15 +151,6 @@ paths:
                     # HELP registry_issue_types_count Number of extensions without API declaration file.
                     # TYPE registry_issue_types_count counter
                     registry_issue_types_count 42 1733941259568
-                    # HELP registry_category_authentication_count Number of extensions in the 'authentication' category.
-                    # TYPE registry_category_authentication_count counter
-                    registry_category_authentication_count 2 1733941259568
-                    # HELP registry_category_messaging_count Number of extensions in the 'messaging' category.
-                    # TYPE registry_category_messaging_count counter
-                    registry_category_messaging_count 11 1733941259568
-                    # HELP registry_category_protocol_count Number of extensions in the 'protocol' category.
-                    # TYPE registry_category_protocol_count counter
-                    registry_category_protocol_count 10 1733941259568
   /module/{module}/extension.json:
     get:
       tags:
@@ -247,42 +211,6 @@ paths:
           description: successful operation
         "404":
           description: module not found
-  /product/{product}.json:
-    get:
-      tags:
-        - subset
-      summary: Suubset by product
-      description: Querying the subset of the registry containing the extensions available in the product specified in the parameter
-      operationId: subsetByProduct
-      parameters:
-        - $ref: "#/components/parameters/product"
-      responses:
-        "200":
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                $ref: "registry.schema.json#/$defs/registry"
-        "404":
-          description: product not found
-  /product/{product}-catalog.json:
-    get:
-      tags:
-        - catalog
-      summary: Catalog by product
-      description: Query the catalog containing extensions available in a given product.
-      operationId: catalogByProduct
-      parameters:
-        - $ref: "#/components/parameters/product"
-      responses:
-        "200":
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                $ref: "registry.schema.json#/$defs/catalog"
-        "404":
-          description: product not found
   /tier/{tier}.json:
     get:
       tags:
@@ -369,24 +297,6 @@ paths:
                 $ref: "registry.schema.json#/$defs/catalog"
         "404":
           description: tier not found
-  /category/{category}.json:
-    get:
-      tags:
-        - subset
-      summary: Subset by category
-      description: Querying the subset of the registry containing extensions belonging to the category specified in the parameter
-      operationId: subsetByCategory
-      parameters:
-        - $ref: "#/components/parameters/category"
-      responses:
-        "200":
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                $ref: "registry.schema.json#/$defs/registry"
-        "404":
-          description: category not found
   /grade/{grade}.json:
     get:
       tags:
@@ -450,14 +360,6 @@ components:
           value: "C"
       schema:
         $ref: "registry.schema.json#/$defs/grade"
-    category:
-      in: path
-      name: category
-      required: true
-      description: category to be queried
-      example: "data"
-      schema:
-        $ref: "registry.schema.json#/$defs/category"
     tier:
       in: path
       name: tier
@@ -470,15 +372,4 @@ components:
           value: "community"
       schema:
         $ref: "registry.schema.json#/$defs/tier"
-    product:
-      in: path
-      name: product
-      required: true
-      description: product to be queried
-      examples:
-        oss:
-          value: "oss"
-        cloud:
-          value: "cloud"
-      schema:
-        $ref: "registry.schema.json#/$defs/product"
+

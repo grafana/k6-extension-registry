@@ -75,9 +75,8 @@ jobs:
           --lint
           --api "${HTDOCS_DIR}"
           --ref "${BASE_URL}/registry.json"
-          --test /registry.json,/catalog.json,/product/oss.json,/product/oss-catalog.json
+          --test /registry.json,/catalog.json
           --test /tier/official.json,/tier/official-catalog.json,/tier/community.json,/tier/community-catalog.json
-          --test /tier/at-least/official.json,/tier/at-least/official-catalog.json,/tier/at-least/partner.json,/tier/at-least/partner-catalog.json
           registry.yaml
 
       - name: Cache Clean

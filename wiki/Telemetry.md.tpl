@@ -54,8 +54,6 @@ Metric | Description | Value
 
 ## Extensions by Tier
 
-Metrics by support. Unofficial extensions are actually community-supported extensions, they were only displayed for better visibility. Since the unofficial extensions also appear in the community extensions metric, the sum of the values is greater than the total number of extensions.
-
 ```mermaid
 pie showData
 {{ range $key, $value:= .metrics }}
@@ -72,58 +70,6 @@ Metric | Description | Value
 -------|-------|------------
 {{ range $key, $value:= .metrics }}
 {{-  if strings.Contains "tier_" $key -}}
-{{-    $key }} | {{ strings.TrimSuffix "." (index $props $key "description") }} | {{ $value }}
-{{ end -}}
-{{ end}}
-
-</div>
-
-## Extensions by Product
-
-Metrics by product. Since an extension may be supported in several products, the sum of the values may be greater than the total number of extensions.
-{{ $products := dict "cloud" "Grafana Cloud k6" "synthetic" "Synthetic Monitoring" "oss" "Grafana k6" }}
-```mermaid
-pie showData
-{{ range $key, $value:= .metrics }}
-  {{- if strings.Contains "product_" $key -}}
-  {{- $name := strings.TrimSuffix "_count" (strings.TrimPrefix "product_" $key) -}}
-  {{- if index $.metrics $key}}"{{index $products $name}}" : {{index $.metrics $key}}{{"\n"}}{{end}}
-  {{- end -}}
-{{- end -}}
-```
-
-<div align="center">
-
-Metric | Description | Value
--------|-------|------------
-{{ range $key, $value:= .metrics }}
-{{-  if strings.Contains "product_" $key -}}
-{{-    $key }} | {{ strings.TrimSuffix "." (index $props $key "description") }} | {{ $value }}
-{{ end -}}
-{{ end}}
-
-</div>
-
-## Extensions by Category
-
-Metrics by extension category. Since an extension can belong to several categories, the sum of the value can be greater than the total number of extensions.
-
-```mermaid
-pie showData
-{{ range $key, $value:= .metrics }}
-  {{- if strings.Contains "category_" $key -}}
-  {{- $name := strings.TrimSuffix "_count" (strings.TrimPrefix "category_" $key) -}}
-  {{- if index $.metrics $key}}"{{$name}}" : {{index $.metrics $key}}{{"\n"}}{{end}}
-  {{- end -}}
-{{- end -}}
-```
-
-<div align="center">
-
-Metric | Description | Value
--------|-------|------------
-{{ range $key, $value:= .metrics }}
-{{-  if strings.Contains "category_" $key -}}
 {{-    $key }} | {{ strings.TrimSuffix "." (index $props $key "description") }} | {{ $value }}
 {{ end -}}
 {{ end}}

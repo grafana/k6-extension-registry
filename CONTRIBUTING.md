@@ -15,14 +15,10 @@ The source of the registry can be found in the [registry.yaml] file. To register
 
 After modifying the [registry.yaml], it is advisable to [run the linter](#lint---run-the-linter).
 
-[registry.yaml]: registry.yaml
+The schema for the registry [registry.schema.json] file.
 
-## Contribute to the JSON schema
-
-The source of the JSON schema can be found in the [registry.schema.yaml] file. After the modification, the [schema should be converted](#schema---convert-the-schema-to-json) to JSON format and saved in the [registry.schema.json] file.
-
-[registry.schema.yaml]: registry.schema.yaml
-[registry.schema.json]: registry.schema.json
+> [!IMPORTANT]
+> The schema is maintained in [k6registry](https://github.com/grafana/k6registry) it is copied here for convenience but any change in the schema must be done in k6registry's repository. 
 
 ## Tasks
 
@@ -33,7 +29,6 @@ The following sections describe the typical tasks of contributing. As long as th
 Contributing will require the use of some tools, which can be installed most easily with a well-configured [eget] tool.
 
 ```bash
-eget mikefarah/yq
 eget grafana/k6registry
 eget hairyhenderson/gomplate
 pip install json-schema-for-humans
@@ -51,14 +46,6 @@ k6registry -q --lint registry.yaml
 
 [lint]: #lint---run-the-linter
 [k6registry]: https://github.com/grafana/k6registry
-
-### schema - Convert the schema to JSON
-
-The source of the JSON schema is [registry.schema.yaml], after its modification, the schema should be converted into JSON format and saved in [registry.schema.json].
-
-```bash
-yq -o=json -P registry.schema.yaml > registry.schema.json
-```
 
 ### public - Generate static documentation
 

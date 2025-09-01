@@ -107,47 +107,10 @@
         "tier": {
           "$ref": "#/$defs/tier",
           "default": "community",
-          "description": "Maintainer of the extension.\n\nPossible values:\n\n  - official: Extensions owned, maintained, and designated by Grafana as \"official\"\n  - partner: Extensions written, maintained, validated, and published by third-party companies against their own projects.\n  - community: Extensions are listed on the Registry by individual maintainers, groups of maintainers, or other members of the k6 community.\n\nExtensions owned by the `grafana` GitHub organization are not officially supported by Grafana by default.\nThere are several k6 extensions owned by the `grafana` GitHub organization, which were created for experimental or example purposes only.\nThe `official` tier value is needed so that officially supported extensions can be distinguished from them.\n\nIf it is missing from the registry source, it will be set with the default \"community\" value during generation.\n",
+          "description": "Maintainer of the extension.\n\nPossible values:\n\n  - official: Extensions owned, maintained, and designated by Grafana as \"official\"\n  - community: Extensions are listed on the Registry by individual maintainers, groups of maintainers, or other members of the k6 community.\n\nExtensions owned by the `grafana` GitHub organization are not officially supported by Grafana by default.\nThere are several k6 extensions owned by the `grafana` GitHub organization, which were created for experimental or example purposes only.\nThe `official` tier value is needed so that officially supported extensions can be distinguished from them.\n\nIf it is missing from the registry source, it will be set with the default \"community\" value during generation.\n",
           "examples": [
             "community",
             "official"
-          ]
-        },
-        "products": {
-          "type": "array",
-          "items": {
-            "$ref": "#/$defs/product"
-          },
-          "description": "Products in which the extension can be used.\n\nSome extensions are not available in all k6 products.\nThis may be for a technological or business reason, or the functionality of the extension may not make sense in the given product.\n\nPossible values:\n\n  - oss: Extensions are available in k6 OSS\n  - cloud: Extensions are available in Grafana Cloud k6\n  - synthetic: Extensions are available in Grafana Synthetic Monitoring\n\nIf the property is missing or empty in the source of the registry, it means that the extension is only available in the k6 OSS product.\nIn this case, the registry will be filled in accordingly during generation.\n",
-          "examples": [
-            [
-              "cloud",
-              "synthetic",
-              "oss"
-            ],
-            [
-              "cloud"
-            ],
-            [
-              "oss"
-            ]
-          ]
-        },
-        "categories": {
-          "type": "array",
-          "items": {
-            "$ref": "#/$defs/category"
-          },
-          "description": "The categories to which the extension belongs.\n\nIf the property is missing or empty in the registry source, the default value is `[\"misc\"]`.\n",
-          "examples": [
-            [
-              "data",
-              "reporting"
-            ],
-            [
-              "observability",
-              "protocol"
-            ]
           ]
         },
         "compliance": {
@@ -342,10 +305,9 @@
       "type": "string",
       "enum": [
         "official",
-        "partner",
         "community"
       ],
-      "description": "Maintainer of the extension.\n\nExtensions can be classified according to who maintains the extension.\nThis usually also specifies who the user can get support from.\n\nPossible values:\n\n  - official: Extensions owned, maintained, and designated by Grafana as \"official\"\n  - partner: Extensions written, maintained, validated, and published by third-party companies against their own projects.\n  - community: Extensions are listed on the Registry by individual maintainers, groups of maintainers, or other members of the k6 community.\n\nExtensions owned by the `grafana` GitHub organization are not officially supported by Grafana by default.\nThere are several k6 extensions owned by the `grafana` GitHub organization, which were created for experimental or example purposes only.\nThe `official` tier value is needed so that officially supported extensions can be distinguished from them.\n\nIf it is missing from the registry source, it will be set with the default `community` value during generation.\n",
+      "description": "Maintainer of the extension.\n\nExtensions can be classified according to who maintains the extension.\nThis usually also specifies who the user can get support from.\n\nPossible values:\n\n  - official: Extensions owned, maintained, and designated by Grafana as \"official\"\n  - community: Extensions are listed on the Registry by individual maintainers, groups of maintainers, or other members of the k6 community.\n\nExtensions owned by the `grafana` GitHub organization are not officially supported by Grafana by default.\nThere are several k6 extensions owned by the `grafana` GitHub organization, which were created for experimental or example purposes only.\nThe `official` tier value is needed so that officially supported extensions can be distinguished from them.\n\nIf it is missing from the registry source, it will be set with the default `community` value during generation.\n",
       "examples": [
         "community",
         "official"
@@ -373,31 +335,6 @@
         ]
       ]
     },
-    "category": {
-      "type": "string",
-      "enum": [
-        "authentication",
-        "browser",
-        "data",
-        "kubernetes",
-        "messaging",
-        "misc",
-        "observability",
-        "protocol",
-        "reporting"
-      ],
-      "description": "The categories to which the extension belongs.\n\nIf it is missing from the registry source, it will be set with the default `[\"misc\"]` value during generation.\n",
-      "examples": [
-        [
-          "data",
-          "reporting"
-        ],
-        [
-          "observability",
-          "protocol"
-        ]
-      ]
-    },
     "metrics": {
       "type": "object",
       "description": "Extension registry metrics.",
@@ -411,16 +348,6 @@
           "type": "integer",
           "default": 0,
           "description": "Number of extensions in the 'official' tier."
-        },
-        "tier_unofficial_count": {
-          "type": "integer",
-          "default": 0,
-          "description": "Number of unofficial extensions."
-        },
-        "tier_partner_count": {
-          "type": "integer",
-          "default": 0,
-          "description": "Number of extensions in the 'partner' tier."
         },
         "tier_community_count": {
           "type": "integer",
@@ -487,51 +414,6 @@
           "default": 0,
           "description": "Number of extensions requiring cgo."
         },
-        "category_authentication_count": {
-          "type": "integer",
-          "default": 0,
-          "description": "Number of extensions in the 'authentication' category."
-        },
-        "category_browser_count": {
-          "type": "integer",
-          "default": 0,
-          "description": "Number of extensions in the 'browser' category."
-        },
-        "category_data_count": {
-          "type": "integer",
-          "default": 0,
-          "description": "Number of extensions in the 'data' category."
-        },
-        "category_kubernetes_count": {
-          "type": "integer",
-          "default": 0,
-          "description": "Number of extensions in the 'kubernetes' category."
-        },
-        "category_messaging_count": {
-          "type": "integer",
-          "default": 0,
-          "description": "Number of extensions in the 'messaging' category."
-        },
-        "category_misc_count": {
-          "type": "integer",
-          "default": 0,
-          "description": "Number of extensions in the 'misc' category."
-        },
-        "category_observability_count": {
-          "type": "integer",
-          "default": 0,
-          "description": "Number of extensions in the 'observability' category."
-        },
-        "category_protocol_count": {
-          "type": "integer",
-          "default": 0,
-          "description": "Number of extensions in the 'protocol' category."
-        },
-        "category_reporting_count": {
-          "type": "integer",
-          "default": 0,
-          "description": "Number of extensions in the 'reporting' category."
-        },
         "issue_module_count": {
           "type": "integer",
           "default": 0,
@@ -588,7 +470,7 @@
           "description": "Number of extensions without CODEOWNERS file."
         }
       },
-      "example": "{\n  \"category_authentication_count\": 2,\n  \"category_browser_count\": 1,\n  \"category_data_count\": 23,\n  \"category_kubernetes_count\": 2,\n  \"category_messaging_count\": 11,\n  \"category_misc_count\": 16,\n  \"category_observability_count\": 12,\n  \"category_protocol_count\": 10,\n  \"category_reporting_count\": 13,\n  \"cgo_count\": 1,\n  \"extension_count\": 72,\n  \"grade_a_count\": 19,\n  \"grade_b_count\": 4,\n  \"grade_c_count\": 44,\n  \"grade_d_count\": 4,\n  \"grade_e_count\": 1,\n  \"issue_build_count\": 5,\n  \"issue_codeowners_count\": 5,\n  \"issue_examples_count\": 16,\n  \"issue_replace_count\": 2,\n  \"issue_smoke_count\": 51,\n  \"issue_types_count\": 44,\n  \"product_cloud_count\": 4,\n  \"product_oss_count\": 71,\n  \"product_synthetic_count\": 2,\n  \"tier_community_count\": 54,\n  \"tier_official_count\": 18,\n  \"tier_unofficial_count\": 6,\n  \"type_javascript_count\": 57,\n  \"type_output_count\": 16\n}\n"
+      "example": "{\n  \"cgo_count\": 1,\n  \"extension_count\": 72,\n  \"grade_a_count\": 19,\n  \"grade_b_count\": 4,\n  \"grade_c_count\": 44,\n  \"grade_d_count\": 4,\n  \"grade_e_count\": 1,\n  \"issue_build_count\": 5,\n  \"issue_codeowners_count\": 5,\n  \"issue_examples_count\": 16,\n  \"issue_replace_count\": 2,\n  \"issue_smoke_count\": 51,\n  \"issue_types_count\": 44,\n  \"product_cloud_count\": 4,\n  \"product_oss_count\": 71,\n  \"product_synthetic_count\": 2,\n  \"tier_community_count\": 54,\n  \"tier_official_count\": 18,\n  \"type_javascript_count\": 57,\n  \"type_output_count\": 16\n}\n"
     }
   }
 }

@@ -564,4 +564,10 @@
   tier: community
   products:
     - oss
-
+- module: github.com/delamart/xk6-hashicorp-vault
+  description: "k6 extension for interacting with HashiCorp Vault servers while testing"
+  imports:
+    - k6/x/hashicorp-vault
+  categories:
+    - authentication
+  tier: community

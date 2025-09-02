@@ -261,42 +261,6 @@ paths:
             application/json:
               schema:
                 $ref: "registry.schema.json#/$defs/metrics"
-  /tier/at-least/{tier}.json:
-    get:
-      tags:
-        - subset
-      summary: Subset by min support
-      description: Query the subset of the registry that contains the extensions whose support is at least the level specified as a parameter.
-      operationId: subsetByMinTier
-      parameters:
-        - $ref: "#/components/parameters/tier"
-      responses:
-        "200":
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                $ref: "registry.schema.json#/$defs/registry"
-        "404":
-          description: tier not found
-  /tier/at-least/{tier}-catalog.json:
-    get:
-      tags:
-        - catalog
-      summary: Catalog by min support
-      description: Query the catalog containing extensions available with at least the support specified as a parameter.
-      operationId: catalogByMinTier
-      parameters:
-        - $ref: "#/components/parameters/tier"
-      responses:
-        "200":
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                $ref: "registry.schema.json#/$defs/catalog"
-        "404":
-          description: tier not found
   /grade/{grade}.json:
     get:
       tags:
@@ -304,24 +268,6 @@ paths:
       summary: Subset by grade
       description: Querying the subset of the registry containing the extensions with the compliance grade specified in the parameter
       operationId: subsetByGrade
-      parameters:
-        - $ref: "#/components/parameters/grade"
-      responses:
-        "200":
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                $ref: "registry.schema.json#/$defs/registry"
-        "404":
-          description: grade not found
-  /grade/at-least/{grade}.json:
-    get:
-      tags:
-        - subset
-      summary: Subset by min grade
-      description: Querying the subset of the registry containing extensions with at least compliance grade specified in the parameter
-      operationId: subsetByMinGrade
       parameters:
         - $ref: "#/components/parameters/grade"
       responses:

@@ -9,7 +9,7 @@
     - cloud
     - synthetic
     - oss
-  constraints: ">=0.55.0"
+  constraints: ">=1.0.0"
 - module: github.com/GhMartingit/xk6-mongo
   description: Load-test Mongo no-SQL databases
   imports:
@@ -344,7 +344,6 @@
   constraints: ">=0.1.0"
   products:
     - oss
-    - cloud
 - module: github.com/grafana/xk6-ssh
   description: Use SSH connections in your tests
   tier: official
@@ -561,3 +560,13 @@
   categories:
     - protocol
     - data
+- module: github.com/copyleftdev/xk6-edi
+  description: "k6 extension for generating HIPAA X12 EDI transactions for healthcare load testing"
+  imports:
+    - k6/x/edi
+  categories:
+    - data
+    - misc
+  tier: community
+  products:
+    - oss

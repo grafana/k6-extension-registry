@@ -55,6 +55,15 @@ generate-schema-doc --config with_footer=false --config collapse_long_descriptio
 mv public/schema/registry.schema.html public/schema/index.html
 ```
 
+### wiki - Generate API files
+
+The registry is exposed using and API defined in [openapi.yaml]. This API is served using static files generated from the registry using the [generate-api-files.sh] script. The script uses the registry.json generated from [registry.yaml] using `k6regisgry` to generate the json file to be returned by each endpoint.
+
+```bash
+k6registry registry.yaml
+generate-api-files.sh
+```
+
 ### wiki - Generate wiki pages
 
 ```bash

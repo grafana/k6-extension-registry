@@ -4,27 +4,15 @@ set -euo pipefail
 
 # K6 Extension Registry API File Generator
 #
-# This script generates various json files from a registry.json following the structure of the API
+# This script generates various files from a registry.json following the structure of the API
 # described in openapi.yaml.
-# The generation process transforms the registry array into multiple catalog formats with different
-# filtering and structure requirements:
 #
-# - Input: registry.json (array of extension objects)
-# - Output: various catalog.json (key-value object where keys are import/output names)
-#
-# Each extension can generate multiple catalog entries based on its imports/outputs arrays:
-# - Extension with imports: ["k6/x/sql", "k6/x/database"] creates 2 catalog entries
-# - Extension with outputs: ["prometheus", "metrics"] creates 2 catalog entries  
-# - Extension with both imports AND outputs creates entries for all combinations
+# Input: registry.json (array of extension objects) is expected in the build dir
 #
 # Extensions are filtered by:
 # - Tier (official, community) 
 # - Grade (A, B, C, D, E, F)
 # - Module: generates per-module extension metadata files
-#
-# The script uses gomplate with templates to handle:
-# - JSON escaping and structure consistency
-# - Pre-filtered registry data for efficiency
 
 function usage() {
     echo "Usage: $0 [OPTIONS]"
@@ -153,6 +141,9 @@ for tier in "${TIERS[@]}"; do
     
     # Generate tier catalog file (as per spec: /tier/{tier}-catalog.json)
     gomplate -f "${TEMPLATES_DIR}/catalog.json.tpl" -t helpers="${TEMPLATES_DIR}/helpers.tpl" -c "registry=${BUILD_DIR}/tier/${tier}.json" | jq . > "${BUILD_DIR}/tier/${tier}-catalog.json"
+
+    # Generate metrics for tier
+    "${SCRIPT_DIR}/generate-metrics.sh" -f "grade,issue" -r "${BUILD_DIR}/tier/${tier}.json" -m "${BUILD_DIR}/tier/${tier}-metrics.txt" -j "${BUILD_DIR}/tier/${tier}-metrics.json"
 done
 
 # Generate grade-based files
@@ -166,6 +157,8 @@ for grade in "${GRADES[@]}"; do
     gomplate -f "${TEMPLATES_DIR}/catalog.json.tpl" -t helpers="${TEMPLATES_DIR}/helpers.tpl" -c "registry=${BUILD_DIR}/grade/${grade}.json" | jq . > "${BUILD_DIR}/grade/${grade}-catalog.json"
 done
 
+echo "Generating metrics"
+"${SCRIPT_DIR}/generate-metrics.sh" -r "${BUILD_DIR}/registry.json" -m "${BUILD_DIR}/metrics.txt" -j "${BUILD_DIR}/metrics.json"
+
 echo "Generation complete!"
 echo "Generated files in: ${BUILD_DIR}"
-tree -L 2 ${BUILD_DIR}

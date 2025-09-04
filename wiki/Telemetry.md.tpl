@@ -7,7 +7,7 @@ Metrics by extension compliance grades. The grade for the fully compliant (witho
 ```mermaid
 pie showData 
 {{ range $key, $value:= .metrics }}
-  {{- if strings.Contains "grade_" $key -}}
+  {{- if and (strings.Contains "grade_" $key) (has $props $key) -}}
   {{- $name := strings.TrimSuffix "_count" (strings.TrimPrefix "grade_" $key) -}}
   {{- if index $.metrics $key}}"{{strings.ToUpper $name}}" : {{index $.metrics $key}}{{"\n"}}{{end}}
   {{- end -}}
@@ -19,7 +19,7 @@ pie showData
 Metric | Description | Value
 -------|-------|------------
 {{ range $key, $value:= .metrics }}
-{{-  if strings.Contains "_grade_" $key -}}
+{{-  if and (strings.Contains "_grade_" $key) (has $props $key) -}}
 {{-    $key }} | {{ strings.TrimSuffix "." (index $props $key "description") }} | {{ $value }}
 {{ end -}}
 {{ end}}
@@ -33,7 +33,7 @@ Metrics by extension compliance issues. Since an extension may have several comp
 ```mermaid
 pie showData title 
 {{ range $key, $value:= .metrics }}
-  {{- if strings.Contains "issue_" $key -}}
+  {{- if and (strings.Contains "issue_" $key) (has $props $key) -}}
   {{- $name := strings.TrimSuffix "_count" (strings.TrimPrefix "issue_" $key) -}}
   {{- if index $.metrics $key}}"{{$name}}" : {{index $.metrics $key}}{{"\n"}}{{end}}
   {{- end -}}
@@ -45,7 +45,7 @@ pie showData title
 Metric | Description | Value
 -------|-------|------------
 {{ range $key, $value:= .metrics }}
-{{-  if strings.Contains "issue_" $key -}}
+{{-  if and (strings.Contains "issue_" $key) (has $props $key) -}}
 {{-    $key }} | {{ strings.TrimSuffix "." (index $props $key "description") }} | {{ $value }}
 {{ end -}}
 {{ end}}
@@ -57,7 +57,7 @@ Metric | Description | Value
 ```mermaid
 pie showData
 {{ range $key, $value:= .metrics }}
-  {{- if strings.Contains "tier_" $key -}}
+  {{- if and (strings.Contains "tier_" $key) (has $props $key) -}}
   {{- $name := strings.TrimSuffix "_count" (strings.TrimPrefix "tier_" $key) -}}
   {{- if index $.metrics $key}}"{{$name}}" : {{index $.metrics $key}}{{"\n"}}{{end}}
   {{- end -}}
@@ -69,7 +69,7 @@ pie showData
 Metric | Description | Value
 -------|-------|------------
 {{ range $key, $value:= .metrics }}
-{{-  if strings.Contains "tier_" $key -}}
+{{-  if and (strings.Contains "tier_" $key) (has $props $key) -}}
 {{-    $key }} | {{ strings.TrimSuffix "." (index $props $key "description") }} | {{ $value }}
 {{ end -}}
 {{ end}}
@@ -83,9 +83,9 @@ Metrics by extension type. Since an extension can implement both JavaScript and 
 ```mermaid
 pie showData
 {{ range $key, $value:= .metrics }}
-  {{- if strings.Contains "type_" $key -}}
+  {{- if and (strings.Contains "type_" $key) (has $props $key) -}}
   {{- $name := strings.TrimSuffix "_count" (strings.TrimPrefix "type_" $key) -}}
-  {{- if index $.metrics $key}}"{{$name}}" : {{index $.metrics $key}}{{"\n"}}{{end}}
+  {{- if index $.metrics $key}}"{{strings.ToUpper $name}}" : {{index $.metrics $key}}{{"\n"}}{{end}}
   {{- end -}}
 {{- end -}}
 ```
@@ -95,7 +95,7 @@ pie showData
 Metric | Description | Value
 -------|-------|------------
 {{ range $key, $value:= .metrics }}
-{{-  if strings.Contains "type_" $key -}}
+{{-  if and (strings.Contains "type_" $key) (has $props $key) -}}
 {{-    $key }} | {{ strings.TrimSuffix "." (index $props $key "description") }} | {{ $value }}
 {{ end -}}
 {{ end}}
@@ -111,7 +111,9 @@ The table below contains all available metrics from the registry.
 Metric | Description | Value
 -------|-------|------------
 {{ range $key, $value:= .metrics -}}
+{{- if has $props $key -}}
 {{ $key }} | {{ strings.TrimSuffix "." (index $props $key "description") }} | {{ $value }} 
+{{ end -}}
 {{ end}}
 
 </div>

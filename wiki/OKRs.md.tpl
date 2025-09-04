@@ -34,7 +34,7 @@ All official extensions should have a compliance grade of A.
 Grade | Count
 ------|------
 {{ range $key, $value:= .official_metrics }}
-{{-  if strings.Contains "grade_" $key -}}
+{{-  if and (strings.Contains "grade_" $key) (has $props $key) -}}
 {{-    ($key|strings.TrimSuffix "_count"|strings.TrimPrefix "grade_" |toUpper) }} | {{ $value }}
 {{ end -}}
 {{ end}}

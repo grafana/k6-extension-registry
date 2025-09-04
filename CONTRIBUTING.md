@@ -65,6 +65,58 @@ k6registry registry.yaml > ${BUILD_DIR}/registry.json
 ./generate-api-files.sh -b ${BUILD_DIR}
 ```
 
+Generates the following files
+
+```ascii 
+build/
+├── catalog.json
+├── metrics.json
+├── metrics.txt
+├── registry.json
+├── grade
+│   ├── A.json
+│   ├── B.json
+│   ├── C.json
+│   ├── D.json
+│   ├── E.json
+│   └── F.json
+├── module
+│   ├── github.com
+│   │   └── grafana
+│   │       ├── xk6-dashboard
+│   │       │   ├── badge.svg
+│   │       │   ├── extension.json
+│   │       │   └── grade.svg
+│   │       ├── xk6-disruptor
+│   │       │   ├── badge.svg
+│   │       │   ├── extension.json
+│   │       │   └── grade.svg
+│   │       ├── xk6-faker
+│   │       │   ├── badge.svg
+│   │       │   ├── extension.json
+│   │       │   └── grade.svg
+│   │       └── xk6-sql
+│   │           ├── badge.svg
+│   │           ├── extension.json
+│   │           └── grade.svg
+│   ├── gitlab.com
+│   │   └── szkiba
+│   │       └── xk6-banner
+│   │           ├── badge.svg
+│   │           ├── extension.json
+│   │           └── grade.svg
+│   └── go.k6.io
+│       └── k6
+│           └── extension.json
+└── tier
+    ├── community-catalog.json
+    ├── community.json
+    ├── community-metrics.json
+    ├── official-catalog.json
+    ├── official.json
+    └── official-metrics.json
+```
+
 ### wiki - Generate wiki pages
 
 ```bash

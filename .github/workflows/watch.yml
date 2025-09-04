@@ -74,7 +74,7 @@ jobs:
           k6registry -v
           --lint
           --ref "${BASE_URL}/registry.json"
-          registry.yaml > "${HTDOCS_DIR}/registry.json"
+          registry.yaml --out "${HTDOCS_DIR}/registry.json"
 
           ./generate-api-files.sh -b "${HTDOCS_DIR}"
 

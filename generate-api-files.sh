@@ -172,6 +172,38 @@ registry_\(.key) \(.value) \($timestamp)
 ' $json_file > $prometheus_file
 }
 
+
+# Generate catalog from registry
+#
+# Iterates over the registry entry and generates a catalog entry for
+# each import and output defined by the extension 
+#
+# input: registry file
+# output: catalog file 
+function generate_catalog() {
+    local registry_file=$1
+    local output_file=$2
+    
+    jq '
+        # Step 1: Create separate arrays for import and output entries
+        [
+          .[] as $ext |
+          if ($ext | has("imports")) and $ext.imports then
+            $ext.imports[] | {key: ., value: $ext}
+          else empty end
+        ] +
+        [
+          .[] as $ext |
+          if ($ext | has("outputs")) and $ext.outputs then
+            $ext.outputs[] | {key: ., value: $ext}
+          else empty end
+        ] |
+        
+        # Step 2: Convert key-value pairs to object
+        from_entries
+    ' "$registry_file" > "$output_file"
+}
+
 # Check if registry.json exists
 if [[ ! -f "$REGISTRY_FILE" ]]; then
     echo "Error: registry.json not found at ${REGISTRY_FILE}"
@@ -186,7 +218,7 @@ generate_module_files
 
 # Generate main catalog
 $LOG "Generating ${BUILD_DIR}/catalog.json..."
-gomplate -f "${TEMPLATES_DIR}/catalog.json.tpl" -t helpers="${TEMPLATES_DIR}/helpers.tpl" -c "registry=${REGISTRY_FILE}" | jq . > "${BUILD_DIR}/catalog.json"
+generate_catalog "${REGISTRY_FILE}" "${BUILD_DIR}/catalog.json"
 
 # Generate tier-based files
 for tier in "${TIERS[@]}"; do
@@ -199,7 +231,7 @@ for tier in "${TIERS[@]}"; do
     jq --arg tier "$tier" '[.[] | select(.tier == $tier)]' "${REGISTRY_FILE}" > "${BUILD_DIR}/tier/${tier}.json"
     
     # Generate tier cataLOG file (as per spec: /tier/{tier}-catalog.json)
-    gomplate -f "${TEMPLATES_DIR}/catalog.json.tpl" -t helpers="${TEMPLATES_DIR}/helpers.tpl" -c "registry=${BUILD_DIR}/tier/${tier}.json" | jq . > "${BUILD_DIR}/tier/${tier}-catalog.json"
+    generate_catalog "${BUILD_DIR}/tier/${tier}.json" "${BUILD_DIR}/tier/${tier}-catalog.json"
 
     # Generate metrics for tier
     generate_metrics "${BUILD_DIR}/tier/${tier}.json" "${BUILD_DIR}/tier/${tier}-metrics.json" "${BUILD_DIR}/tier/${tier}-metrics.txt" "grade,issue"
@@ -213,7 +245,7 @@ for grade in "${GRADES[@]}"; do
     jq --arg grade "$grade" '[.[] | select(.compliance and .compliance.grade == $grade)]' "${REGISTRY_FILE}" > "${BUILD_DIR}/grade/${grade}.json"
     
     # Generate grade catalog file
-    gomplate -f "${TEMPLATES_DIR}/catalog.json.tpl" -t helpers="${TEMPLATES_DIR}/helpers.tpl" -c "registry=${BUILD_DIR}/grade/${grade}.json" | jq . > "${BUILD_DIR}/grade/${grade}-catalog.json"
+    generate_catalog  "${BUILD_DIR}/grade/${grade}.json" "${BUILD_DIR}/grade/${grade}-catalog.json"
 done
 
 $LOG "Generating metrics"

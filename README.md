@@ -63,14 +63,6 @@ Refers to the maintainer of the extension. **Optional, defaults to `community`**
 
 Extensions owned by the `grafana` GitHub organization are not officially supported by Grafana by default.
 
-### `products`
-
-Products in which the extension can be used. **Optional, defaults to `["oss"]`**
-
-### `categories`
-
-The categories to which the extension belongs. **Optional, defaults to `["misc"]`**
-
 ### `versions`
 
 List of supported versions. **Optional, the default is to query the repository manager API**

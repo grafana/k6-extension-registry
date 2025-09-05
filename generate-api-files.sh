@@ -26,6 +26,10 @@ function usage() {
 GRADES=("A" "B" "C" "D" "E" "F")
 TIERS=("official" "community")
 
+# default log command to noop
+LOG=":"
+VERBOSE=""
+
 # Configuration
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 BUILD_DIR="${SCRIPT_DIR}/build"
@@ -55,6 +59,11 @@ while [[ $# -gt 0 ]]; do
         -h|--help)
             usage
             exit 0
+            ;;
+        -v|--verbose)
+            LOG="echo"
+            VERBOSE="-v"
+            shift 1
             ;;
         *)
             echo "Unknown option: $1"
@@ -90,7 +99,7 @@ generate_k6_badge() {
 
 # Function to generate module extension files
 generate_module_files() {
-    echo "Generating module extension files..."
+    $LOG "Generating module extension files..."
     
     # Process each extension directly with jq, creating one file per module
     jq -r '.[] | "\(.module)|\(. | tostring)"' "${REGISTRY_FILE}" | \
@@ -120,18 +129,18 @@ if [[ ! -f "$REGISTRY_FILE" ]]; then
     exit 1
 fi
 
-echo "Starting generation of registry API files..."
+$LOG "Starting generation of registry API files..."
 
 # Generate module-specific files
 generate_module_files
 
 # Generate main catalog
-echo "Generating ${BUILD_DIR}/catalog.json..."
+$LOG "Generating ${BUILD_DIR}/catalog.json..."
 gomplate -f "${TEMPLATES_DIR}/catalog.json.tpl" -t helpers="${TEMPLATES_DIR}/helpers.tpl" -c "registry=${REGISTRY_FILE}" | jq . > "${BUILD_DIR}/catalog.json"
 
 # Generate tier-based files
 for tier in "${TIERS[@]}"; do
-    echo "Generating tier files for: ${tier}..."
+    $LOG "Generating tier files for: ${tier}..."
     
     # Create tier directory
     mkdir -p "${BUILD_DIR}/tier"
@@ -139,7 +148,7 @@ for tier in "${TIERS[@]}"; do
     # Generate tier registry file (as per spec: /tier/{tier}.json)
     jq --arg tier "$tier" '[.[] | select(.tier == $tier)]' "${REGISTRY_FILE}" > "${BUILD_DIR}/tier/${tier}.json"
     
-    # Generate tier catalog file (as per spec: /tier/{tier}-catalog.json)
+    # Generate tier cataLOG file (as per spec: /tier/{tier}-catalog.json)
     gomplate -f "${TEMPLATES_DIR}/catalog.json.tpl" -t helpers="${TEMPLATES_DIR}/helpers.tpl" -c "registry=${BUILD_DIR}/tier/${tier}.json" | jq . > "${BUILD_DIR}/tier/${tier}-catalog.json"
 
     # Generate metrics for tier
@@ -148,7 +157,7 @@ done
 
 # Generate grade-based files
 for grade in "${GRADES[@]}"; do
-    echo "Generating grade files for: ${grade}..."
+    $LOG "Generating grade files for: ${grade}..."
     
     # Filter registry by grade using jq (handle missing compliance fields)
     jq --arg grade "$grade" '[.[] | select(.compliance and .compliance.grade == $grade)]' "${REGISTRY_FILE}" > "${BUILD_DIR}/grade/${grade}.json"
@@ -157,8 +166,11 @@ for grade in "${GRADES[@]}"; do
     gomplate -f "${TEMPLATES_DIR}/catalog.json.tpl" -t helpers="${TEMPLATES_DIR}/helpers.tpl" -c "registry=${BUILD_DIR}/grade/${grade}.json" | jq . > "${BUILD_DIR}/grade/${grade}-catalog.json"
 done
 
-echo "Generating metrics"
-"${SCRIPT_DIR}/generate-metrics.sh" -r "${BUILD_DIR}/registry.json" -m "${BUILD_DIR}/metrics.txt" -j "${BUILD_DIR}/metrics.json"
+$LOG "Generating metrics"
+"${SCRIPT_DIR}/generate-metrics.sh" $VERBOSE -r "${BUILD_DIR}/registry.json" -m "${BUILD_DIR}/metrics.txt" -j "${BUILD_DIR}/metrics.json"
 
-echo "Generation complete!"
-echo "Generated files in: ${BUILD_DIR}"
+$LOG "Generation complete!"
+$LOG "Generated files in: ${BUILD_DIR}"
+if [[ ! -z $VERBOSE ]];then
+   tree -L 2 ${BUILD_DIR}
+fi

@@ -25,6 +25,7 @@ function usage() {
     echo "  -j, --json FILE       Generate JSON metrics file at specified path (optional)"
     echo "  -m, --metrics FILE    Use specified metrics file path (default: build/metrics.txt)"
     echo "  -r, --registry FILE   Use specified registry file path (default: build/registry.json)"
+    echo "  -v, --verbose         verbose output"
     echo "  -h, --help            Show this help message"
 }
 
@@ -102,7 +103,7 @@ function generate_json() {
         printf '\n}\n'
     } > "$metrics_json_file"
     
-    echo "JSON metrics generated successfully at: ${metrics_json_file}"
+    $LOG "JSON metrics generated successfully at: ${metrics_json_file}"
 }
 
 # Configuration
@@ -119,6 +120,8 @@ REGISTRY_FILE="${BUILD_DIR}/registry.json"
 METRICS_FILE="${BUILD_DIR}/metrics.txt"
 METRICS_JSON_FILE=""
 FILTERS="tier,grade,issue"
+# default log command as noop
+LOG=":"
 
 # Parse command line arguments
 while [[ $# -gt 0 ]]; do
@@ -143,6 +146,10 @@ while [[ $# -gt 0 ]]; do
             REGISTRY_FILE="$2"
             shift 2
             ;;
+        -v|--verbose)
+            LOG="echo"
+            shift 1
+            ;;
         *)
             echo "Unknown option: $1"
             echo "Use -h or --help for usage information"
@@ -158,7 +165,7 @@ if [[ ! -f "$REGISTRY_FILE" ]]; then
     exit 1
 fi
 
-echo "Generating Prometheus metrics from ${REGISTRY_FILE}..."
+$LOG "Generating Prometheus metrics from ${REGISTRY_FILE}..."
 
 # Get current timestamp in milliseconds
 TIMESTAMP=$(date +%s)000
@@ -173,11 +180,11 @@ EOF
 
 # Generate metrics by filter
 for FILTER in ${FILTERS//,/ }; do
-   echo "Generating $FILTER metrics..." 
+   $LOG "Generating $FILTER metrics..." 
    generate_prometheus "$REGISTRY_FILE" $FILTER "${QUERIES[$FILTER]}" "$TIMESTAMP" "$METRICS_FILE"
 done
 
-echo "Prometheus metrics generated successfully at: ${METRICS_FILE}"
+$LOG "Prometheus metrics generated successfully at: ${METRICS_FILE}"
 
 if [[ ! -z $METRICS_JSON_FILE ]]; then
    generate_json $METRICS_FILE $METRICS_JSON_FILE

@@ -6,11 +6,11 @@ The content of the wiki is generated automatically, so it is consistent with the
 
 The following table lists all registered k6 extensions.
 
-Repository | Description | Availability
+Repository | Description | Tier
 -----------|-------------|-------------
 {{ range $idx, $ext:= .registry -}}
 {{ if (ne $ext.module "go.k6.io/k6") -}}
-{{ if and $ext.repo $ext.repo.url }}[{{ $ext.repo.owner }}/{{ $ext.repo.name }}]({{$ext.repo.url}}){{else}}{{ $ext.module }}{{end}} | {{ $ext.description }} | {{ range $idx, $product := $ext.products }}{{$product}} {{end}}
+{{ if and $ext.repo $ext.repo.url }}[{{ $ext.repo.owner }}/{{ $ext.repo.name }}]({{$ext.repo.url}}){{else}}{{ $ext.module }}{{end}} | {{ $ext.description }} | {{ $ext.tier }}
 {{ end -}}
 {{ end }}
 

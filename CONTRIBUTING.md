@@ -9,20 +9,16 @@ Before you begin, make sure to familiarize yourself with the [Code of Conduct](C
 ## Contributing to the registry
 
 > [!IMPORTANT]
-> Before registering a new extension, please read the [Registry Requirements](https://grafana.com/docs/k6/latest/extensions/explanations/extensions-registry/#registry-requirements).
+> Before registering a new extension, please read the [Registry Requirements](https://grafana.com/docs/k6/latest/extensions/create/extensions-registry/).
 
 The source of the registry can be found in the [registry.yaml] file. To register an extension, simply add a new entry to the end of the file. The data of the already registered extension can be modified accordingly.
 
 After modifying the [registry.yaml], it is advisable to [run the linter](#lint---run-the-linter).
 
-[registry.yaml]: registry.yaml
+The schema for the registry [registry.schema.json] file.
 
-## Contribute to the JSON schema
-
-The source of the JSON schema can be found in the [registry.schema.yaml] file. After the modification, the [schema should be converted](#schema---convert-the-schema-to-json) to JSON format and saved in the [registry.schema.json] file.
-
-[registry.schema.yaml]: registry.schema.yaml
-[registry.schema.json]: registry.schema.json
+> [!IMPORTANT]
+> The schema is maintained in [k6registry](https://github.com/grafana/k6registry) it is copied here for convenience but any change in the schema must be done in k6registry's repository. 
 
 ## Tasks
 
@@ -33,7 +29,6 @@ The following sections describe the typical tasks of contributing. As long as th
 Contributing will require the use of some tools, which can be installed most easily with a well-configured [eget] tool.
 
 ```bash
-eget mikefarah/yq
 eget grafana/k6registry
 eget hairyhenderson/gomplate
 pip install json-schema-for-humans
@@ -52,20 +47,74 @@ k6registry -q --lint registry.yaml
 [lint]: #lint---run-the-linter
 [k6registry]: https://github.com/grafana/k6registry
 
-### schema - Convert the schema to JSON
-
-The source of the JSON schema is [registry.schema.yaml], after its modification, the schema should be converted into JSON format and saved in [registry.schema.json].
-
-```bash
-yq -o=json -P registry.schema.yaml > registry.schema.json
-```
-
 ### public - Generate static documentation
 
 ```bash
 npx @redocly/cli build-docs -o public/index.html openapi.yaml
 generate-schema-doc --config with_footer=false --config collapse_long_descriptions=false registry.schema.json public/schema
 mv public/schema/registry.schema.html public/schema/index.html
+```
+
+### wiki - Generate API files
+
+The registry is exposed using and API defined in [openapi.yaml]. This API is served using static files generated from the registry using the [generate-api-files.sh] script. The script takes the registry.json generated from [registry.yaml] using `k6registry` as input to generate the json file to be returned by each endpoint. It also generates a metrics.txt file with metrics for the extensions by tier, grade, and issues found.
+
+```bash
+BUILD_DIR=build
+k6registry registry.yaml > ${BUILD_DIR}/registry.json
+./generate-api-files.sh -b ${BUILD_DIR}
+```
+
+Generates the following files
+
+```ascii 
+build/
+├── catalog.json
+├── metrics.json
+├── metrics.txt
+├── registry.json
+├── grade
+│   ├── A.json
+│   ├── B.json
+│   ├── C.json
+│   ├── D.json
+│   ├── E.json
+│   └── F.json
+├── module
+│   ├── github.com
+│   │   └── grafana
+│   │       ├── xk6-dashboard
+│   │       │   ├── badge.svg
+│   │       │   ├── extension.json
+│   │       │   └── grade.svg
+│   │       ├── xk6-disruptor
+│   │       │   ├── badge.svg
+│   │       │   ├── extension.json
+│   │       │   └── grade.svg
+│   │       ├── xk6-faker
+│   │       │   ├── badge.svg
+│   │       │   ├── extension.json
+│   │       │   └── grade.svg
+│   │       └── xk6-sql
+│   │           ├── badge.svg
+│   │           ├── extension.json
+│   │           └── grade.svg
+│   ├── gitlab.com
+│   │   └── szkiba
+│   │       └── xk6-banner
+│   │           ├── badge.svg
+│   │           ├── extension.json
+│   │           └── grade.svg
+│   └── go.k6.io
+│       └── k6
+│           └── extension.json
+└── tier
+    ├── community-catalog.json
+    ├── community.json
+    ├── community-metrics.json
+    ├── official-catalog.json
+    ├── official.json
+    └── official-metrics.json
 ```
 
 ### wiki - Generate wiki pages
@@ -75,5 +124,5 @@ export BASE_URL=https://registry.k6.io
 curl -s -o build/registry.json $BASE_URL/registry.json
 curl -s -o build/metrics.json $BASE_URL/metrics.json
 curl -s -o build/official-metrics.json $BASE_URL/tier/official-metrics.json
-gomplate -c registry=build/registry.json -c metrics=build/metrics.json -c official_metrics=build/official-metrics.json -c schema=registry.schema.json --input-dir wiki --output-map='build/wiki/{{.in|strings.TrimSuffix ".tpl"}}'
+gomplate -c registry=build/registry.json -c metrics=build/metrics.json -c official_metrics=build/tier/official-metrics.json -c schema=registry.schema.json --input-dir wiki --output-map='build/wiki/{{.in|strings.TrimSuffix ".tpl"}}'
 ```

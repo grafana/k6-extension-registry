@@ -1,0 +1,21 @@
+{
+  "compliance": {
+    "grade": "A",
+    "level": 100
+  },
+  "description": "Generate random, pronounceable codenames",
+  "imports": [
+    "k6/x/codename"
+  ],
+  "module": "codeberg.org/szkiba/xk6-codename",
+  "repo": {
+    "clone_url": "https://codeberg.org/szkiba/xk6-codename.git",
+    "name": "xk6-codename",
+    "owner": "szkiba",
+    "url": "https://codeberg.org/szkiba/xk6-codename"
+  },
+  "tier": "community",
+  "versions": [
+    "v0.1.0"
+  ]
+}

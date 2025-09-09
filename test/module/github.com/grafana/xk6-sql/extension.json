@@ -1,0 +1,39 @@
+{
+  "compliance": {
+    "grade": "A",
+    "level": 100
+  },
+  "description": "Load-test SQL Servers",
+  "imports": [
+    "k6/x/sql"
+  ],
+  "module": "github.com/grafana/xk6-sql",
+  "repo": {
+    "clone_url": "https://github.com/grafana/xk6-sql.git",
+    "description": "k6 extension to load test RDBMSs (PostgreSQL, MySQL, MS SQL and SQLite3)",
+    "homepage": "https://github.com/grafana/xk6-sql",
+    "license": "Apache-2.0",
+    "name": "xk6-sql",
+    "owner": "grafana",
+    "public": true,
+    "stars": 110,
+    "timestamp": 1725979901,
+    "topics": [
+      "k6",
+      "sql",
+      "xk6"
+    ],
+    "url": "https://github.com/grafana/xk6-sql"
+  },
+  "tier": "official",
+  "versions": [
+    "v0.4.1",
+    "v0.4.0",
+    "v0.3.0",
+    "v0.2.1",
+    "v0.2.0",
+    "v0.1.1",
+    "v0.1.0",
+    "v0.0.1"
+  ]
+}

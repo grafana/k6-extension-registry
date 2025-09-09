@@ -64,9 +64,13 @@ jobs:
         uses: grafana/k6-extension-actions/setup-eget@v0.1.0
 
       - name: Setup k6registry
-        uses: grafana/k6-extension-actions/setup-k6registry@v0.1.0
-        with:
-          k6registry-version: v0.2.6
+        run: >
+           go install github.com/grafana/k6registry/cmd/k6registry@v0.3.0
+
+      - name: Setup gomplate
+        uses: jason-dour/action-setup-gomplate@81b9ca6f49d6594a118d19f0d05f6fd05372e64c # v1.1.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Run k6registry
         id: generate
@@ -75,12 +79,10 @@ jobs:
         run: >
           k6registry -v
           --lint
-          --api "${HTDOCS_DIR}"
           --ref "${BASE_URL}/registry.json"
-          --test /registry.json,/catalog.json,/product/oss.json,/product/oss-catalog.json
-          --test /tier/official.json,/tier/official-catalog.json,/tier/community.json,/tier/community-catalog.json
-          --test /tier/at-least/official.json,/tier/at-least/official-catalog.json,/tier/at-least/partner.json,/tier/at-least/partner-catalog.json
-          registry.yaml
+          registry.yaml --out "${HTDOCS_DIR}/registry.json"
+
+          ./generate-api-files.sh -b "${HTDOCS_DIR}"
 
       - name: Cache Clean
         if: ${{ ( github.ref_name == 'main' && steps.generate.outputs.changed == 'true' ) || inputs.force_changed }}

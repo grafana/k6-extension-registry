@@ -1,0 +1,34 @@
+{
+  "constraints": ">=v0.50.0",
+  "description": "A modern load testing tool, using Go and JavaScript",
+  "imports": [
+    "k6"
+  ],
+  "module": "go.k6.io/k6",
+  "repo": {
+    "description": "A modern load testing tool, using Go and JavaScript - https://k6.io",
+    "homepage": "https://github.com/grafana/k6",
+    "license": "AGPL-3.0",
+    "name": "k6",
+    "owner": "grafana",
+    "public": true,
+    "topics": [
+      "es6",
+      "go",
+      "golang",
+      "hacktoberfest",
+      "javascript",
+      "load-generator",
+      "load-testing",
+      "performance"
+    ],
+    "url": "https://github.com/grafana/k6"
+  },
+  "tier": "official",
+  "versions": [
+    "v0.53.0",
+    "v0.52.0",
+    "v0.51.0",
+    "v0.50.0"
+  ]
+}

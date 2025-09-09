@@ -1,0 +1,22 @@
+{
+  "compliance": {
+    "grade": "A",
+    "level": 100
+  },
+  "description": "Generate short unique identifiers from numbers",
+  "imports": [
+    "k6/x/sqids"
+  ],
+  "module": "bitbucket.org/szkiba/xk6-sqids",
+  "repo": {
+    "clone_url": "git@bitbucket.org:szkiba/xk6-sqids.git",
+    "name": "xk6-sqids",
+    "owner": "szkiba",
+    "url": "https://bitbucket.org/szkiba/xk6-sqids"
+  },
+  "tier": "community",
+  "versions": [
+    "v0.1.0",
+    "v0.1.1"
+  ]
+}

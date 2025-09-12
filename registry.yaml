@@ -564,4 +564,15 @@
   tier: community
   products:
     - oss
-
+- module: github.com/bbsakura/xk6-gtp
+  description: GTP (GPRS Tunneling Protocol) extension for k6
+  imports:
+    - k6/x/gtp
+  categories:
+    - protocol
+- module: github.com/bbsakura/xk6-diameter
+  description: Diameter protocol extension for k6
+  imports:
+    - k6/x/diameter
+  categories:
+    - protocol

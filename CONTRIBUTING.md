@@ -60,7 +60,7 @@ mv public/schema/registry.schema.html public/schema/index.html
 The registry is exposed using and API defined in [openapi.yaml]. This API is served using static files generated from the registry using the [generate-api-files.sh] script. The script takes the registry.json generated from [registry.yaml] using `k6registry` as input to generate the json file to be returned by each endpoint. It also generates a metrics.txt file with metrics for the extensions by tier, grade, and issues found.
 
 ```bash
-BUILD_DIR=build
+export BUILD_DIR=build/api/v1
 k6registry registry.yaml > ${BUILD_DIR}/registry.json
 ./generate-api-files.sh -b ${BUILD_DIR}
 ```
@@ -68,7 +68,7 @@ k6registry registry.yaml > ${BUILD_DIR}/registry.json
 Generates the following files
 
 ```ascii 
-build/
+build/api/v1
 ├── catalog.json
 ├── metrics.json
 ├── metrics.txt
@@ -121,8 +121,6 @@ build/
 
 ```bash
 export BASE_URL=https://registry.k6.io
-curl -s -o build/registry.json $BASE_URL/registry.json
-curl -s -o build/metrics.json $BASE_URL/metrics.json
-curl -s -o build/official-metrics.json $BASE_URL/tier/official-metrics.json
-gomplate -c registry=build/registry.json -c metrics=build/metrics.json -c official_metrics=build/tier/official-metrics.json -c schema=registry.schema.json --input-dir wiki --output-map='build/wiki/{{.in|strings.TrimSuffix ".tpl"}}'
+export API_DIR=build/api/v1
+gomplate -c registry=${API_DIR}/registry.json -c metrics=${API_DIR}/metrics.json -c official_metrics=${API_DIR}/tier/official-metrics.json -c schema=registry.schema.json --input-dir wiki --output-map='build/wiki/{{.in|strings.TrimSuffix ".tpl"}}'
 ```

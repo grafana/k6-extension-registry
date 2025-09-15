@@ -1,6 +1,6 @@
 openapi: "3.1.0"
 info:
-  version: "0.1.0"
+  version: "1.0.0"
   title: Grafana k6 Extension Registry Service
   summary: Query the Grafana k6 Extension Registry database.
   description: |
@@ -26,6 +26,7 @@ info:
 externalDocs:
   description: Find out more about Grafana k6 extensions
   url: https://grafana.com/docs/k6/latest/extensions/
+basePath: "/api/v1"
 servers:
   - url: https://registry.k6.io
 tags:

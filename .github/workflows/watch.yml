@@ -30,7 +30,7 @@ jobs:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       XDG_CACHE_HOME: ${{ github.workspace }}/build/cache
       HTDOCS_DIR: ${{ github.workspace }}/build/htdocs
-      BUILD_DIR: ${{ github.workspace }}/build
+      API_DIR:  ${{ github.workspace }}/build/htdocs/api/v1
     outputs:
       changed: ${{ steps.generate.outputs.changed }}
     steps:
@@ -77,12 +77,14 @@ jobs:
         env:
           GITHUB_TOKEN: ${{github.token}}
         run: >
+          mkdir -p ${API_DIR}
+
           k6registry -v
           --lint
           --ref "${BASE_URL}/registry.json"
-          registry.yaml --out "${HTDOCS_DIR}/registry.json"
+          registry.yaml --out "${API_DIR}/registry.json"
 
-          ./generate-api-files.sh -b "${HTDOCS_DIR}"
+          ./generate-api-files.sh -b "${API_DIR}"
 
       - name: Cache Clean
         if: ${{ ( github.ref_name == 'main' && steps.generate.outputs.changed == 'true' ) || inputs.force_changed }}
@@ -148,6 +150,7 @@ jobs:
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       HTDOCS_DIR: ${{ github.workspace }}/htdocs
+      API_DIR:  ${{ github.workspace }}/build/htdocs/api/v1
       WIKI_WORK_DIR: ${{ github.workspace }}/wiki.work
     steps:
       - name: Checkout
@@ -176,7 +179,11 @@ jobs:
       - name: Generate
         run: |
           rm -rf ${WIKI_WORK_DIR}/*
-          gomplate -c registry=${HTDOCS_DIR}/registry.json -c metrics=${HTDOCS_DIR}/metrics.json -c official_metrics=${HTDOCS_DIR}/tier/official-metrics.json -c schema=registry.schema.json --input-dir wiki --output-map="${WIKI_WORK_DIR}/{{.in|strings.TrimSuffix \".tpl\"}}"
+          gomplate -c registry=${API_DIR}/registry.json \
+            -c metrics=${API_DIR}/metrics.json \
+            -c official_metrics=${API_DIR}/tier/official-metrics.json \
+            -c schema=registry.schema.json --input-dir wiki \
+            --output-map="${WIKI_WORK_DIR}/{{.in|strings.TrimSuffix \".tpl\"}}"
       - name: Push
         run: |
           cd ${WIKI_WORK_DIR}

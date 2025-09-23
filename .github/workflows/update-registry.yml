@@ -1,0 +1,147 @@
+name: Update Registry
+
+on:
+  repository_dispatch:
+    types: [extension_version_update]
+  workflow_dispatch:
+    inputs:
+      module:
+        description: 'The module name to update (e.g., github.com/grafana/xk6-sql)'
+        required: true
+      version:
+        description: 'The version to add (e.g., v1.0.6)'
+        required: true
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  update-registry:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Extract inputs
+        id: inputs
+        run: |
+          if [[ "${{ github.event_name }}" == "repository_dispatch" ]]; then
+            echo "module=${{ github.event.client_payload.module }}" >> $GITHUB_OUTPUT
+            echo "version=${{ github.event.client_payload.version }}" >> $GITHUB_OUTPUT
+            echo "repository_url=${{ github.event.client_payload.repository_url }}" >> $GITHUB_OUTPUT
+            echo "release_url=${{ github.event.client_payload.release_url }}" >> $GITHUB_OUTPUT
+          else
+            echo "module=${{ github.event.inputs.module }}" >> $GITHUB_OUTPUT
+            echo "version=${{ github.event.inputs.version }}" >> $GITHUB_OUTPUT
+            echo "repository_url=" >> $GITHUB_OUTPUT
+            echo "release_url=" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Install yq
+        run: |
+          echo "Installing yq v4..."
+          sudo wget -qO /usr/local/bin/yq https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64
+          sudo chmod +x /usr/local/bin/yq
+          yq --version
+
+      - name: Validate inputs
+        run: |
+          MODULE="${{ steps.inputs.outputs.module }}"
+          VERSION="${{ steps.inputs.outputs.version }}"
+          
+          echo "Validating inputs..."
+          echo "Module: $MODULE"
+          echo "Version: $VERSION"
+          
+          # Validate module format (should be a valid Go module path)
+          if [[ ! "$MODULE" =~ ^[a-zA-Z0-9._/-]+$ ]]; then
+            echo "Error: Invalid module format: $MODULE"
+            exit 1
+          fi
+          
+          # Validate version format (should be semver with v prefix)
+          if [[ ! "$VERSION" =~ ^v[0-9]+\.[0-9]+\.[0-9]+(-[a-zA-Z0-9.-]+)?(\+[a-zA-Z0-9.-]+)?$ ]]; then
+            echo "Error: Invalid version format: $VERSION (expected semver with 'v' prefix)"
+            exit 1
+          fi
+
+      - name: Update registry with new version
+        id: update-registry
+        run: |
+          set -e
+          
+          MODULE="${{ steps.inputs.outputs.module }}"
+          VERSION="${{ steps.inputs.outputs.version }}"
+          REGISTRY_PATH="registry.yaml"
+          
+          echo "Updating module: $MODULE"
+          echo "Adding version: $VERSION"
+          echo "Registry file: $REGISTRY_PATH"
+          
+          # Check if registry file exists
+          if [[ ! -f "$REGISTRY_PATH" ]]; then
+            echo "Error: Registry file $REGISTRY_PATH does not exist"
+            exit 1
+          fi
+          
+          # Check if module exists in registry
+          MODULE_INDEX=$(yq eval ".[] | select(.module == \"$MODULE\") | path | .[0]" "$REGISTRY_PATH")
+          
+          if [[ -z "$MODULE_INDEX" ]]; then
+            echo "Error: Module $MODULE not found in registry"
+            echo "Please add the module to the registry first by creating a PR with the module definition."
+            exit 1
+          fi
+          
+          echo "Found module at index: $MODULE_INDEX"
+          
+          # Check if version already exists
+          VERSION_EXISTS=$(yq eval ".[$MODULE_INDEX].versions[] | select(. == \"$VERSION\")" "$REGISTRY_PATH")
+          
+          if [[ -n "$VERSION_EXISTS" ]]; then
+            echo "Version $VERSION already exists for module $MODULE"
+            echo "no-changes=true" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+          
+          # Add the new version to the module
+          yq eval ".[$MODULE_INDEX].versions += [\"$VERSION\"]" -i "$REGISTRY_PATH"
+          
+          echo "Successfully added version $VERSION to module $MODULE"
+          echo "no-changes=false" >> $GITHUB_OUTPUT
+          
+          # Show the updated versions for this module
+          echo "Current versions for $MODULE:"
+          yq eval ".[$MODULE_INDEX].versions[]" "$REGISTRY_PATH"
+
+      - name: Create Pull Request
+        if: steps.update-registry.outputs.no-changes != 'true'
+        uses: peter-evans/create-pull-request@v5
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          title: 'Add ${{ steps.inputs.outputs.version }} to ${{ steps.inputs.outputs.module }}'
+          body: |
+            Automatically adds version ${{ steps.inputs.outputs.version }} for ${{ steps.inputs.outputs.module }} to the k6 extension registry.
+            
+            **Module:** ${{ steps.inputs.outputs.module }}
+            **Version:** ${{ steps.inputs.outputs.version }}
+            ${{ steps.inputs.outputs.repository_url && format('**Repository:** {0}', steps.inputs.outputs.repository_url) || '' }}
+            ${{ steps.inputs.outputs.release_url && format('**Release:** {0}', steps.inputs.outputs.release_url) || '' }}
+            
+            This PR was created automatically via the registry update workflow.
+          branch: add-version-${{ steps.inputs.outputs.module }}-${{ steps.inputs.outputs.version }}
+          commit-message: 'Add ${{ steps.inputs.outputs.version }} for ${{ steps.inputs.outputs.module }}'
+          labels: |
+            automated
+            version-update
+
+      - name: Log result
+        run: |
+          if [[ "${{ steps.update-registry.outputs.no-changes }}" == "true" ]]; then
+            echo "✅ No changes needed - version already exists"
+          else
+            echo "✅ Successfully created PR to add version ${{ steps.inputs.outputs.version }} for ${{ steps.inputs.outputs.module }}"
+          fi

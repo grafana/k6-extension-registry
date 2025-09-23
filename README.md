@@ -81,9 +81,7 @@ The `cgo` property value `true` indicates that cgo must be enabled to build the 
 
 This repository includes a reusable GitHub Action that can be used from other repositories to automatically add new versions to the registry when releases are published.
 
-## Automatically updating the registry from a module release workflow
-
-Use the [register-version](./actions/register-version.yml) action to automatically update the registry when publishing new versions of your extension:
+Use the [register-version](./actions/register-version.yml) action to automatically update the registry:
 
 ```yaml
 - name: Update extension registry
@@ -91,6 +89,7 @@ Use the [register-version](./actions/register-version.yml) action to automatical
   with:
     module: ${{ github.repository }}
     version: ${{ github.event.release.tag_name }}
+    token: ${{ secrets.GITHUB_TOKEN }}
 ```
 
 ### Action Inputs
@@ -99,6 +98,7 @@ Use the [register-version](./actions/register-version.yml) action to automatical
 |-------|-------------|----------|---------|
 | `module` | The module name to update (e.g., `github.com/grafana/xk6-sql`) | Yes | - |
 | `version` | The version to add (e.g., `v1.0.6`) | Yes | - |
-| `registry-path` | Path to the registry.yaml file | No | `registry.yaml` |
+| `token` | GitHub token with workflow trigger permissions | Yes | - |
+| `repository-url` | URL of the source repository (used for PR context) | No | - |
+| `release-url` | URL of the release (used for PR context) | No | - |
 
-The action will automatically handle checking if the module exists, whether the version is already present, and updating the registry file using `yq` for safe YAML manipulation.

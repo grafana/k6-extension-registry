@@ -1,5 +1,5 @@
 name: 'Update Extension Registry Version'
-description: 'Add a new version to a module in the k6 extension registry and create a pull request'
+description: 'Add a new version to a module in the k6 extension registry via centralized workflow'
 author: 'Grafana Labs'
 
 inputs:
@@ -10,94 +10,46 @@ inputs:
     description: 'The version to add (e.g., v1.0.6)'
     required: true
   token:
-    description: 'GitHub token with permissions to create pull requests'
+    description: 'GitHub token with permissions to trigger workflows'
     required: true
-  registry-path:
-    description: 'Path to checkout the k6-extension-registry repository'
+  repository-url:
+    description: 'URL of the source repository (optional, used for PR context)'
     required: false
-    default: 'registry'
+  release-url:
+    description: 'URL of the release (optional, used for PR context)'
+    required: false
 
 runs:
   using: 'composite'
   steps:
-    - name: Checkout registry repository
-      uses: actions/checkout@v4
+    - name: Trigger registry update workflow
+      uses: peter-evans/repository-dispatch@v3
       with:
+        token: ${{ inputs.token }}
         repository: grafana/k6-extension-registry
-        token: ${{ inputs.token }}
-        path: ${{ inputs.registry-path }}
+        event-type: extension_version_update
+        client-payload: |
+          {
+            "module": "${{ inputs.module }}",
+            "version": "${{ inputs.version }}",
+            "repository_url": "${{ inputs.repository-url }}",
+            "release_url": "${{ inputs.release-url }}"
+          }
 
-    - name: Install yq
+    - name: Log dispatch
       shell: bash
       run: |
-        echo "Installing yq v4..."
-        sudo wget -qO /usr/local/bin/yq https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64
-        sudo chmod +x /usr/local/bin/yq
-        yq --version
-
-    - name: Update registry with new version
-      id: update-registry
-      shell: bash
-      run: |
-        set -e
-        
-        MODULE="${{ inputs.module }}"
-        VERSION="${{ inputs.version }}"
-        REGISTRY_PATH="${{ inputs.registry-path }}/registry.yaml"
-        
-        echo "Updating module: $MODULE"
-        echo "Adding version: $VERSION"
-        echo "Registry file: $REGISTRY_PATH"
-        
-        # Check if registry file exists
-        if [[ ! -f "$REGISTRY_PATH" ]]; then
-          echo "Error: Registry file $REGISTRY_PATH does not exist"
-          exit 1
-        fi
-        
-        # Check if module exists in registry
-        MODULE_INDEX=$(yq eval ".[] | select(.module == \"$MODULE\") | path | .[0]" "$REGISTRY_PATH")
-        
-        if [[ -z "$MODULE_INDEX" ]]; then
-          echo "Error: Module $MODULE not found in registry"
-          exit 1
-        fi
-        
-        echo "Found module at index: $MODULE_INDEX"
-        
-        # Check if version already exists
-        VERSION_EXISTS=$(yq eval ".[$MODULE_INDEX].versions[] | select(. == \"$VERSION\")" "$REGISTRY_PATH")
-        
-        if [[ -n "$VERSION_EXISTS" ]]; then
-          echo "Version $VERSION already exists for module $MODULE"
-          echo "no-changes=true" >> $GITHUB_OUTPUT
-          exit 0
-        fi
-        
-        # Add the new version to the module
-        yq eval ".[$MODULE_INDEX].versions += [\"$VERSION\"]" -i "$REGISTRY_PATH"
-        
-        echo "Successfully added version $VERSION to module $MODULE"
-        echo "no-changes=false" >> $GITHUB_OUTPUT
-        
-        # Show the updated versions for this module
-        echo "Current versions for $MODULE:"
-        yq eval ".[$MODULE_INDEX].versions[]" "$REGISTRY_PATH"
-
-    - name: Create Pull Request
-      if: steps.update-registry.outputs.no-changes != 'true'
-      uses: peter-evans/create-pull-request@v5
-      with:
-        path: ${{ inputs.registry-path }}
-        token: ${{ inputs.token }}
-        title: 'Add ${{ inputs.version }} to ${{ inputs.module }}'
-        body: |
-          Automatically adds version ${{ inputs.version }} for ${{ inputs.module }} to the k6 extension registry.
-          
-          **Module:** ${{ inputs.module }}
-          **Version:** ${{ inputs.version }}
-        branch: add-version-${{ inputs.module }}-${{ inputs.version }}
-        commit-message: 'Add ${{ inputs.version }} for ${{ inputs.module }}'
+        echo "✅ Triggered registry update workflow for:"
+        echo "  Module: ${{ inputs.module }}"
+        echo "  Version: ${{ inputs.version }}"
+        echo ""
+        echo "The centralized workflow will:"
+        echo "  1. Validate the module exists in the registry"
+        echo "  2. Check if the version already exists"
+        echo "  3. Update the registry.yaml file if needed"
+        echo "  4. Create a pull request with the changes"
+        echo ""
+        echo "Check the workflow runs at: https://github.com/grafana/k6-extension-registry/actions"
 
 branding:
   icon: 'package'

@@ -76,3 +76,29 @@ Version constraints are primarily used to filter automatically detected versions
 Flag indicating the need for cgo. **Optional, cgo is not enabled by default**
 
 The `cgo` property value `true` indicates that cgo must be enabled to build the extension.
+
+## GitHub Action for Version Updates
+
+This repository includes a reusable GitHub Action that can be used from other repositories to automatically add new versions to the registry when releases are published.
+
+## Automatically updating the registry from a module release workflow
+
+Use the [register-version](./actions/register-version.yml) action to automatically update the registry when publishing new versions of your extension:
+
+```yaml
+- name: Update extension registry
+  uses: grafana/k6-extension-registry/actions/register-version@main
+  with:
+    module: ${{ github.repository }}
+    version: ${{ github.event.release.tag_name }}
+```
+
+### Action Inputs
+
+| Input | Description | Required | Default |
+|-------|-------------|----------|---------|
+| `module` | The module name to update (e.g., `github.com/grafana/xk6-sql`) | Yes | - |
+| `version` | The version to add (e.g., `v1.0.6`) | Yes | - |
+| `registry-path` | Path to the registry.yaml file | No | `registry.yaml` |
+
+The action will automatically handle checking if the module exists, whether the version is already present, and updating the registry file using `yq` for safe YAML manipulation.

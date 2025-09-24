@@ -61,27 +61,6 @@ jobs:
           sudo chmod +x /usr/local/bin/yq
           yq --version
 
-      - name: Validate inputs
-        run: |
-          MODULE="${{ steps.inputs.outputs.module }}"
-          VERSION="${{ steps.inputs.outputs.version }}"
-          
-          echo "Validating inputs..."
-          echo "Module: $MODULE"
-          echo "Version: $VERSION"
-          
-          # Validate module format (should be a valid Go module path)
-          if [[ ! "$MODULE" =~ ^[a-zA-Z0-9._/-]+$ ]]; then
-            echo "Error: Invalid module format: $MODULE"
-            exit 1
-          fi
-          
-          # Validate version format (should be semver with v prefix)
-          if [[ ! "$VERSION" =~ ^v[0-9]+\.[0-9]+\.[0-9]+(-[a-zA-Z0-9.-]+)?(\+[a-zA-Z0-9.-]+)?$ ]]; then
-            echo "Error: Invalid version format: $VERSION (expected semver with 'v' prefix)"
-            exit 1
-          fi
-
       - name: Validate source repository
         id: validate-source
         run: |
@@ -130,54 +109,25 @@ jobs:
       - name: Update registry with new version
         id: update-registry
         run: |
-          set -e
+          ./update-registry.sh \
+            --module "${{ steps.inputs.outputs.module }}" \
+            --version "${{ steps.inputs.outputs.version }}"
 
-          MODULE="${{ steps.inputs.outputs.module }}"
-          VERSION="${{ steps.inputs.outputs.version }}"
-          REGISTRY_PATH="registry.yaml"
-
-          echo "Updating module: $MODULE"
-          echo "Adding version: $VERSION"
-          echo "Registry file: $REGISTRY_PATH"
-
-          # Check if registry file exists
-          if [[ ! -f "$REGISTRY_PATH" ]]; then
-            echo "Error: Registry file $REGISTRY_PATH does not exist"
-            exit 1
+      - name: Check for registry changes
+        id: check-changes
+        run: |
+          # Check if there are any changes to the registry.yaml file
+          if git diff --quiet registry.yaml; then
+            echo "registry-changed=true" >> $GITHUB_OUTPUT
+            echo "Changes detected in registry.yaml"
+            git diff registry.yaml
+          else
+            echo "No changes detected in registry.yaml"
+            echo "registry-changed=false" >> $GITHUB_OUTPUT
           fi
-
-          # Check if module exists in registry
-          MODULE_INDEX=$(yq eval ".[] | select(.module == \"$MODULE\") | path | .[0]" "$REGISTRY_PATH")
-
-          if [[ -z "$MODULE_INDEX" ]]; then
-            echo "Error: Module $MODULE not found in registry"
-            echo "Please add the module to the registry first by creating a PR with the module definition."
-            exit 1
-          fi
-
-          echo "Found module at index: $MODULE_INDEX"
-
-          # Check if version already exists
-          VERSION_EXISTS=$(yq eval ".[$MODULE_INDEX].versions[] | select(. == \"$VERSION\")" "$REGISTRY_PATH")
-
-          if [[ -n "$VERSION_EXISTS" ]]; then
-            echo "Version $VERSION already exists for module $MODULE"
-            echo "no-changes=true" >> $GITHUB_OUTPUT
-            exit 0
-          fi
-
-          # Add the new version to the module
-          yq eval ".[$MODULE_INDEX].versions += [\"$VERSION\"]" -i "$REGISTRY_PATH"
-
-          echo "Successfully added version $VERSION to module $MODULE"
-          echo "no-changes=false" >> $GITHUB_OUTPUT
-
-          # Show the updated versions for this module
-          echo "Current versions for $MODULE:"
-          yq eval ".[$MODULE_INDEX].versions[]" "$REGISTRY_PATH"
 
       - name: Create Pull Request
-        if: steps.update-registry.outputs.no-changes != 'true'
+        if: steps.check-changes.outputs.registry-changed == 'true'
         id: create-pr
         uses: peter-evans/create-pull-request@v5
         with:
@@ -208,7 +158,7 @@ jobs:
 
       - name: auto-merge
         if: |
-          steps.update-registry.outputs.no-changes != 'true' && 
+          steps.check-changes.outputs.registry-changed == 'true' && 
           steps.create-pr.outputs.pull-request-number &&
           steps.validate-source.outputs.trusted == 'true' &&
           steps.inputs.outputs.auto_merge == 'true'
@@ -229,7 +179,7 @@ jobs:
 
       - name: Log result
         run: |
-          if [[ "${{ steps.update-registry.outputs.no-changes }}" == "true" ]]; then
+          if [[ "${{ steps.check-changes.outputs.registry-changed }}" == "false" ]]; then
             echo "✅ No changes needed - version already exists"
           elif [[ "${{ steps.validate-source.outputs.trusted }}" == "true" && "${{ steps.inputs.outputs.auto_merge }}" == "true" ]]; then
             echo "✅ Successfully created PR with auto-merge enabled"

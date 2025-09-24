@@ -40,11 +40,7 @@ EOF
 }
 
 # Function to validate inputs
-validate_inputs() {
-    echo "Validating inputs..."
-    echo "Module: $MODULE"
-    echo "Version: $VERSION"
-    
+validate_inputs() {    
     # Validate module format (should be a valid Go module path)
     if [[ ! "$MODULE" =~ ^[a-zA-Z0-9._/-]+$ ]]; then
         echo "Error: Invalid module format: $MODULE"
@@ -58,16 +54,10 @@ validate_inputs() {
         echo "Examples: v1.0.0, v1.2.3-beta.1, v2.0.0+build.123"
         exit 1
     fi
-    
-    echo "✅ Input validation passed"
 }
 
 # Function to update registry with new version
 update_registry() {
-    echo "Updating module: $MODULE"
-    echo "Adding version: $VERSION"
-    echo "Registry file: $REGISTRY_PATH"
-
     # Check if registry file exists
     if [[ ! -f "$REGISTRY_PATH" ]]; then
         echo "Error: Registry file $REGISTRY_PATH does not exist"
@@ -83,14 +73,11 @@ update_registry() {
         exit 1
     fi
 
-    echo "Found module at index: $MODULE_INDEX"
-
     # Check if version already exists
     VERSION_EXISTS=$(yq eval ".[$MODULE_INDEX].versions[] | select(. == \"$VERSION\")" "$REGISTRY_PATH")
 
     if [[ -n "$VERSION_EXISTS" ]]; then
         echo "Version $VERSION already exists for module $MODULE"
-        echo "Skipping - no changes needed"
         exit 0
     fi
 
@@ -144,16 +131,6 @@ if [[ -z "$VERSION" ]]; then
     exit 1
 fi
 
-# Main execution
-echo "Starting registry update..."
-echo "Module: $MODULE"
-echo "Version: $VERSION"
-echo "Registry: $REGISTRY_PATH"
-
-# Validate inputs
 validate_inputs
 
-# Update registry
 update_registry
-
-echo "Registry update completed successfully!"

@@ -6,10 +6,10 @@
 # It assumes inputs have already been validated by the workflow.
 #
 # Usage:
-#   ./update-registry.sh --module <module> --version <version> [--registry-path <path>]
+#   ./register-version.sh --module <module> --version <version> [--registry-path <path>]
 #
 # Example:
-#   ./update-registry.sh --module github.com/grafana/xk6-sql --version v1.2.3
+#   ./register-version.sh --module github.com/grafana/xk6-sql --version v1.2.3
 
 set -euo pipefail
 
@@ -23,7 +23,7 @@ VERSION=""
 # Function to show usage
 usage() {
     cat << EOF
-K6 Extension Registry Update Script
+Add version to k6 extension registry
 
 Usage: $0 [OPTIONS]
 

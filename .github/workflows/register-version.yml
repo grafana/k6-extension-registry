@@ -128,7 +128,7 @@ jobs:
       - name: Update registry with new version
         id: update-registry
         run: |
-          ./update-registry.sh \
+          ./register-version.sh \
             --module "${{ steps.inputs.outputs.module }}" \
             --version "${{ steps.inputs.outputs.version }}"
 

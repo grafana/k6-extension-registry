@@ -24,6 +24,14 @@
   versions:
     - "v0.3.2"
 
+- module: github.com/grafana/xk6-dns
+  description: DNS resolution and lookups in your tests
+  tier: official
+  imports:
+    - k6/x/dns
+  versions:
+    - "v1.0.0"
+
 - module: github.com/grafana/xk6-faker
   description: Generate fake data in your tests
   tier: official

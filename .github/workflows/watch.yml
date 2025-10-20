@@ -57,6 +57,13 @@ jobs:
         with:
           xk6-version: 1.2.2
 
+      - name: Setup xk6 lint dependencies
+        run: |
+           go install golang.org/x/vuln/cmd/govulncheck@v1.1.4
+           go install github.com/securego/gosec/v2/cmd/gosec@v2.22.10
+
+
+
       - name: Setup k6registry
         run: >
            go install github.com/grafana/k6registry/cmd/k6registry@v0.4.0

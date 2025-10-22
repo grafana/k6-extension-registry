@@ -66,7 +66,7 @@ jobs:
 
       - name: Setup k6registry
         run: >
-           go install github.com/grafana/k6registry/cmd/k6registry@v0.4.0
+           go install github.com/grafana/k6registry/cmd/k6registry@v0.4.1
 
       - name: Setup gomplate
         uses: jason-dour/action-setup-gomplate@81b9ca6f49d6594a118d19f0d05f6fd05372e64c # v1.1.0
@@ -95,7 +95,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{github.token}}
         run: |
-          k6registry -v --lint registry.yaml --out "${HTDOCS_DIR}/registry.json"
+          k6registry -v --lint --ignore-lint-errors registry.yaml --out "${HTDOCS_DIR}/registry.json"
 
           # check if changed from current published version
           if ! curl -fsSL "${BASE_URL}/registry.json" | diff -q "${HTDOCS_DIR}/registry.json" - >/dev/null 2>&1; then

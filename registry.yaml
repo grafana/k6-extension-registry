@@ -36,6 +36,14 @@
     - "v0.4.3"
     - "v0.4.4"
 
+- module: github.com/grafana/xk6-icmp
+  description: ICMP protocol support for k6
+  tier: official
+  imports:
+    - k6/x/icmp
+  versions:
+    - "v0.1.0"
+
 - module: github.com/grafana/xk6-loki
   description: Test Grafana Loki log ingestion endpoints
   tier: official

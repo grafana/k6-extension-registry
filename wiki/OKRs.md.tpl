@@ -33,17 +33,17 @@ Name | Issues | Description
 -----|--------|------------
 {{ range $idx, $ext:= .registry -}}
 {{ if and (eq $ext.tier "official") (ne $ext.module "go.k6.io/k6") -}}
-{{ if coll.Has $ext.compliance "issues" }}
+{{ if coll.Has $ext.compliance "issues" -}}
 {{ if and $ext.repo $ext.repo.url }}[{{ $ext.repo.name }}]({{$ext.repo.url}}){{else}}{{ $ext.module }}{{end}} | {{ range $idx, $issue := $ext.compliance.issues }}{{$issue}} {{end}} | {{ $ext.description }}
 {{ end -}}
 {{ end -}}
-{{ end -}}
+{{ end }}
 
 **Explanation of compliance checks:**
 
 {{- range $i, $issue := $issues -}}
 {{- if eq "module" $issue }}
-- `module` - checks if there is a valid `go.mod`
+  - `module` - checks if there is a valid `go.mod`
 {{- else if eq "replace" $issue }}
   - `replace` - checks if there is no `replace` directive in `go.mod`
 {{- else if eq "readme" $issue }}

@@ -36,7 +36,8 @@ Name | Issues | Description
 {{ if coll.Has $ext.compliance "issues" }}
 {{ if and $ext.repo $ext.repo.url }}[{{ $ext.repo.name }}]({{$ext.repo.url}}){{else}}{{ $ext.module }}{{end}} | {{ range $idx, $issue := $ext.compliance.issues }}{{$issue}} {{end}} | {{ $ext.description }}
 {{ end -}}
-{{ end }}
+{{ end -}}
+{{ end -}}
 
 **Explanation of compliance checks:**
 

@@ -55,7 +55,7 @@ jobs:
       - name: Setup xk6
         uses: grafana/setup-xk6@v1.0.0
         with:
-          xk6-version: 1.2.2
+          xk6-version: 1.2.3
 
       - name: Setup xk6 lint dependencies
         run: |

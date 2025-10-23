@@ -1,28 +1,10 @@
 Lists of extensions based on issues found by the compliance check. A specific extension can be included in several lists, since an extension can have several issues.
 
-{{- $issues := dict
-        "module" (coll.Slice) 
-        "replace" (coll.Slice) 
-        "readme" (coll.Slice) 
-        "examples" (coll.Slice) 
-        "license" (coll.Slice) 
-        "git" (coll.Slice) 
-        "versions" (coll.Slice) 
-        "build" (coll.Slice) 
-        "smoke" (coll.Slice) 
-        "types" (coll.Slice) 
-        "codeowners" (coll.Slice) 
- -}}
 {{- $k6_version := "" -}}
 {{- range $idx, $ext:= .registry -}}
 {{-   if (eq $ext.module "go.k6.io/k6") -}}
 {{-     $k6_version = (index $ext.versions 0) -}}
-{{-     continue -}}
-{{-   end -}}
-{{-   if coll.Has $ext.compliance "issues" -}}
-{{-     range $j, $issue := $ext.compliance.issues -}}
-{{-       $issues = (coll.Set $issue (append $ext (index $issues $issue)) $issues) -}}
-{{-     end -}}
+{{-     break -}}
 {{-   end -}}
 {{- end -}}
 {{- $summaries := dict
@@ -37,17 +19,30 @@ Lists of extensions based on issues found by the compliance check. A specific ex
         "license" "The extensions below do not have a suitable open-source license file."
         "git" "The extensions below do not have a git repository (this is not possible, it can only happen locally)."
         "versions" "The extensions below do not have semantic version tags."
+        "security" "The following extensions have security issues."
+        "vulnerability" "The following extensions have known vulnerabilities."
  -}}
-{{- range $issue, $exts := $issues }}
-{{   if gt (len $exts) 0  }}
-## {{$issue}}
-{{ default "" (index $summaries $issue) }}
+{{- $issue_types := coll.Slice "module" "replace" "readme" "examples" "license" "git" "versions" "build" "smoke" "types" "codeowners" "security" "vulnerability" -}}
+{{- range $issue_type := $issue_types -}}
+{{-   $has_extensions := false -}}
+{{-   range $idx, $ext := $.registry -}}
+{{-     if and (coll.Has $ext "compliance") (coll.Has $ext.compliance "issues") (coll.Has $ext.compliance.issues $issue_type) -}}
+{{-       $has_extensions = true -}}
+{{-       break -}}
+{{-     end -}}
+{{-   end -}}
+{{-   if $has_extensions }}
+
+## {{$issue_type}}
+{{ default "" (index $summaries $issue_type) }}
 
 Repository | Description
 -----------|------------
-{{-   range $idx, $ext := index $exts }}
-{{      if and $ext.repo $ext.repo.url }}[{{ $ext.repo.owner }}/{{ $ext.repo.name }}]({{$ext.repo.url}}){{else}}{{ $ext.module }}{{end}} | {{ $ext.description }}
-{{-   end -}}
-{{- end -}}
+{{-     range $idx, $ext := $.registry }}
+{{-       if and (coll.Has $ext "compliance") (coll.Has $ext.compliance "issues") (coll.Has $ext.compliance.issues $issue_type) }}
+{{          if and $ext.repo $ext.repo.url }}[{{ $ext.repo.owner }}/{{ $ext.repo.name }}]({{$ext.repo.url}}){{else}}{{ $ext.module }}{{end}} | {{ $ext.description }}
+{{-       end }}
+{{-     end }}
 
-{{   end }}
+{{-   end }}
+{{- end }}

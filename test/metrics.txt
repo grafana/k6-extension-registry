@@ -1,16 +1,24 @@
 # HELP registry_extension_count Number of extension extensions.
 # TYPE registry_extension_count counter
-registry_extension_count 5 1757407780000
+registry_extension_count 4 1757407780000
 
 # HELP registry_tier_community_count Number of tier community extensions.
 # TYPE registry_tier_community_count counter
-registry_tier_community_count 2 1757407780000
+registry_tier_community_count 1 1757407780000
 
 # HELP registry_tier_official_count Number of tier official extensions.
 # TYPE registry_tier_official_count counter
 registry_tier_official_count 3 1757407780000
 
-# HELP registry_grade_a_count Number of grade a extensions.
-# TYPE registry_grade_a_count counter
-registry_grade_a_count 4 1757407780000
+# HELP registry_issue_build_count Number of issue build extensions.
+# TYPE registry_issue_build_count counter
+registry_issue_build_count 1 1757407780000
+
+# HELP registry_issue_security_count Number of issue security extensions.
+# TYPE registry_issue_security_count counter
+registry_issue_security_count 2 1757407780000
+
+# HELP registry_issue_vulnerability_count Number of issue vulnerability extensions.
+# TYPE registry_issue_vulnerability_count counter
+registry_issue_vulnerability_count 3 1757407780000
 

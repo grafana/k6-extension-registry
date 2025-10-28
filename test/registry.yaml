@@ -1,0 +1,38 @@
+- module: github.com/grafana/xk6-faker
+  constraints: '>=v0.4.0'
+  description: Generate random fake data
+  imports:
+  - k6/x/faker
+  tier: official
+  versions:
+  - v0.4.0
+- module: github.com/grafana/xk6-sql
+  description: Load-test SQL Servers
+  imports:
+  - k6/x/sql
+  tier: official
+  versions:
+  - v0.4.1
+  - v0.4.0
+  - v0.3.0
+  - v0.2.1
+  - v0.2.0
+  - v0.1.1
+  - v0.1.0
+- module: go.k6.io/k6
+  description: A modern load testing tool, using Go and JavaScript
+  imports:
+  - k6
+  tier: official
+  versions:
+  - v0.53.0
+  - v0.52.0
+  - v0.51.0
+  - v0.50.0
+- module: github.com/mostafa/xk6-kafka
+  description: Load test Apache Kafka. Includes support for Avro messages.
+  tier: community
+  imports:
+    - k6/x/kafka
+  versions:
+    - "v1.0.0"

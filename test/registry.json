@@ -1,51 +1,12 @@
 [
   {
     "compliance": {
-      "grade": "A",
-      "level": 100
-    },
-    "description": "Generate random, pronounceable codenames",
-    "imports": [
-      "k6/x/codename"
-    ],
-    "module": "codeberg.org/szkiba/xk6-codename",
-    "repo": {
-      "clone_url": "https://codeberg.org/szkiba/xk6-codename.git",
-      "name": "xk6-codename",
-      "owner": "szkiba",
-      "url": "https://codeberg.org/szkiba/xk6-codename"
-    },
-    "tier": "community",
-    "versions": [
-      "v0.1.0"
-    ]
-  },
-  {
-    "compliance": {
-      "grade": "A",
-      "level": 100
-    },
-    "description": "Generate short unique identifiers from numbers",
-    "imports": [
-      "k6/x/sqids"
-    ],
-    "module": "bitbucket.org/szkiba/xk6-sqids",
-    "repo": {
-      "clone_url": "git@bitbucket.org:szkiba/xk6-sqids.git",
-      "name": "xk6-sqids",
-      "owner": "szkiba",
-      "url": "https://bitbucket.org/szkiba/xk6-sqids"
-    },
-    "tier": "community",
-    "versions": [
-      "v0.1.0",
-      "v0.1.1"
-    ]
-  },
-  {
-    "compliance": {
-      "grade": "A",
-      "level": 100
+      "v0.4.0": {
+        "issues": [
+          "security",
+          "vulnerability"
+        ]
+      }
     },
     "constraints": ">=v0.4.0",
     "description": "Generate random fake data",
@@ -56,14 +17,15 @@
     "repo": {
       "clone_url": "https://github.com/grafana/xk6-faker.git",
       "description": "Random fake data generator for k6.",
-      "homepage": "https://faker.x.k6.io",
+      "homepage": "http://faker.x.k6.io/",
       "license": "AGPL-3.0",
       "name": "xk6-faker",
       "owner": "grafana",
       "public": true,
-      "stars": 55,
-      "timestamp": 1725533453,
+      "stars": 109,
+      "timestamp": 1761735241,
       "topics": [
+        "k6",
         "xk6"
       ],
       "url": "https://github.com/grafana/xk6-faker"
@@ -75,8 +37,48 @@
   },
   {
     "compliance": {
-      "grade": "A",
-      "level": 100
+      "v0.1.0": {
+        "issues": [
+          "vulnerability",
+          "build"
+        ]
+      },
+      "v0.1.1": {
+        "issues": [
+          "vulnerability",
+          "build"
+        ]
+      },
+      "v0.2.0": {
+        "issues": [
+          "vulnerability",
+          "build"
+        ]
+      },
+      "v0.2.1": {
+        "issues": [
+          "vulnerability",
+          "build"
+        ]
+      },
+      "v0.3.0": {
+        "issues": [
+          "vulnerability",
+          "build"
+        ]
+      },
+      "v0.4.0": {
+        "issues": [
+          "vulnerability",
+          "build"
+        ]
+      },
+      "v0.4.1": {
+        "issues": [
+          "vulnerability",
+          "build"
+        ]
+      }
     },
     "description": "Load-test SQL Servers",
     "imports": [
@@ -85,14 +87,14 @@
     "module": "github.com/grafana/xk6-sql",
     "repo": {
       "clone_url": "https://github.com/grafana/xk6-sql.git",
-      "description": "k6 extension to load test RDBMSs (PostgreSQL, MySQL, MS SQL and SQLite3)",
-      "homepage": "https://github.com/grafana/xk6-sql",
+      "description": "Use SQL databases from k6 tests.",
+      "homepage": "http://sql.x.k6.io/",
       "license": "Apache-2.0",
       "name": "xk6-sql",
       "owner": "grafana",
       "public": true,
-      "stars": 110,
-      "timestamp": 1725979901,
+      "stars": 168,
+      "timestamp": 1761509005,
       "topics": [
         "k6",
         "sql",
@@ -108,20 +110,18 @@
       "v0.2.1",
       "v0.2.0",
       "v0.1.1",
-      "v0.1.0",
-      "v0.0.1"
+      "v0.1.0"
     ]
   },
   {
-    "constraints": ">=v0.50.0",
     "description": "A modern load testing tool, using Go and JavaScript",
     "imports": [
       "k6"
     ],
     "module": "go.k6.io/k6",
     "repo": {
-      "description": "A modern load testing tool, using Go and JavaScript - https://k6.io",
-      "homepage": "https://github.com/grafana/k6",
+      "description": "A modern load testing tool, using Go and JavaScript",
+      "homepage": "https://grafana.com/oss/k6/",
       "license": "AGPL-3.0",
       "name": "k6",
       "owner": "grafana",
@@ -132,6 +132,7 @@
         "golang",
         "hacktoberfest",
         "javascript",
+        "k6",
         "load-generator",
         "load-testing",
         "performance"
@@ -144,6 +145,52 @@
       "v0.52.0",
       "v0.51.0",
       "v0.50.0"
+    ]
+  },
+  {
+    "compliance": {
+      "v1.0.0": {
+        "issues": [
+          "security",
+          "vulnerability"
+        ]
+      }
+    },
+    "description": "Load test Apache Kafka. Includes support for Avro messages.",
+    "imports": [
+      "k6/x/kafka"
+    ],
+    "module": "github.com/mostafa/xk6-kafka",
+    "repo": {
+      "clone_url": "https://github.com/mostafa/xk6-kafka.git",
+      "description": "k6 extension to load test Apache Kafka with support for various serialization formats, SASL, TLS, compression, Schema Registry client and beyond",
+      "homepage": "https://github.com/mostafa/xk6-kafka",
+      "license": "Apache-2.0",
+      "name": "xk6-kafka",
+      "owner": "mostafa",
+      "public": true,
+      "stars": 196,
+      "timestamp": 1760609950,
+      "topics": [
+        "apache-kafka",
+        "avro",
+        "extension",
+        "hacktoberfest",
+        "json-schema",
+        "jsonschema",
+        "k6",
+        "kafka",
+        "load-testing",
+        "performance-testing",
+        "sasl",
+        "schema-registry",
+        "xk6"
+      ],
+      "url": "https://github.com/mostafa/xk6-kafka"
+    },
+    "tier": "community",
+    "versions": [
+      "v1.0.0"
     ]
   }
 ]

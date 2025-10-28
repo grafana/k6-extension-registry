@@ -1,6 +1,8 @@
 {
-  "extension_count": 5,
-  "tier_community_count": 2,
+  "extension_count": 4,
+  "tier_community_count": 1,
   "tier_official_count": 3,
-  "grade_a_count": 4
+  "issue_build_count": 1,
+  "issue_security_count": 2,
+  "issue_vulnerability_count": 3
 }

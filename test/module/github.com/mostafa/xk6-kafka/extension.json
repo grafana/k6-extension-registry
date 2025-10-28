@@ -1,0 +1,46 @@
+{
+  "compliance": {
+    "v1.0.0": {
+      "issues": [
+        "security",
+        "vulnerability"
+      ]
+    }
+  },
+  "description": "Load test Apache Kafka. Includes support for Avro messages.",
+  "imports": [
+    "k6/x/kafka"
+  ],
+  "module": "github.com/mostafa/xk6-kafka",
+  "repo": {
+    "clone_url": "https://github.com/mostafa/xk6-kafka.git",
+    "description": "k6 extension to load test Apache Kafka with support for various serialization formats, SASL, TLS, compression, Schema Registry client and beyond",
+    "homepage": "https://github.com/mostafa/xk6-kafka",
+    "license": "Apache-2.0",
+    "name": "xk6-kafka",
+    "owner": "mostafa",
+    "public": true,
+    "stars": 196,
+    "timestamp": 1760609950,
+    "topics": [
+      "apache-kafka",
+      "avro",
+      "extension",
+      "hacktoberfest",
+      "json-schema",
+      "jsonschema",
+      "k6",
+      "kafka",
+      "load-testing",
+      "performance-testing",
+      "sasl",
+      "schema-registry",
+      "xk6"
+    ],
+    "url": "https://github.com/mostafa/xk6-kafka"
+  },
+  "tier": "community",
+  "versions": [
+    "v1.0.0"
+  ]
+}

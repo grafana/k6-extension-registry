@@ -16,7 +16,7 @@ cp test/registry.json "$TEMP_DIR/"
 ./generate-api-files.sh -b "$TEMP_DIR" -t "1757407780000"
 
 # Compare generated files
-if ! diff -r test "$TEMP_DIR"; then
+if ! diff -r -x registry.yaml test "$TEMP_DIR"; then
         echo "FAILURE: Generated files differ from expected output"
         exit 1
 fi

@@ -1,45 +1,48 @@
 {
-  "k6/x/codename": {
+  "k6/x/kafka": {
     "compliance": {
-      "grade": "A",
-      "level": 100
+      "v1.0.0": {
+        "issues": [
+          "security",
+          "vulnerability"
+        ]
+      }
     },
-    "description": "Generate random, pronounceable codenames",
+    "description": "Load test Apache Kafka. Includes support for Avro messages.",
     "imports": [
-      "k6/x/codename"
+      "k6/x/kafka"
     ],
-    "module": "codeberg.org/szkiba/xk6-codename",
+    "module": "github.com/mostafa/xk6-kafka",
     "repo": {
-      "clone_url": "https://codeberg.org/szkiba/xk6-codename.git",
-      "name": "xk6-codename",
-      "owner": "szkiba",
-      "url": "https://codeberg.org/szkiba/xk6-codename"
+      "clone_url": "https://github.com/mostafa/xk6-kafka.git",
+      "description": "k6 extension to load test Apache Kafka with support for various serialization formats, SASL, TLS, compression, Schema Registry client and beyond",
+      "homepage": "https://github.com/mostafa/xk6-kafka",
+      "license": "Apache-2.0",
+      "name": "xk6-kafka",
+      "owner": "mostafa",
+      "public": true,
+      "stars": 196,
+      "timestamp": 1760609950,
+      "topics": [
+        "apache-kafka",
+        "avro",
+        "extension",
+        "hacktoberfest",
+        "json-schema",
+        "jsonschema",
+        "k6",
+        "kafka",
+        "load-testing",
+        "performance-testing",
+        "sasl",
+        "schema-registry",
+        "xk6"
+      ],
+      "url": "https://github.com/mostafa/xk6-kafka"
     },
     "tier": "community",
     "versions": [
-      "v0.1.0"
-    ]
-  },
-  "k6/x/sqids": {
-    "compliance": {
-      "grade": "A",
-      "level": 100
-    },
-    "description": "Generate short unique identifiers from numbers",
-    "imports": [
-      "k6/x/sqids"
-    ],
-    "module": "bitbucket.org/szkiba/xk6-sqids",
-    "repo": {
-      "clone_url": "git@bitbucket.org:szkiba/xk6-sqids.git",
-      "name": "xk6-sqids",
-      "owner": "szkiba",
-      "url": "https://bitbucket.org/szkiba/xk6-sqids"
-    },
-    "tier": "community",
-    "versions": [
-      "v0.1.0",
-      "v0.1.1"
+      "v1.0.0"
     ]
   }
 }

@@ -1,7 +1,11 @@
 {
   "compliance": {
-    "grade": "A",
-    "level": 100
+    "v0.4.0": {
+      "issues": [
+        "security",
+        "vulnerability"
+      ]
+    }
   },
   "constraints": ">=v0.4.0",
   "description": "Generate random fake data",
@@ -12,14 +16,15 @@
   "repo": {
     "clone_url": "https://github.com/grafana/xk6-faker.git",
     "description": "Random fake data generator for k6.",
-    "homepage": "https://faker.x.k6.io",
+    "homepage": "http://faker.x.k6.io/",
     "license": "AGPL-3.0",
     "name": "xk6-faker",
     "owner": "grafana",
     "public": true,
-    "stars": 55,
-    "timestamp": 1725533453,
+    "stars": 109,
+    "timestamp": 1761447876,
     "topics": [
+      "k6",
       "xk6"
     ],
     "url": "https://github.com/grafana/xk6-faker"

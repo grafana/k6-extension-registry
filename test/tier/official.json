@@ -1,8 +1,12 @@
 [
   {
     "compliance": {
-      "grade": "A",
-      "level": 100
+      "v0.4.0": {
+        "issues": [
+          "security",
+          "vulnerability"
+        ]
+      }
     },
     "constraints": ">=v0.4.0",
     "description": "Generate random fake data",
@@ -13,14 +17,15 @@
     "repo": {
       "clone_url": "https://github.com/grafana/xk6-faker.git",
       "description": "Random fake data generator for k6.",
-      "homepage": "https://faker.x.k6.io",
+      "homepage": "http://faker.x.k6.io/",
       "license": "AGPL-3.0",
       "name": "xk6-faker",
       "owner": "grafana",
       "public": true,
-      "stars": 55,
-      "timestamp": 1725533453,
+      "stars": 109,
+      "timestamp": 1761447876,
       "topics": [
+        "k6",
         "xk6"
       ],
       "url": "https://github.com/grafana/xk6-faker"
@@ -32,8 +37,48 @@
   },
   {
     "compliance": {
-      "grade": "A",
-      "level": 100
+      "v0.1.0": {
+        "issues": [
+          "vulnerability",
+          "build"
+        ]
+      },
+      "v0.1.1": {
+        "issues": [
+          "vulnerability",
+          "build"
+        ]
+      },
+      "v0.2.0": {
+        "issues": [
+          "vulnerability",
+          "build"
+        ]
+      },
+      "v0.2.1": {
+        "issues": [
+          "vulnerability",
+          "build"
+        ]
+      },
+      "v0.3.0": {
+        "issues": [
+          "vulnerability",
+          "build"
+        ]
+      },
+      "v0.4.0": {
+        "issues": [
+          "vulnerability",
+          "build"
+        ]
+      },
+      "v0.4.1": {
+        "issues": [
+          "vulnerability",
+          "build"
+        ]
+      }
     },
     "description": "Load-test SQL Servers",
     "imports": [
@@ -42,14 +87,14 @@
     "module": "github.com/grafana/xk6-sql",
     "repo": {
       "clone_url": "https://github.com/grafana/xk6-sql.git",
-      "description": "k6 extension to load test RDBMSs (PostgreSQL, MySQL, MS SQL and SQLite3)",
-      "homepage": "https://github.com/grafana/xk6-sql",
+      "description": "Use SQL databases from k6 tests.",
+      "homepage": "http://sql.x.k6.io/",
       "license": "Apache-2.0",
       "name": "xk6-sql",
       "owner": "grafana",
       "public": true,
-      "stars": 110,
-      "timestamp": 1725979901,
+      "stars": 168,
+      "timestamp": 1761509005,
       "topics": [
         "k6",
         "sql",
@@ -65,20 +110,18 @@
       "v0.2.1",
       "v0.2.0",
       "v0.1.1",
-      "v0.1.0",
-      "v0.0.1"
+      "v0.1.0"
     ]
   },
   {
-    "constraints": ">=v0.50.0",
     "description": "A modern load testing tool, using Go and JavaScript",
     "imports": [
       "k6"
     ],
     "module": "go.k6.io/k6",
     "repo": {
-      "description": "A modern load testing tool, using Go and JavaScript - https://k6.io",
-      "homepage": "https://github.com/grafana/k6",
+      "description": "A modern load testing tool, using Go and JavaScript",
+      "homepage": "https://grafana.com/oss/k6/",
       "license": "AGPL-3.0",
       "name": "k6",
       "owner": "grafana",
@@ -89,6 +132,7 @@
         "golang",
         "hacktoberfest",
         "javascript",
+        "k6",
         "load-generator",
         "load-testing",
         "performance"

@@ -26,8 +26,15 @@ Lists of extensions based on issues found by the compliance check. A specific ex
 {{- range $issue_type := $issue_types -}}
 {{-   $has_extensions := false -}}
 {{-   range $idx, $ext := $.registry -}}
-{{-     if and (coll.Has $ext "compliance") (coll.Has $ext.compliance "issues") (coll.Has $ext.compliance.issues $issue_type) -}}
-{{-       $has_extensions = true -}}
+{{-     if coll.Has $ext "compliance" -}}
+{{-       range $version, $comp := $ext.compliance -}}
+{{-         if and (coll.Has $comp "issues") (coll.Has $comp.issues $issue_type) -}}
+{{-           $has_extensions = true -}}
+{{-           break -}}
+{{-         end -}}
+{{-       end -}}
+{{-     end -}}
+{{-     if $has_extensions -}}
 {{-       break -}}
 {{-     end -}}
 {{-   end -}}
@@ -36,11 +43,19 @@ Lists of extensions based on issues found by the compliance check. A specific ex
 ## {{$issue_type}}
 {{ default "" (index $summaries $issue_type) }}
 
-Repository | Description
------------|------------
+Repository | Description | Versions
+-----------|-------------|----------
 {{-     range $idx, $ext := $.registry }}
-{{-       if and (coll.Has $ext "compliance") (coll.Has $ext.compliance "issues") (coll.Has $ext.compliance.issues $issue_type) }}
-{{          if and $ext.repo $ext.repo.url }}[{{ $ext.repo.owner }}/{{ $ext.repo.name }}]({{$ext.repo.url}}){{else}}{{ $ext.module }}{{end}} | {{ $ext.description }}
+{{-       if coll.Has $ext "compliance" -}}
+{{-         $versions_with_issue := coll.Slice -}}
+{{-         range $version, $comp := $ext.compliance -}}
+{{-           if and (coll.Has $comp "issues") (coll.Has $comp.issues $issue_type) -}}
+{{-             $versions_with_issue = $versions_with_issue | coll.Append $version -}}
+{{-           end -}}
+{{-         end -}}
+{{-         if $versions_with_issue }}
+{{            if and $ext.repo $ext.repo.url }}[{{ $ext.repo.owner }}/{{ $ext.repo.name }}]({{$ext.repo.url}}){{else}}{{ $ext.module }}{{end}} | {{ $ext.description }} | {{ range $vidx, $version := $versions_with_issue }}{{ $version }} {{ end }}
+{{-         end -}}
 {{-       end }}
 {{-     end }}
 

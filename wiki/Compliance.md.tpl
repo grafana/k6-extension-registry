@@ -17,11 +17,23 @@ Compliance with the requirements expected of k6 extensions is checked by various
   - `codeowners` - checks if there is a CODEOWNERS file (for official extensions) (in the `.github` or `docs` or in the base directory)
 
 
-Repository | Issues | Description
------------|--------|-------------
-{{ range $idx, $ext:= .registry -}}
+Repository | Description | Version | Issues
+-----------|-------------|---------|--------
+{{- range $idx, $ext:= .registry -}}
 {{ if (ne $ext.module "go.k6.io/k6") -}}
-{{ if and $ext.repo $ext.repo.url }}[{{ $ext.repo.owner }}/{{ $ext.repo.name }}]({{$ext.repo.url}}){{else}}{{ $ext.module }}{{end}} | {{if coll.Has $ext.compliance "issues"}}{{ range $idx, $issue := $ext.compliance.issues }}{{$issue}} {{end}} {{else}} 🎉 {{end}} | {{ $ext.description }}
+{{- if coll.Has $ext "compliance" -}}
+{{-   $versions := coll.Keys $ext.compliance | coll.Sort -}}
+{{-   range $vidx, $version := $versions -}}
+{{-     $comp := index $ext.compliance $version -}}
+{{-     if eq $vidx 0 }}
+{{ if and $ext.repo $ext.repo.url }}[{{ $ext.repo.owner }}/{{ $ext.repo.name }}]({{$ext.repo.url}}){{else}}{{ $ext.module }}{{end}} | {{ $ext.description }} | {{ $version }} | {{if coll.Has $comp "issues"}}{{ range $i, $issue := $comp.issues }}{{$issue}} {{end}} {{else}} 🎉 {{end }}
+{{-     else }}
+&nbsp; | &nbsp; | {{ $version }} | {{if coll.Has $comp "issues"}}{{ range $i, $issue := $comp.issues }}{{$issue}} {{end}} {{else}} 🎉 {{end }}
+{{-     end -}}
+{{-   end -}}
+{{- else -}}
+{{ if and $ext.repo $ext.repo.url }}[{{ $ext.repo.owner }}/{{ $ext.repo.name }}]({{$ext.repo.url}}){{else}}{{ $ext.module }}{{end}} | {{ $ext.description }} | - | 🎉
+{{- end -}}
 {{ end -}}
 {{ end }}
 

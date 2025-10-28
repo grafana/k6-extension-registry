@@ -74,8 +74,14 @@ function generate_metrics() {
           (group_by(.tier) | map(create_metric("tier"; .[0].tier; length)) | add)
         else {} end) +
 
+        # collect the issues of all published version of the extension
         (if ($filters | contains("issue")) then
-          ([.[] | select(.compliance.issues) | .compliance.issues[]] | group_by(.) | map(create_metric("issue"; .[0]; length)) | add)
+          ([.[] |
+            select(.compliance) |
+            [.compliance | to_entries[] | .value.issues[]?] | unique | .[]
+          ] |
+          group_by(.) |
+          map(create_metric("issue"; .[0]; length)) | add // {})
         else {} end)
     ' $registry > $json_file
 

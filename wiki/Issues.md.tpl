@@ -22,7 +22,7 @@ Lists of extensions based on issues found by the compliance check. A specific ex
         "security" "The following extensions have security issues."
         "vulnerability" "The following extensions have known vulnerabilities."
  -}}
-{{- $issue_types := coll.Slice "module" "replace" "readme" "examples" "license" "git" "versions" "build" "smoke" "types" "codeowners" "security" "vulnerability" -}}
+{{- $issue_types := coll.Slice "module" "replace" "readme" "examples" "license" "git" "versions" "build" "smoke" "types" "codeowners" "security" "vulnerability" | coll.Sort -}}
 {{- range $issue_type := $issue_types -}}
 {{-   $has_extensions := false -}}
 {{-   range $idx, $ext := $.registry -}}
@@ -45,7 +45,7 @@ Lists of extensions based on issues found by the compliance check. A specific ex
 
 Repository | Description | Versions
 -----------|-------------|----------
-{{-     range $idx, $ext := $.registry }}
+{{-     range $idx, $ext := coll.Sort "module" $.registry }}
 {{-       if coll.Has $ext "compliance" -}}
 {{-         $versions_with_issue := coll.Slice -}}
 {{-         range $version, $comp := $ext.compliance -}}

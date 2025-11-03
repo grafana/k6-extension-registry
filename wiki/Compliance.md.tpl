@@ -19,7 +19,7 @@ Compliance with the requirements expected of k6 extensions is checked by various
 
 Repository | Description | Version | Issues
 -----------|-------------|---------|--------
-{{- range $idx, $ext:= .registry -}}
+{{- range $idx, $ext:= coll.Sort "module" .registry -}}
 {{ if (ne $ext.module "go.k6.io/k6") -}}
 {{- if coll.Has $ext "compliance" -}}
 {{-   $versions := coll.Keys $ext.compliance | coll.Sort -}}

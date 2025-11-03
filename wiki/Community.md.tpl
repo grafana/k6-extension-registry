@@ -2,7 +2,7 @@ Set of k6 extensions developed by the community, without official support.
 
 Name | Description
 -----|------------
-{{ range $idx, $ext:= .registry -}}
+{{ range $idx, $ext:= coll.Sort "module" .registry -}}
 {{ if and (eq $ext.tier "community") (ne $ext.module "go.k6.io/k6") -}}
 {{ if and $ext.repo $ext.repo.url }}[{{ $ext.repo.name }}]({{$ext.repo.url}}){{else}}{{ $ext.module }}{{end}} | {{ $ext.description }}
 {{ end -}}

@@ -52,7 +52,7 @@ Name | Description | Issues
 {{-   end -}}
 {{-   $all_issues = $all_issues | uniq -}}
 {{-   if $all_issues }}
-{{ if and $ext.repo $ext.repo.url }}[{{ $ext.repo.name }}]({{$ext.repo.url}}){{else}}{{ $ext.module }}{{end}} | {{ $ext.description }} | {{ range $i, $issue := $all_issues }}{{$issue}} {{end }}
+{{ if and $ext.repo $ext.repo.url }}[{{ $ext.repo.owner }}/{{ $ext.repo.name }}]({{$ext.repo.url}}){{else}}{{ $ext.module }}{{end}} | {{ $ext.description }} | {{ range $i, $issue := $all_issues }}{{$issue}} {{end }}
 {{-   end -}}
 {{- end -}}
 {{ end -}}

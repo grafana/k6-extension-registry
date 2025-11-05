@@ -182,3 +182,11 @@
   versions:
     - "v0.1.10"
     - "v0.1.11"
+    
+- module: github.com/grafana/xk6-tls
+  description: TLS certificates validation and inspection
+  tier: community
+  imports:
+    - k6/x/tls
+  versions:
+    - "v0.1.0"

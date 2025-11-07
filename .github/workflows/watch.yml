@@ -41,37 +41,14 @@ jobs:
           ref: ${{ github.event.pull_request.head.ref }}
           persist-credentials: false
 
+      - name: Setup k6registry
+        uses: ./.github/actions/k6registry_setup
+
       - name: Cache Restore
         uses: actions/cache/restore@v4
         with:
           path: ${{ env.XDG_CACHE_HOME }}
           key: xdg-cache
-
-      - name: Set up Go
-        uses: actions/setup-go@v5
-        with:
-          go-version: "1.24.x"
-
-      - name: Setup xk6
-        uses: grafana/setup-xk6@v1.0.0
-        with:
-          xk6-version: 1.2.3
-
-      - name: Setup xk6 lint dependencies
-        run: |
-           go install golang.org/x/vuln/cmd/govulncheck@v1.1.4
-           go install github.com/securego/gosec/v2/cmd/gosec@v2.22.10
-
-
-
-      - name: Setup k6registry
-        run: >
-           go install github.com/grafana/k6registry/cmd/k6registry@v0.5.1
-
-      - name: Setup gomplate
-        uses: jason-dour/action-setup-gomplate@81b9ca6f49d6594a118d19f0d05f6fd05372e64c # v1.1.0
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Prepare
         run: |
@@ -101,6 +78,11 @@ jobs:
           if ! curl -fsSL "${BASE_URL}/registry.json" | diff -q "${HTDOCS_DIR}/registry.json" - >/dev/null 2>&1; then
             echo "changed=true" >> $GITHUB_OUTPUT
           fi
+
+      - name: Setup gomplate
+        uses: jason-dour/action-setup-gomplate@81b9ca6f49d6594a118d19f0d05f6fd05372e64c # v1.1.0
+        env:
+          GITHUB_TOKEN: ${{github.token}}
 
       - name: Update API
         if: ${{ steps.generate.outputs.changed == 'true'  || inputs.force_changed }}

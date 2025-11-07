@@ -1,4 +1,4 @@
-name: watch
+name: update
 
 env:
   BASE_URL: "https://registry.k6.io"

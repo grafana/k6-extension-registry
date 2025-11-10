@@ -1,0 +1,27 @@
+on:
+  pull_request:
+    branches:
+      - main
+
+permissions: {}
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    permissions:
+      actions: read
+    outputs:
+      new_versions: ${{ steps.check.outputs.new_versions }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: setup
+        uses: ./.github/actions/k6registry_setup
+
+      - name: check
+        run: >
+          ./check-new-versions.sh --lint --verbose
+

@@ -53,14 +53,69 @@ new_versions() {
     fi
 }
 
-# Lint new versions using xk6 lint
+# Lint the versions of a module
+# it is handled differently as xk6 cannot lint k6
+# $1 module name
+# $2 github repository
+# $3 versions
+# $4 lint command
+#
+# returns
+#   0 if lint passes
+#   1 if lint fails
+lint_module() {
+    local module=$1
+    local repo=$2
+    local versions=$3
+    local lint_cmd=$4
+
+    # Create temporary directory
+    temp_dir=$(mktemp -d)
+
+    # TODO: get the clone url from the registry
+    if git clone "$repo" "$temp_dir" &>/dev/null; then
+        # Change to temp directory and checkout version
+        pushd "$temp_dir" > /dev/null
+
+        # Process each version for this module
+        for version in $versions; do
+            log -n "Linting $module:$version"
+
+            if git checkout "$version" &>/dev/null; then
+                if lint_output=$($lint_cmd 2>&1); then
+                    log "  ✓ passed"
+                else
+                    log "  ✗ failed"
+                    log "$lint_output" | sed 's/^/    /'
+                    exit_code=1
+                fi
+            else
+                log "  ✗ - error checking out version"
+                exit_code=1
+            fi
+        done  # end of version loop
+
+        popd > /dev/null
+    else
+        log "  ✗ - error cloning repository"
+        exit_code=1
+    fi
+
+    # Cleanup temp directory
+    rm -rf "$temp_dir"
+
+    return $exit_code
+}
+
+# Lint new versions. 
+# Extensions are linted with xk6 and the given flags.
+# k6 is not linted, only the version is checked to exist.
 # Takes the output from new_versions function and lints each extension
 # $1 new versions string (format: "module:version" per line)
 # $2 optional lint flags
 # returns:
-#   0 if there are not new versions to lint
-#   1 if lint passes
-#   2 if lint fails
+#   0 if lint passes
+#   1 if lint fails
 lint_versions() {
     local versions="$1"
     local flags="$2"
@@ -82,50 +137,17 @@ lint_versions() {
         local module=$(echo "$line" | cut -d':' -f1)
         local mod_versions=$(echo "$line" | cut -d':' -f2)
 
-        # Skip linting for go.k6.io/k6 module
+        # k6 is handled differently
         if [[ "$module" == "go.k6.io/k6" ]]; then
-            continue
-        fi
-
-        # Create temporary directory
-        temp_dir=$(mktemp -d)
-
-        # Clone repository
-        # TODO: get the clone url from the registry
-        if git clone "https://$module.git" "$temp_dir" &>/dev/null; then
-            # Change to temp directory and checkout version
-            pushd "$temp_dir" > /dev/null
-
-            # Process each version for this module
-            for version in $mod_versions; do
-                log -n "Linting $module:$version"
-
-                if git checkout "$version" &>/dev/null; then
-                    # Run xk6 lint and capture output
-                    local lint_output
-                    local lint_cmd="xk6 lint"
-
-                    if lint_output=$($lint_cmd $flags 2>&1); then
-                        log "  ✓ passed"
-                    else
-                        log "  ✗ failed"
-                        log "$lint_output" | sed 's/^/    /'
-                        exit_code=1
-                    fi
-                else
-                    log "  ✗ - error checking out version"
-                    exit_code=1
-                fi
-            done  # end of version loop
-
-            popd > /dev/null
+            repo="https://github.com/grafana/k6.git"
+            # don't do nothing for linting k6, just check the version exists
+            lint_cmd="true"
         else
-            log "  ✗ - error cloning repository"
-            exit_code=1
+            repo="https://$module.git"
+            lint_cmd="xk6 lint $flags"
         fi
 
-        # Cleanup temp directory
-        rm -rf "$temp_dir"
+        lint_module $module $repo $mod_versions $lint_cmd || exit_code=1
 
     done <<< "$versions"
 

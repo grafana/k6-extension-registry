@@ -147,7 +147,7 @@ lint_versions() {
             lint_cmd="xk6 lint $flags"
         fi
 
-        lint_module $module $repo $mod_versions $lint_cmd || exit_code=1
+        lint_module $module $repo "$mod_versions" $lint_cmd || exit_code=1
 
     done <<< "$versions"
 

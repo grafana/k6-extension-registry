@@ -179,8 +179,6 @@ jobs:
         run: >
           rm -rf ${WIKI_WORK_DIR}/* &&
           gomplate -c registry=${HTDOCS_DIR}/registry.json
-          -c metrics=${HTDOCS_DIR}/metrics.json
-          -c official_metrics=${HTDOCS_DIR}/tier/official-metrics.json
           -c schema=${HTDOCS_DIR}/registry.schema.json
           --input-dir wiki
           --output-map="${WIKI_WORK_DIR}/{{.in|strings.TrimSuffix \".tpl\"}}"

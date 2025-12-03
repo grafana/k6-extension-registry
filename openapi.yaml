@@ -35,8 +35,6 @@ tags:
     description: Extension catalog queries
   - name: subset
     description: Query subsets of the registry
-  - name: metrics
-    description: Registry metrics queries
 paths:
   /registry.json:
     get:
@@ -66,74 +64,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Catalog"
-  /metrics.json:
-    get:
-      tags:
-        - metrics
-      summary: Registry metrics
-      description: Download the registry metrics as a single JSON file
-      operationId: getMetrics
-      responses:
-        "200":
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Metrics"
-  /metrics.txt:
-    get:
-      tags:
-        - metrics
-      summary: Registry metrics in Prometheus text format.
-      description: Download the registry metrics as a single TXT file in Prometheus text format
-      operationId: getMetricsPrometheus
-      responses:
-        "200":
-          description: successful operation
-          content:
-            text/plain:
-              schema:
-                type: string
-              examples:
-                simple:
-                  summary: Simple example
-                  value: |
-                    # HELP registry_tier_official_count Number of extensions in the 'official' tier.
-                    # TYPE registry_tier_official_count counter
-                    registry_tier_official_count 14 1733941259568
-                    # HELP registry_type_javascript_count Number of JavaScript extension.
-                    # TYPE registry_type_javascript_count counter
-                    registry_type_javascript_count 56 1733941259568
-                    # HELP registry_type_output_count Number of Output extension.
-                    # TYPE registry_type_output_count counter
-                    registry_type_output_count 16 1733941259568
-                    # HELP registry_issue_examples_count Number of extensions without examples directory.
-                    # TYPE registry_issue_examples_count counter
-                    registry_issue_examples_count 14 1733941259568
-                    # HELP registry_tier_community_count Number of extension in the community' tier.
-                    # TYPE registry_tier_community_count counter
-                    registry_tier_community_count 57 1733941259568
-                    # HELP registry_extension_count The total number of extensions.
-                    # TYPE registry_extension_count counter
-                    registry_extension_count 71 1733941259568
-                    # HELP registry_issue_smoke_count Number of extensions without smoke test script.
-                    # TYPE registry_issue_smoke_count counter
-                    registry_issue_smoke_count 49 1733941259568
-                    # HELP registry_tier_unofficial_count Number of unofficial extensions.
-                    # TYPE registry_tier_unofficial_count counter
-                    registry_tier_unofficial_count 11 1733941259568
-                    # HELP registry_issue_build_count Number of extensions not buildable with the latest k6 version.
-                    # TYPE registry_issue_build_count counter
-                    registry_issue_build_count 3 1733941259568
-                    # HELP registry_cgo_count Number of extensions requiring cgo.
-                    # TYPE registry_cgo_count counter
-                    registry_cgo_count 1 1733941259568
-                    # HELP registry_issue_replace_count Number of extensions with replace directive in go.mod.
-                    # TYPE registry_issue_replace_count counter
-                    registry_issue_replace_count 2 1733941259568
-                    # HELP registry_issue_types_count Number of extensions without API declaration file.
-                    # TYPE registry_issue_types_count counter
-                    registry_issue_types_count 42 1733941259568
   /module/{module}/extension.json:
     get:
       tags:
@@ -189,20 +119,6 @@ paths:
                 $ref: "#/components/schemas/Catalog"
         "404":
           description: tier not found
-  /tier/{tier}-metrics.json:
-    get:
-      tags:
-        - metrics
-      summary: Subset of registry metrics for tier.
-      description: Download the registry metrics for tier as a single JSON file
-      operationId: getTierMetrics
-      responses:
-        "200":
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Metrics"
 
 components:
   schemas:
@@ -221,8 +137,6 @@ components:
       type: object
       additionalProperties:
         $ref: "./registry.schema.json#/$defs/extension"
-    Metrics:
-      $ref: "./registry.schema.json#/$defs/metrics"
     Tier:
       $ref: "./registry.schema.json#/$defs/tier"
 

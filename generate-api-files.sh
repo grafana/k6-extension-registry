@@ -33,73 +33,6 @@ generate_module_files() {
     done
 }
 
-# Generate metrics for a registry
-# Generates the total number of extensions and the number of extensions for each filter
-# Accepted filters are 'tier' and 'issue'.
-# 
-# Parameters
-# $1 input registry file
-# $2 output metrics file in json format
-# $3 output metrics file in prometheus format
-# $4 timestamp for metrics
-# $5 filters. Defaults to all (tier,issue)
-function generate_metrics() {
-    local registry=$1
-    local json_file=$2
-    local prometheus_file=$3
-    local timestamp=$4
-    local filters=${5:-"tier,issue"}
-
-    jq --arg filters "$filters" '
-        # Takes field name (e.g., "tier", "issue") and field value (e.g., "official", "deprecated")
-        # Returns formatted metric name like "tier_official_count"
-        def metric_name(field_name; field_value):
-          [field_name, (field_value | ascii_downcase), "count"] | join("_");
-
-        # Takes field name, field value, and count, returns metric object
-        def create_metric(field_name; field_value; count):
-          {(metric_name(field_name; field_value)): count};
-
-        # initialize metrics json with the number of extensions
-        {
-          extension_count: length
-        } +
-
-        # For each filter, generate the count for each value if enabled
-        # group_by create groups for each unique value
-        # create_metric() - Helper function to create consistent metric objects
-        # length - Counts how many items are in each group
-        # add combines the count objects
-        (if ($filters | contains("tier")) then
-          (group_by(.tier) | map(create_metric("tier"; .[0].tier; length)) | add)
-        else {} end) +
-
-        # collect the issues of all published version of the extension
-        (if ($filters | contains("issue")) then
-          ([.[] |
-            select(.compliance) |
-            [.compliance | to_entries[] | .value.issues[]?] | unique | .[]
-          ] |
-          group_by(.) |
-          map(create_metric("issue"; .[0]; length)) | add // {})
-        else {} end)
-    ' $registry > $json_file
-
-    # Convert JSON to Prometheus format
-    jq -r --arg timestamp "${timestamp}" '
-        to_entries[] | 
-        .key as $metric_name |
-        (.key | gsub("_count$"; "") | gsub("_"; " ")) as $description |
-        .value as $count |
-        [
-          "# HELP registry_" + $metric_name + " Number of " + $description + " extensions.",
-          "# TYPE registry_" + $metric_name + " counter",
-          "registry_" + $metric_name + " " + ($count | tostring) + " " + $timestamp,
-          ""
-        ] | join("\n")
-    ' $json_file > $prometheus_file
-}
-
 # Generate catalog from registry
 #
 # Iterates over the registry entry and generates a catalog entry for
@@ -148,15 +81,6 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 BUILD_DIR="${SCRIPT_DIR}/build"
 TEMPLATES_DIR="${SCRIPT_DIR}/api"
 
-TIMESTAMP="$(date +%s)000"
-
-# Check for required dependencies
-if ! command -v gomplate >/dev/null 2>&1; then
-    echo "Error: gomplate is required but not installed."
-    echo "Install with: go install github.com/hairyhenderson/gomplate/v4/cmd/gomplate@latest"
-    exit 1
-fi
-
 if ! command -v jq >/dev/null 2>&1; then
     echo "Error: jq is required but not installed."
     echo "Install jq from your package manager."
@@ -174,10 +98,6 @@ while [[ $# -gt 0 ]]; do
             usage
             exit 0
             ;;
-        -t|--timestamp)
-             TIMESTAMP=$2
-             shift 2
-             ;;
         -v|--verbose)
             LOG="echo"
             shift 1
@@ -229,13 +149,7 @@ for tier in "${TIERS[@]}"; do
     
     # Generate tier cataLOG file (as per spec: /tier/{tier}-catalog.json)
     generate_catalog "${BUILD_DIR}/tier/${tier}.json" "${BUILD_DIR}/tier/${tier}-catalog.json"
-
-    # Generate metrics for tier
-    generate_metrics "${BUILD_DIR}/tier/${tier}.json" "${BUILD_DIR}/tier/${tier}-metrics.json" "${BUILD_DIR}/tier/${tier}-metrics.txt" "${TIMESTAMP}" "issue"
 done
-
-$LOG "Generating metrics"
-generate_metrics  "${BUILD_DIR}/registry.json" "${BUILD_DIR}/metrics.json" "${BUILD_DIR}/metrics.txt" "${TIMESTAMP}"
 
 $LOG "Generation complete!"
 $LOG "Generated files in: ${BUILD_DIR}"

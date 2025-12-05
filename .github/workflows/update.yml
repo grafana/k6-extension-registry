@@ -32,7 +32,7 @@ jobs:
       changed: ${{ steps.generate.outputs.changed }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6
         with:
           repository: ${{ github.event.pull_request.head.repo.full_name }}
           ref: ${{ github.event.pull_request.head.ref }}
@@ -153,12 +153,12 @@ jobs:
       WIKI_WORK_DIR: ${{ github.workspace }}/wiki.work
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6
         with:
           persist-credentials: false
 
       - name: Checkout Wiki
-        uses: actions/checkout@v4
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6
         with:
           repository: ${{ github.repository }}.wiki
           path: ${{ env.WIKI_WORK_DIR }}

@@ -124,6 +124,14 @@
   versions:
     - "v0.3.17"
 
+- module: github.com/szkiba/xk6-dotenv
+  description: Load env vars from a .env file.
+  tier: community
+  imports:
+    - k6/x/dotenv
+  versions:
+    - "v0.3.0"
+
 - module: github.com/mostafa/xk6-kafka
   description: Load test Apache Kafka. Includes support for Avro messages.
   tier: community

@@ -56,6 +56,14 @@
   versions:
     - "v0.1.1"
 
+- module: github.com/grafana/xk6-redis
+  description: Extension for Redis database
+  tier: official
+  imports:
+    - k6/x/redis
+  versions:
+    - "v0.3.5"
+
 - module: github.com/grafana/xk6-sql
   description: Load-test SQL Servers
   tier: official

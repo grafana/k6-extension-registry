@@ -209,3 +209,19 @@
     - k6/x/msgpack
   versions:
     - "v0.0.3"
+
+- module: github.com/bbsakura/xk6-gtp
+  description: GTP (GPRS Tunneling Protocol) extension for k6
+  tier: community
+  imports:
+    - k6/x/gtpv2
+  versions:
+    - "v0.1.1"
+
+- module: github.com/bbsakura/xk6-diameter
+  description: Diameter protocol extension for k6
+  tier: community
+  imports:
+    - k6/x/diameter
+  versions:
+    - "v0.1.1"

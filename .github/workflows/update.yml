@@ -102,7 +102,7 @@ jobs:
           key: xdg-cache
 
       - name: Upload Site
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
         if: ${{ ( github.ref_name == 'main' && steps.generate.outputs.changed == 'true') || inputs.force_changed }}
         with:
           path: ${{ env.HTDOCS_DIR }}
@@ -124,7 +124,7 @@ jobs:
       HTDOCS_DIR: ${{ github.workspace }}/htdocs
     steps:
       - name: Download Site
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # v7
         with:
           path: ${{ env.HTDOCS_DIR }}
           name: "htdocs"
@@ -165,7 +165,7 @@ jobs:
           persist-credentials: true
 
       - name: Download Site
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # v7
         with:
           path: ${{ env.HTDOCS_DIR }}
           name: "htdocs"

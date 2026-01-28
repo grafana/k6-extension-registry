@@ -197,6 +197,14 @@
     - "v0.1.10"
     - "v0.1.11"
 
+- module: github.com/grafana/xk6-subcommand-httpbin
+  description: Run a local httpbin server from k6
+  tier: community
+  subcommands:
+    - httpbin
+  versions:
+    - "v1.0.0"
+
 - module: github.com/grafana/xk6-tls
   description: TLS certificates validation and inspection
   tier: community

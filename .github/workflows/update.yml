@@ -223,7 +223,7 @@ jobs:
             K6_EXTENSION_REGISTRY_CHANGE_NOTIFIER_PEM=k6-extension-reg-change-notifier:private_key
       - name: Generate a token
         id: generate-token
-        uses: actions/create-github-app-token@v1
+        uses: actions/create-github-app-token@29824e69f54612133e76f7eaac726eef6c875baf # v2
         with:
           app-id: ${{ env.K6_EXTENSION_REGISTRY_CHANGE_NOTIFIER_ID }}
           private-key: ${{ env.K6_EXTENSION_REGISTRY_CHANGE_NOTIFIER_PEM }}

@@ -67,7 +67,7 @@ mv public/schema/registry.schema.html public/schema/index.html
 
 ### api - Generate API files
 
-The registry is exposed using and API defined in [openapi.yaml]. This API is served using static files generated from the registry using the [generate-api-files.sh] script. The script takes the registry.json generated from [registry.yaml] using `k6registry` as input to generate the json file to be returned by each endpoint. It also generates a metrics.txt file with metrics for the extensions by tier, grade, and issues found.
+The registry is exposed using and API defined in [openapi.yaml]. This API is served using static files generated from the registry using the [generate-api-files.sh] script. The script takes the registry.json generated from [registry.yaml] using `k6registry` as input to generate the json file to be returned by each endpoint.
 
 ```bash
 BUILD_DIR=build
@@ -80,8 +80,6 @@ Generates the following files
 ```ascii 
 build/
 ├── catalog.json
-├── metrics.json
-├── metrics.txt
 ├── registry.json
 ├── module
 │   ├── github.com
@@ -104,15 +102,13 @@ build/
 └── tier
     ├── community-catalog.json
     ├── community.json
-    ├── community-metrics.json
     ├── official-catalog.json
     ├── official.json
-    └── official-metrics.json
 ```
 
 ### wiki - Modify wiki pages
 
-The [wiki](https://github.com/grafana/k6-extension-registry/wiki) presents the content of the registry in a textual form for humans to view. It is built from the registry, the metrics, and the schema using templates found in the [wiki] directory.
+The [wiki](https://github.com/grafana/k6-extension-registry/wiki) presents the content of the registry in a textual form for humans to view. It is built from the registry, and the schema using templates found in the [wiki] directory.
 
 > [!IMPORTANT]
 > The content of the wiki is re-generated automatically when the registry changes.
@@ -122,8 +118,6 @@ After modifying the template, you can re-generate the wiki locally using the fol
 ```bash
 export BASE_URL=https://registry.k6.io
 curl -s -o build/registry.json $BASE_URL/registry.json
-curl -s -o build/metrics.json $BASE_URL/metrics.json
-curl -s -o build/official-metrics.json $BASE_URL/tier/official-metrics.json
 curl -s -o build/registry.schema.json $BASE_URL/registry.schema.json
-gomplate -c registry=build/registry.json -c metrics=build/metrics.json -c official_metrics=build/tier/official-metrics.json -c schema=build/registry.schema.json --input-dir wiki --output-map='build/wiki/{{.in|strings.TrimSuffix ".tpl"}}'
+gomplate -c registry=build/registry.json -c schema=build/registry.schema.json --input-dir wiki --output-map='build/wiki/{{.in|strings.TrimSuffix ".tpl"}}'
 ```

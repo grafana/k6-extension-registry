@@ -16,6 +16,8 @@
     - "v1.4.0"
     - "v1.4.1"
     - "v1.4.2"
+    - "v1.5.0"
+    - "v1.6.0"
 
 # Official extensions
 
@@ -26,6 +28,7 @@
     - k6/x/dns
   versions:
     - "v1.0.0"
+    - "v1.0.1"
 
 - module: github.com/grafana/xk6-faker
   description: Generate fake data in your tests
@@ -46,6 +49,7 @@
     - k6/x/icmp
   versions:
     - "v0.1.0"
+    - "v0.2.0"
 
 - module: github.com/grafana/xk6-mqtt
   description: MQTT protocol support for k6
@@ -54,6 +58,15 @@
     - k6/x/mqtt
   versions:
     - "v0.1.1"
+    - "v0.2.0"
+
+- module: github.com/grafana/xk6-redis
+  description: Extension for Redis database
+  tier: official
+  imports:
+    - k6/x/redis
+  versions:
+    - "v0.3.6"
 
 - module: github.com/grafana/xk6-sql
   description: Load-test SQL Servers
@@ -184,7 +197,7 @@
   versions:
     - "v0.1.10"
     - "v0.1.11"
-    
+
 - module: github.com/grafana/xk6-tls
   description: TLS certificates validation and inspection
   tier: community
@@ -192,3 +205,11 @@
     - k6/x/tls
   versions:
     - "v0.1.0"
+
+- module: github.com/tango-tango/xk6-msgpack
+  description: k6 MessagePack extension
+  tier: community
+  imports:
+    - k6/x/msgpack
+  versions:
+    - "v0.0.3"

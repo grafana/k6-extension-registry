@@ -34,14 +34,14 @@ jobs:
     steps:
       - name: Generate GitHub App Token
         id: app-token
-        uses: actions/create-github-app-token@v2.1.4
+        uses: actions/create-github-app-token@67018539274d69449ef7c02e8e71183d1719ab42 # v2.1.4
         with:
           app-id: ${{ secrets.app_id }}
           private-key: ${{ secrets.app_pem }}
           repositories: k6-extension-registry
 
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6
         with:
           repository: ${{ github.repository_owner }}/k6-extension-registry
           token: ${{ steps.app-token.outputs.token }}
@@ -149,7 +149,7 @@ jobs:
       - name: Create Pull Request
         if: steps.check-changes.outputs.registry-changed == 'true'
         id: create-pr
-        uses: peter-evans/create-pull-request@271a8d0340265f705b14b6d32b9829c1cb33d45e # v7.0.8
+        uses: peter-evans/create-pull-request@22a9089034f40e5a961c8808d113e2c98fb63676 # v7.0.11
         with:
           token: ${{ steps.app-token.outputs.token }}
           title: 'Add ${{ steps.inputs.outputs.version }} to ${{ steps.inputs.outputs.module }}'

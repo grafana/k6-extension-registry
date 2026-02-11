@@ -32,7 +32,7 @@ jobs:
       changed: ${{ steps.generate.outputs.changed }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6
         with:
           repository: ${{ github.event.pull_request.head.repo.full_name }}
           ref: ${{ github.event.pull_request.head.ref }}
@@ -42,7 +42,7 @@ jobs:
         uses: ./.github/actions/k6registry_setup
 
       - name: Cache Restore
-        uses: actions/cache/restore@v4
+        uses: actions/cache/restore@9255dc7a253b0ccc959486e2bca901246202afeb # v5
         with:
           path: ${{ env.XDG_CACHE_HOME }}
           key: xdg-cache
@@ -95,7 +95,7 @@ jobs:
           fi
 
       - name: Cache Save
-        uses: actions/cache/save@v4
+        uses: actions/cache/save@9255dc7a253b0ccc959486e2bca901246202afeb # v5
         if: ${{ ( github.ref_name == 'main' && steps.generate.outputs.changed == 'true' ) || inputs.force_changed }}
         with:
           path: ${{ env.XDG_CACHE_HOME }}
@@ -130,15 +130,15 @@ jobs:
           name: "htdocs"
 
       - name: Configure Pages
-        uses: actions/configure-pages@v5
+        uses: actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b # v5
 
       - name: Upload Pages Artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@7b1f4a764d45c48632c6b24a0339c27f5614fb0b # v4
         with:
           path: ${{ env.HTDOCS_DIR }}
 
       - name: Deploy Pages
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e # v4
 
   wiki:
     runs-on: ubuntu-latest
@@ -153,12 +153,12 @@ jobs:
       WIKI_WORK_DIR: ${{ github.workspace }}/wiki.work
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6
         with:
           persist-credentials: false
 
       - name: Checkout Wiki
-        uses: actions/checkout@v4
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6
         with:
           repository: ${{ github.repository }}.wiki
           path: ${{ env.WIKI_WORK_DIR }}
@@ -214,7 +214,7 @@ jobs:
       - publish
     if: ${{ ( github.ref_name == 'main' && needs.generate.outputs.changed == 'true' ) || inputs.force_changed }}
     steps:
-      - uses: grafana/shared-workflows/actions/get-vault-secrets@get-vault-secrets-v1.1.0
+      - uses: grafana/shared-workflows/actions/get-vault-secrets@a37de51f3d713a30a9e4b21bcdfbd38170020593 # get-vault-secrets/v1.3.0
         with:
           # Secrets placed in the ci/repo/grafana/<repo>/<path> path in Vault
           # Also stored in 1Password as "k6 Cloud CI/CD Secrets" (Vault is write-only)
@@ -223,7 +223,7 @@ jobs:
             K6_EXTENSION_REGISTRY_CHANGE_NOTIFIER_PEM=k6-extension-reg-change-notifier:private_key
       - name: Generate a token
         id: generate-token
-        uses: actions/create-github-app-token@v1
+        uses: actions/create-github-app-token@29824e69f54612133e76f7eaac726eef6c875baf # v2
         with:
           app-id: ${{ env.K6_EXTENSION_REGISTRY_CHANGE_NOTIFIER_ID }}
           private-key: ${{ env.K6_EXTENSION_REGISTRY_CHANGE_NOTIFIER_PEM }}

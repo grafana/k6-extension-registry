@@ -90,7 +90,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6
         with:
           persist-credentials: false
 
@@ -100,7 +100,7 @@ jobs:
           mkdir -p ${XDG_CACHE_HOME}
 
       - name: Cache Restore
-        uses: actions/cache/restore@v4
+        uses: actions/cache/restore@9255dc7a253b0ccc959486e2bca901246202afeb # v5
         with:
           path: ${{ env.XDG_CACHE_HOME }}
           key: xdg-cache
@@ -113,14 +113,14 @@ jobs:
           ssh-auth-sock: ${{ env.SSH_AUTH_SOCK }}
 
       - name: Configure Pages
-        uses: actions/configure-pages@v5
+        uses: actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b # v5
         id: pages
 
       - name: Setup eget
-        uses: grafana/k6-extension-actions/setup-eget@v0.1.0
+        uses: grafana/k6-extension-actions/setup-eget@3e8336239853800074ad1f7491d9d98554709acd # v0.1.0
 
       - name: Setup k6registry
-        uses: grafana/k6-extension-actions/setup-k6registry@v0.1.0
+        uses: grafana/k6-extension-actions/setup-k6registry@3e8336239853800074ad1f7491d9d98554709acd # v0.1.0
 
       - name: Check inputs
         id: params
@@ -156,7 +156,7 @@ jobs:
           fi
 
       - name: Cache Save
-        uses: actions/cache/save@v4
+        uses: actions/cache/save@9255dc7a253b0ccc959486e2bca901246202afeb # v5
         if: ${{ github.ref_name == 'main' && steps.generate.outputs.changed == 'true' }}
         with:
           path: ${{ env.XDG_CACHE_HOME }}
@@ -186,12 +186,12 @@ jobs:
           name: "htdocs"
 
       - name: Configure Pages
-        uses: actions/configure-pages@v5
+        uses: actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b # v5
 
       - name: Upload Pages Artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@7b1f4a764d45c48632c6b24a0339c27f5614fb0b # v4
         with:
           path: ${{ env.HTDOCS_DIR }}
 
       - name: Deploy Pages
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e # v4

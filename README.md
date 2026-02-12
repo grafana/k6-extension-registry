@@ -15,8 +15,6 @@ The registry is published at https://registry.k6.io.
 
 It can be accessed using the API described in [openapi.yaml]. This API allows accessing subset of the registry by different criteria (e.g. by tier), and also fetch statistics about the extensions.
 
-The [Wiki](https://github.com/grafana/k6-extension-registry/wiki) has human-readable reports based on registry content.
-
 ## Registering an extension
 
 > [!IMPORTANT]

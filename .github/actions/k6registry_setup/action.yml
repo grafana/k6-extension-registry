@@ -22,4 +22,4 @@ runs:
     - name: Setup k6registry
       shell: bash
       run: >
-          go install github.com/grafana/k6registry/cmd/k6registry@v0.5.1
+          go install github.com/grafana/k6registry/cmd/k6registry@v0.5.3

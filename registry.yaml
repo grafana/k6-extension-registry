@@ -213,3 +213,11 @@
     - k6/x/msgpack
   versions:
     - "v0.0.3"
+
+- module: github.com/grafana/xk6-subcommand-httpbin
+  description: Run a local httpbin server from k6
+  tier: community
+  subcommands:
+    - httpbin
+  versions:
+    - "v1.0.0"

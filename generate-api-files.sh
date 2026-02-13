@@ -103,7 +103,7 @@ function generate_metrics() {
 # Generate catalog from registry
 #
 # Iterates over the registry entry and generates a catalog entry for
-# each import and output defined by the extension 
+# each import, output, and subcommand defined by the extension 
 #
 # input: registry file
 # output: catalog file 
@@ -112,7 +112,7 @@ function generate_catalog() {
     local output_file=$2
     
     jq '
-        # Creates a separate arrays of key-value pairs using import and output as keys
+        # Creates a separate arrays of key-value pairs using import, output, and subcommand as keys
         # and the extension as value, and converts this array of key-value pairs to an object
         [
           .[] as $ext |
@@ -124,6 +124,12 @@ function generate_catalog() {
           .[] as $ext |
           if ($ext | has("outputs")) and $ext.outputs then
             $ext.outputs[] | {key: ., value: $ext}
+          else empty end
+        ] +
+        [
+          .[] as $ext |
+          if ($ext | has("subcommands")) and $ext.subcommands then
+            $ext.subcommands[] | {key: ("subcommand:" + .), value: $ext}
           else empty end
         ] | from_entries
     ' "$registry_file" > "$output_file"

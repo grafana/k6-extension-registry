@@ -221,3 +221,11 @@
     - httpbin
   versions:
     - "v1.0.0"
+    
+- module: github.com/XEmAX32/xk6-socket.io
+  description: Run a Socket.IO connection from k6
+  tier: community
+  imports:
+    - k6/x/socketio
+  versions:
+    - "v0.1.0"

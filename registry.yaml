@@ -112,6 +112,14 @@
     - "v0.1.2"
     - "v0.1.3"
 
+- module: github.com/grafana/xk6-subcommand-explore
+  description: Explore k6 extensions for Automatic Resolution
+  tier: official
+  subcommands:
+    - explore
+  versions:
+    - "v0.1.0"
+
 # Community extensions
 
 - module: github.com/grafana/xk6-client-prometheus-remote

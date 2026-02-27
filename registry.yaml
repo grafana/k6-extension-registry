@@ -120,6 +120,14 @@
   versions:
     - "v1.0.0"
 
+- module: github.com/grafana/xk6-tcp
+  description: TCP protocol support for k6
+  tier: official
+  imports:
+    - k6/x/tcp
+  versions:
+    - "v0.1.0"
+
 # Community extensions
 
 - module: github.com/grafana/xk6-client-prometheus-remote

@@ -120,6 +120,14 @@
   versions:
     - "v1.0.0"
 
+- module: github.com/grafana/xk6-docs
+  description: k6 documentation in the terminal
+  tier: official
+  subcommands:
+    - docs
+  versions:
+    - "v0.0.1"
+
 # Community extensions
 
 - module: github.com/grafana/xk6-client-prometheus-remote

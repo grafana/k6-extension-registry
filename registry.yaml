@@ -122,12 +122,13 @@
     - "v1.0.0"
 
 - module: github.com/grafana/xk6-docs
-  description: k6 documentation in the terminal
+  description: CLI k6 docs for AI agents and users. It comes with an agent skill to help AI agents to write k6 scripts with best practices.
   tier: official
   subcommands:
     - docs
   versions:
     - "v0.0.1"
+    - "v0.0.5"
 
 # Community extensions
 

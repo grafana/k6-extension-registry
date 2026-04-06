@@ -109,19 +109,18 @@ jobs:
           name: "htdocs"
           overwrite: true
 
-  publish:
+  publish-dev:
     runs-on: ubuntu-latest
     permissions:
-      pages: write
-      contents: write
       id-token: write
 
     needs:
       - generate
     if: ${{ ( github.ref_name == 'main' && needs.generate.outputs.changed == 'true' ) || inputs.force_changed }}
     env:
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       HTDOCS_DIR: ${{ github.workspace }}/htdocs
+      S3_BUCKET: dev-us-east-0-k6-catalog
+      AWS_REGION: us-east-2
     steps:
       - name: Download Site
         uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
@@ -129,16 +128,71 @@ jobs:
           path: ${{ env.HTDOCS_DIR }}
           name: "htdocs"
 
-      - name: Configure Pages
-        uses: actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b # v5
+      - name: Get secrets
+        uses: grafana/shared-workflows/actions/get-vault-secrets@f1614b210386ac420af6807a997ac7f6d96e477a # get-vault-secrets/v1.3.1
+        with:
+          vault_instance: dev
+          # arn:.../k6-registry-uploader-role
+          repo_secrets: |
+            IAM_ROLE_ARN=deploy:uploader-iam-role
 
-      - name: Upload Pages Artifact
-        uses: actions/upload-pages-artifact@7b1f4a764d45c48632c6b24a0339c27f5614fb0b # v4
+      - name: Authenticate to AWS
+        uses: grafana/shared-workflows/actions/aws-auth@85022085ed5314601c05d10e846de56bdd71e369 # aws-auth/v1.0.3
+        with:
+          aws-region: ${{ env.AWS_REGION }}
+          role-arn: ${{ env.IAM_ROLE_ARN }}
+
+      - name: Sync to S3
+        run: aws s3 sync ${HTDOCS_DIR} s3://${S3_BUCKET} --delete
+
+  wiki:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    needs:
+      - generate
+    if: ${{ ( github.ref_name == 'main' && needs.generate.outputs.changed == 'true' ) || inputs.force_changed }}
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      HTDOCS_DIR: ${{ github.workspace }}/htdocs
+      WIKI_WORK_DIR: ${{ github.workspace }}/wiki.work
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Checkout Wiki
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ github.repository }}.wiki
+          path: ${{ env.WIKI_WORK_DIR }}
+          persist-credentials: true
+
+      - name: Download Site
+        uses: actions/download-artifact@v4
         with:
           path: ${{ env.HTDOCS_DIR }}
+          name: "htdocs"
 
-      - name: Deploy Pages
-        uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e # v4
+      - name: Setup gomplate
+        uses: jason-dour/action-setup-gomplate@81b9ca6f49d6594a118d19f0d05f6fd05372e64c # v1.1.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Generate
+        run: |
+          rm -rf ${WIKI_WORK_DIR}/*
+          gomplate -c registry=${HTDOCS_DIR}/registry.json -c metrics=${HTDOCS_DIR}/metrics.json -c official_metrics=${HTDOCS_DIR}/tier/official-metrics.json -c schema=registry.schema.json --input-dir wiki --output-map="${WIKI_WORK_DIR}/{{.in|strings.TrimSuffix \".tpl\"}}"
+      - name: Push
+        run: |
+          cd ${WIKI_WORK_DIR}
+          git config --local user.email 'github-actions[bot]@users.noreply.github.com'
+          git config --local user.name 'github-actions[bot]'
+          git add .
+          if git commit -m "Update due to registry changes" 2>/dev/null >/dev/null; then
+            git push
+          fi
 
   notify:
     strategy:
@@ -156,7 +210,7 @@ jobs:
       EVENT_TYPE: extension-registry-changed
     needs:
       - generate
-      - publish
+      - publish-dev
     if: ${{ ( github.ref_name == 'main' && needs.generate.outputs.changed == 'true' ) || inputs.force_changed }}
     steps:
       - uses: grafana/shared-workflows/actions/get-vault-secrets@f1614b210386ac420af6807a997ac7f6d96e477a # get-vault-secrets/v1.3.1

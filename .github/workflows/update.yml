@@ -13,6 +13,8 @@ on:
   push:
     branches:
       - main
+    tags:
+      - 'v*'
   schedule:
     - cron: "40 */2 * * *"
 
@@ -103,7 +105,7 @@ jobs:
 
       - name: Upload Site
         uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f # v7
-        if: ${{ ( github.ref_name == 'main' && steps.generate.outputs.changed == 'true') || inputs.force_changed }}
+        if: ${{ ( github.ref_name == 'main' && steps.generate.outputs.changed == 'true') || github.ref_type == 'tag' || inputs.force_changed }}
         with:
           path: ${{ env.HTDOCS_DIR }}
           name: "htdocs"
@@ -145,6 +147,42 @@ jobs:
       - name: Sync to S3
         run: aws s3 sync ${HTDOCS_DIR} s3://${S3_BUCKET} --delete
 
+  publish-prod:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+
+    needs:
+      - generate
+    if: ${{ github.ref_type == 'tag' }}
+    env:
+      HTDOCS_DIR: ${{ github.workspace }}/htdocs
+      S3_BUCKET: prod-us-east-0-k6-catalog
+      AWS_REGION: us-east-2
+    steps:
+      - name: Download Site
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
+        with:
+          path: ${{ env.HTDOCS_DIR }}
+          name: "htdocs"
+
+      - name: Get secrets
+        uses: grafana/shared-workflows/actions/get-vault-secrets@f1614b210386ac420af6807a997ac7f6d96e477a # get-vault-secrets/v1.3.1
+        with:
+          vault_instance: prod
+          # arn:.../k6-registry-uploader-role
+          repo_secrets: |
+            IAM_ROLE_ARN=deploy:uploader-iam-role
+
+      - name: Authenticate to AWS
+        uses: grafana/shared-workflows/actions/aws-auth@85022085ed5314601c05d10e846de56bdd71e369 # aws-auth/v1.0.3
+        with:
+          aws-region: ${{ env.AWS_REGION }}
+          role-arn: ${{ env.IAM_ROLE_ARN }}
+
+      - name: Sync to S3
+        run: aws s3 sync ${HTDOCS_DIR} s3://${S3_BUCKET} --delete
+
   notify:
     strategy:
       matrix:
@@ -162,7 +200,8 @@ jobs:
     needs:
       - generate
       - publish-dev
-    if: ${{ ( github.ref_name == 'main' && needs.generate.outputs.changed == 'true' ) || inputs.force_changed }}
+      - publish-prod
+    if: ${{ needs.publish-dev.result == 'success' || needs.publish-prod.result == 'success' }}
     steps:
       - uses: grafana/shared-workflows/actions/get-vault-secrets@f1614b210386ac420af6807a997ac7f6d96e477a # get-vault-secrets/v1.3.1
         with:

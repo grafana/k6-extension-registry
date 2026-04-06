@@ -170,7 +170,7 @@ jobs:
           persist-credentials: true
 
       - name: Download Site
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
         with:
           path: ${{ env.HTDOCS_DIR }}
           name: "htdocs"

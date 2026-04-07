@@ -199,9 +199,8 @@ jobs:
       EVENT_TYPE: extension-registry-changed
     needs:
       - generate
-      - publish-dev
       - publish-prod
-    if: ${{ contains(fromJSON('["success","failure"]'), needs.publish-dev.result) || contains(fromJSON('["success","failure"]'), needs.publish-prod.result) }}
+    if: ${{ needs.publish-prod.result == 'success' }}
     steps:
       - uses: grafana/shared-workflows/actions/get-vault-secrets@f1614b210386ac420af6807a997ac7f6d96e477a # get-vault-secrets/v1.3.1
         with:

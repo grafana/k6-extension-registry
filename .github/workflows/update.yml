@@ -145,55 +145,6 @@ jobs:
       - name: Sync to S3
         run: aws s3 sync ${HTDOCS_DIR} s3://${S3_BUCKET} --delete
 
-  wiki:
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
-    needs:
-      - generate
-    if: ${{ ( github.ref_name == 'main' && needs.generate.outputs.changed == 'true' ) || inputs.force_changed }}
-    env:
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      HTDOCS_DIR: ${{ github.workspace }}/htdocs
-      WIKI_WORK_DIR: ${{ github.workspace }}/wiki.work
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          persist-credentials: false
-
-      - name: Checkout Wiki
-        uses: actions/checkout@v4
-        with:
-          repository: ${{ github.repository }}.wiki
-          path: ${{ env.WIKI_WORK_DIR }}
-          persist-credentials: true
-
-      - name: Download Site
-        uses: actions/download-artifact@v4
-        with:
-          path: ${{ env.HTDOCS_DIR }}
-          name: "htdocs"
-
-      - name: Setup gomplate
-        uses: jason-dour/action-setup-gomplate@81b9ca6f49d6594a118d19f0d05f6fd05372e64c # v1.1.0
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Generate
-        run: |
-          rm -rf ${WIKI_WORK_DIR}/*
-          gomplate -c registry=${HTDOCS_DIR}/registry.json -c metrics=${HTDOCS_DIR}/metrics.json -c official_metrics=${HTDOCS_DIR}/tier/official-metrics.json -c schema=registry.schema.json --input-dir wiki --output-map="${WIKI_WORK_DIR}/{{.in|strings.TrimSuffix \".tpl\"}}"
-      - name: Push
-        run: |
-          cd ${WIKI_WORK_DIR}
-          git config --local user.email 'github-actions[bot]@users.noreply.github.com'
-          git config --local user.name 'github-actions[bot]'
-          git add .
-          if git commit -m "Update due to registry changes" 2>/dev/null >/dev/null; then
-            git push
-          fi
-
   notify:
     strategy:
       matrix:

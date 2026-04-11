@@ -232,3 +232,11 @@
     - httpbin
   versions:
     - "v1.0.0"
+
+- module: github.com/copyleftdev/xk6-pyre
+  description: High-performance Prometheus HTTP exporter for k6 (40% faster, thread-safe)
+  tier: community
+  outputs:
+    - prometheus
+  versions:
+    - "v0.1.0"

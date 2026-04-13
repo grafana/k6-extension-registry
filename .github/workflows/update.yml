@@ -44,7 +44,7 @@ jobs:
         uses: ./.github/actions/k6registry_setup
 
       - name: Cache Restore
-        uses: actions/cache/restore@668228422ae6a00e4ad889ee87cd7109ec5666a7 # v5
+        uses: actions/cache/restore@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5
         with:
           path: ${{ env.XDG_CACHE_HOME }}
           key: xdg-cache
@@ -97,7 +97,7 @@ jobs:
           fi
 
       - name: Cache Save
-        uses: actions/cache/save@668228422ae6a00e4ad889ee87cd7109ec5666a7 # v5
+        uses: actions/cache/save@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5
         if: ${{ ( github.ref_name == 'main' && steps.generate.outputs.changed == 'true' ) || inputs.force_changed }}
         with:
           path: ${{ env.XDG_CACHE_HOME }}

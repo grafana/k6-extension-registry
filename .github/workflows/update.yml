@@ -73,6 +73,10 @@ jobs:
         run: |
           k6registry -v --lint --ignore-lint-errors registry.yaml --out "${HTDOCS_DIR}/registry.json"
 
+          # generate v2 registry from the separate v2 source file
+          mkdir -p "${HTDOCS_DIR}/v2"
+          k6registry -v registry-v2.yaml --out "${HTDOCS_DIR}/v2/registry.json"
+
           # check if changed from current published version
           if ! curl -fsSL "${BASE_URL}/registry.json" | diff -q "${HTDOCS_DIR}/registry.json" - >/dev/null 2>&1; then
             echo "changed=true" >> $GITHUB_OUTPUT

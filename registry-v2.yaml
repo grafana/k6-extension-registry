@@ -1,0 +1,15 @@
+# k6 v2
+
+- module: go.k6.io/k6/v2
+  description: A modern load testing tool, using Go and JavaScript
+  tier: official
+  imports:
+    - k6
+
+# Official extensions
+
+- module: github.com/grafana/xk6-faker
+  description: Generate fake data in your tests
+  tier: official
+  imports:
+    - k6/x/faker

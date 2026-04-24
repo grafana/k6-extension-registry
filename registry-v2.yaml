@@ -5,6 +5,8 @@
   tier: official
   imports:
     - k6
+  versions:
+    - v0.0.0+2a014daaa
 
 # Official extensions
 
@@ -13,3 +15,5 @@
   tier: official
   imports:
     - k6/x/faker
+  versions:
+    - v0.0.0+051eb6d3ce9a

@@ -37,6 +37,8 @@ tags:
     description: Query subsets of the registry
   - name: metrics
     description: Registry metrics queries
+  - name: v2
+    description: k6 v2-compatible extensions
 paths:
   /registry.json:
     get:
@@ -203,6 +205,109 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Metrics"
+
+  /v2/registry.json:
+    get:
+      tags:
+        - v2
+        - global
+      summary: k6 v2 registry
+      description: Download the registry of k6 v2-compatible extensions as a single JSON file
+      operationId: v2Registry
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Registry"
+  /v2/catalog.json:
+    get:
+      tags:
+        - v2
+        - catalog
+      summary: k6 v2 catalog
+      description: Download the catalog of k6 v2-compatible extensions as a single JSON file
+      operationId: v2Catalog
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Catalog"
+  /v2/metrics.json:
+    get:
+      tags:
+        - v2
+        - metrics
+      summary: k6 v2 registry metrics
+      description: Download the k6 v2 registry metrics as a single JSON file
+      operationId: v2Metrics
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Metrics"
+  /v2/module/{module}/extension.json:
+    get:
+      tags:
+        - v2
+        - module
+      summary: Query a k6 v2-compatible extension
+      description: Query the data of a specific k6 v2-compatible extension
+      operationId: v2Extension
+      parameters:
+        - $ref: "#/components/parameters/module"
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Extension"
+        "404":
+          description: module not found
+  /v2/tier/{tier}.json:
+    get:
+      tags:
+        - v2
+        - subset
+      summary: k6 v2 registry subset by tier
+      description: Query the k6 v2 registry subset for a given support tier
+      operationId: v2SubsetByTier
+      parameters:
+        - $ref: "#/components/parameters/tier"
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Registry"
+        "404":
+          description: tier not found
+  /v2/tier/{tier}-catalog.json:
+    get:
+      tags:
+        - v2
+        - catalog
+      summary: k6 v2 catalog subset by tier
+      description: Query the k6 v2 catalog for a given support tier
+      operationId: v2CatalogByTier
+      parameters:
+        - $ref: "#/components/parameters/tier"
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Catalog"
+        "404":
+          description: tier not found
 
 components:
   schemas:

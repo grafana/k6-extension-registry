@@ -6,19 +6,10 @@
   imports:
     - k6
   versions:
-    - "v1.0.0"
-    - "v1.1.0"
-    - "v1.2.0"
-    - "v1.2.1"
-    - "v1.2.2"
-    - "v1.2.3"
-    - "v1.3.0"
-    - "v1.4.0"
-    - "v1.4.1"
-    - "v1.4.2"
     - "v1.5.0"
     - "v1.6.0"
     - "v1.6.1"
+    - "v1.7.0"
 
 # Official extensions
 
@@ -120,13 +111,16 @@
   versions:
     - "v1.0.0"
 
-- module: github.com/grafana/xk6-tcp
-  description: TCP protocol support for k6
+- module: github.com/grafana/xk6-docs
+  description: CLI k6 docs for AI agents and users. It comes with an agent skill to help AI agents to write k6 scripts with best practices.
   tier: official
-  imports:
-    - k6/x/tcp
+  subcommands:
+    - docs
   versions:
-    - "v0.1.0"
+    - "v0.0.1"
+    - "v0.0.5"
+    - "v0.0.6"
+    - "v0.0.7"
 
 # Community extensions
 

@@ -143,3 +143,23 @@ jobs:
 - **Pull request creation**: Creates a pull request with detailed information about the update
 - **Auto-merge**: Trusted sources can have their updates automatically merged
 - **Security**: Cross-validates repository URLs and module paths to prevent malicious updates
+
+## Releasing
+
+### Staging
+
+The registry is automatically published to staging whenever a commit is merged to `main` **and** the generated `registry.json` differs from the currently published version. No manual action is required.
+
+### Production
+
+To release to production, push a tag matching `v*.*.*`:
+
+```bash
+git tag v0.1.0
+git push origin v0.1.0
+```
+
+The `update` workflow detects the tag and publishes the registry to the production S3 bucket. After a successful production deploy, it automatically dispatches an `extension-registry-changed` event to the downstream repositories (`k6-extension-registry-wayback`, `k6-extension-list`, `k6-docs`).
+
+> [!NOTE]
+> Production releases do not require the registry content to have changed — the tag push alone triggers the publish.

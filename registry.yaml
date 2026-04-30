@@ -241,3 +241,11 @@
     - httpbin
   versions:
     - "v1.0.0"
+
+- module: github.com/moko-poi/xk6-valkey
+  description: Valkey support for k6
+  tier: community
+  imports:
+    - k6/x/valkey
+  versions:
+    - "v0.1.0"

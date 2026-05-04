@@ -16,4 +16,4 @@
   imports:
     - k6/x/faker
   versions:
-    - v0.0.0+051eb6d3ce9a
+    - v0.5.0

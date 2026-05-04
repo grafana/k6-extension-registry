@@ -6,7 +6,7 @@
   imports:
     - k6
   versions:
-    - v0.0.0+2a014daaa
+    - v0.0.0+43b6303a377a
 
 # Official extensions
 

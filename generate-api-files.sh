@@ -135,6 +135,39 @@ function generate_catalog() {
     ' "$registry_file" > "$output_file"
 }
 
+function generate_for_dir() {
+    local dir=$1
+    local registry_file="${dir}/registry.json"
+
+    if [[ ! -f "$registry_file" ]]; then
+        return 0
+    fi
+
+    rm -rf "${dir}/"{tier,module}
+    mkdir -p "${dir}/tier"
+    mkdir -p "${dir}/module"
+
+    $LOG "Starting generation of registry API files in ${dir}..."
+
+    REGISTRY_FILE="$registry_file" BUILD_DIR="$dir" generate_module_files
+
+    $LOG "Generating ${dir}/catalog.json..."
+    generate_catalog "${registry_file}" "${dir}/catalog.json"
+
+    for tier in "${TIERS[@]}"; do
+        $LOG "Generating tier files for: ${tier} in ${dir}..."
+        mkdir -p "${dir}/tier"
+        jq --arg tier "$tier" '[.[] | select(.tier == $tier)]' "${registry_file}" > "${dir}/tier/${tier}.json"
+        generate_catalog "${dir}/tier/${tier}.json" "${dir}/tier/${tier}-catalog.json"
+        generate_metrics "${dir}/tier/${tier}.json" "${dir}/tier/${tier}-metrics.json" "${dir}/tier/${tier}-metrics.txt" "${TIMESTAMP}" "issue"
+    done
+
+    $LOG "Generating metrics for ${dir}..."
+    generate_metrics "${registry_file}" "${dir}/metrics.json" "${dir}/metrics.txt" "${TIMESTAMP}"
+
+    $LOG "Generation complete for ${dir}!"
+}
+
 function usage() {
     echo "Usage: $0 [OPTIONS]"
     echo "Options:"
@@ -205,43 +238,17 @@ if [[ ! -f "$REGISTRY_FILE" ]]; then
     exit 1
 fi
 
-# Create api directory structure
-rm -rf  "${BUILD_DIR}/"{tier,module}
-mkdir -p "${BUILD_DIR}/tier"
-mkdir -p "${BUILD_DIR}/module"
-
-$LOG "Starting generation of registry API files..."
-
-# Generate module-specific files
-generate_module_files
-
-# Generate main catalog
-$LOG "Generating ${BUILD_DIR}/catalog.json..."
-generate_catalog "${REGISTRY_FILE}" "${BUILD_DIR}/catalog.json"
+# Generate v1 API files
+generate_for_dir "${BUILD_DIR}"
 
 # generate product/cloud-catalog.json to ensure backwards compatibility
 mkdir -p "${BUILD_DIR}/product"
 cp "${BUILD_DIR}/catalog.json" "${BUILD_DIR}/product/cloud-catalog.json"
 
-# Generate tier-based files
-for tier in "${TIERS[@]}"; do
-    $LOG "Generating tier files for: ${tier}..."
-    
-    # Create tier directory
-    mkdir -p "${BUILD_DIR}/tier"
-    
-    # Generate tier registry file (as per spec: /tier/{tier}.json)
-    jq --arg tier "$tier" '[.[] | select(.tier == $tier)]' "${REGISTRY_FILE}" > "${BUILD_DIR}/tier/${tier}.json"
-    
-    # Generate tier cataLOG file (as per spec: /tier/{tier}-catalog.json)
-    generate_catalog "${BUILD_DIR}/tier/${tier}.json" "${BUILD_DIR}/tier/${tier}-catalog.json"
+# Generate v2 API files if registry-v2.json has been pre-generated into build/v2/
+if [[ -f "${BUILD_DIR}/v2/registry.json" ]]; then
+    $LOG "Found v2 registry, generating v2 API files..."
+    generate_for_dir "${BUILD_DIR}/v2"
+fi
 
-    # Generate metrics for tier
-    generate_metrics "${BUILD_DIR}/tier/${tier}.json" "${BUILD_DIR}/tier/${tier}-metrics.json" "${BUILD_DIR}/tier/${tier}-metrics.txt" "${TIMESTAMP}" "issue"
-done
-
-$LOG "Generating metrics"
-generate_metrics  "${BUILD_DIR}/registry.json" "${BUILD_DIR}/metrics.json" "${BUILD_DIR}/metrics.txt" "${TIMESTAMP}"
-
-$LOG "Generation complete!"
 $LOG "Generated files in: ${BUILD_DIR}"

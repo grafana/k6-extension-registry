@@ -10,6 +10,14 @@
 
 # Official extensions
 
+- module: github.com/grafana/xk6-dns
+  description: DNS resolution and lookups in your tests
+  tier: official
+  imports:
+    - k6/x/dns
+  versions:
+    - v1.1.0
+
 - module: github.com/grafana/xk6-faker
   description: Generate fake data in your tests
   tier: official
@@ -17,6 +25,14 @@
     - k6/x/faker
   versions:
     - v0.5.0
+
+- module: github.com/grafana/xk6-icmp
+  description: ICMP protocol support for k6
+  tier: official
+  imports:
+    - k6/x/icmp
+  versions:
+    - v0.3.0
 
 - module: github.com/grafana/xk6-mqtt
   description: MQTT protocol support for k6
@@ -34,30 +50,6 @@
   versions:
     - v0.4.0
 
-- module: github.com/grafana/xk6-ssh
-  description: Use SSH connections in your tests
-  tier: official
-  imports:
-    - k6/x/ssh
-  versions:
-    - v0.2.0
-
-- module: github.com/grafana/xk6-dns
-  description: DNS resolution and lookups in your tests
-  tier: official
-  imports:
-    - k6/x/dns
-  versions:
-    - v1.1.0
-
-- module: github.com/grafana/xk6-icmp
-  description: ICMP protocol support for k6
-  tier: official
-  imports:
-    - k6/x/icmp
-  versions:
-    - v0.3.0
-
 - module: github.com/grafana/xk6-sql
   description: Load-test SQL Servers
   tier: official
@@ -65,6 +57,14 @@
     - k6/x/sql
   versions:
     - v1.1.0
+
+- module: github.com/grafana/xk6-ssh
+  description: Use SSH connections in your tests
+  tier: official
+  imports:
+    - k6/x/ssh
+  versions:
+    - v0.2.0
 
 - module: github.com/grafana/xk6-subcommand-explore
   description: Explore k6 extensions for Automatic Resolution

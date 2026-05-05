@@ -74,6 +74,14 @@
   versions:
     - v1.1.0
 
+- module: github.com/grafana/xk6-docs
+  description: CLI k6 docs for AI agents and users
+  tier: official
+  subcommands:
+    - docs
+  versions:
+    - v0.0.9
+
 - module: github.com/grafana/xk6-tcp
   description: TCP protocol support for k6
   tier: official

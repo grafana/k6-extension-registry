@@ -58,6 +58,22 @@
   versions:
     - v1.1.0
 
+- module: github.com/grafana/xk6-sql-driver-mysql
+  description: xk6-sql driver extension for MySQL database support
+  tier: official
+  imports:
+    - k6/x/sql/driver/mysql
+  versions:
+    - v0.3.0
+
+- module: github.com/grafana/xk6-sql-driver-postgres
+  description: xk6-sql driver extension for Postgres database support
+  tier: official
+  imports:
+    - k6/x/sql/driver/postgres
+  versions:
+    - v0.2.0
+
 - module: github.com/grafana/xk6-ssh
   description: Use SSH connections in your tests
   tier: official

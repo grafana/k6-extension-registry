@@ -105,3 +105,11 @@
     - k6/x/tcp
   versions:
     - v0.3.0
+
+- module: github.com/grafana/mcp-k6
+  description: An MCP server for k6 for AI agents
+  tier: official
+  subcommands:
+    - mcp
+  versions:
+    - v0.6.0

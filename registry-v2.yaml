@@ -88,7 +88,7 @@
   subcommands:
     - agent
   versions:
-    - v0.1.1
+    - v0.1.2
 
 - module: github.com/grafana/xk6-subcommand-explore
   description: Explore k6 extensions for Automatic Resolution

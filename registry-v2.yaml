@@ -82,6 +82,14 @@
   versions:
     - v0.2.0
 
+- module: github.com/grafana/xk6-subcommand-agent
+  description: Bootstrap an AI-assisted k6 testing workflow in any editor
+  tier: official
+  subcommands:
+    - agent
+  versions:
+    - v0.1.2
+
 - module: github.com/grafana/xk6-subcommand-explore
   description: Explore k6 extensions for Automatic Resolution
   tier: official

@@ -137,7 +137,7 @@ jobs:
           name: "htdocs"
 
       - name: Get secrets
-        uses: grafana/shared-workflows/actions/get-vault-secrets@f1614b210386ac420af6807a997ac7f6d96e477a # get-vault-secrets/v1.3.1
+        uses: grafana/shared-workflows/actions/get-vault-secrets@a53fc80bc30b0a16a262520465db899fa3af08b7 # get-vault-secrets/v1.3.2
         with:
           vault_instance: dev
           # arn:.../k6-registry-uploader-role
@@ -173,7 +173,7 @@ jobs:
           name: "htdocs"
 
       - name: Get secrets
-        uses: grafana/shared-workflows/actions/get-vault-secrets@f1614b210386ac420af6807a997ac7f6d96e477a # get-vault-secrets/v1.3.1
+        uses: grafana/shared-workflows/actions/get-vault-secrets@a53fc80bc30b0a16a262520465db899fa3af08b7 # get-vault-secrets/v1.3.2
         with:
           # arn:.../k6-registry-uploader-role
           repo_secrets: |
@@ -207,7 +207,7 @@ jobs:
       - publish-prod
     if: ${{ needs.publish-prod.result == 'success' }}
     steps:
-      - uses: grafana/shared-workflows/actions/get-vault-secrets@f1614b210386ac420af6807a997ac7f6d96e477a # get-vault-secrets/v1.3.1
+      - uses: grafana/shared-workflows/actions/get-vault-secrets@a53fc80bc30b0a16a262520465db899fa3af08b7 # get-vault-secrets/v1.3.2
         with:
           # Secrets placed in the ci/repo/grafana/<repo>/<path> path in Vault
           # Also stored in 1Password as "k6 Cloud CI/CD Secrets" (Vault is write-only)

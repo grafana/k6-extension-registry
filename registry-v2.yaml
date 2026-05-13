@@ -97,6 +97,7 @@
     - explore
   versions:
     - v1.1.0
+    - v1.2.0
 
 - module: github.com/grafana/xk6-docs
   description: CLI k6 docs for AI agents and users

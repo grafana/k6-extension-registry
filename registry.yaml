@@ -242,3 +242,11 @@
     - httpbin
   versions:
     - "v1.0.0"
+
+- module: github.com/msradam/xk6-llm
+  description: Load test OpenAI-compatible LLM inference servers. Streaming TTFT/ITL/TPOT, goodput, cost, and energy metrics.
+  tier: community
+  imports:
+    - k6/x/llm
+  versions:
+    - "v0.1.0"

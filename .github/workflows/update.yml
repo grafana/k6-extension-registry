@@ -137,9 +137,11 @@ jobs:
           name: "htdocs"
 
       - name: Get secrets
+        id: get-secrets
         uses: grafana/shared-workflows/actions/get-vault-secrets@a53fc80bc30b0a16a262520465db899fa3af08b7 # get-vault-secrets/v1.3.2
         with:
           vault_instance: dev
+          export_env: false
           # arn:.../k6-registry-uploader-role
           repo_secrets: |
             IAM_ROLE_ARN=deploy:uploader-iam-role
@@ -148,7 +150,7 @@ jobs:
         uses: grafana/shared-workflows/actions/aws-auth@85022085ed5314601c05d10e846de56bdd71e369 # aws-auth/v1.0.3
         with:
           aws-region: ${{ env.AWS_REGION }}
-          role-arn: ${{ env.IAM_ROLE_ARN }}
+          role-arn: ${{ fromJSON(steps.get-secrets.outputs.secrets).IAM_ROLE_ARN }}
 
       - name: Sync to S3
         run: aws s3 sync ${HTDOCS_DIR} s3://${S3_BUCKET} --delete
@@ -173,8 +175,10 @@ jobs:
           name: "htdocs"
 
       - name: Get secrets
+        id: get-secrets
         uses: grafana/shared-workflows/actions/get-vault-secrets@a53fc80bc30b0a16a262520465db899fa3af08b7 # get-vault-secrets/v1.3.2
         with:
+          export_env: false
           # arn:.../k6-registry-uploader-role
           repo_secrets: |
             IAM_ROLE_ARN=deploy:uploader-iam-role
@@ -183,7 +187,7 @@ jobs:
         uses: grafana/shared-workflows/actions/aws-auth@85022085ed5314601c05d10e846de56bdd71e369 # aws-auth/v1.0.3
         with:
           aws-region: ${{ env.AWS_REGION }}
-          role-arn: ${{ env.IAM_ROLE_ARN }}
+          role-arn: ${{ fromJSON(steps.get-secrets.outputs.secrets).IAM_ROLE_ARN }}
 
       - name: Sync to S3
         run: aws s3 sync ${HTDOCS_DIR} s3://${S3_BUCKET} --delete
@@ -207,8 +211,10 @@ jobs:
       - publish-prod
     if: ${{ needs.publish-prod.result == 'success' }}
     steps:
-      - uses: grafana/shared-workflows/actions/get-vault-secrets@a53fc80bc30b0a16a262520465db899fa3af08b7 # get-vault-secrets/v1.3.2
+      - id: get-secrets
+        uses: grafana/shared-workflows/actions/get-vault-secrets@a53fc80bc30b0a16a262520465db899fa3af08b7 # get-vault-secrets/v1.3.2
         with:
+          export_env: false
           # Secrets placed in the ci/repo/grafana/<repo>/<path> path in Vault
           # Also stored in 1Password as "k6 Cloud CI/CD Secrets" (Vault is write-only)
           repo_secrets: |
@@ -218,8 +224,8 @@ jobs:
         id: generate-token
         uses: actions/create-github-app-token@1b10c78c7865c340bc4f6099eb2f838309f1e8c3 # v3
         with:
-          app-id: ${{ env.K6_EXTENSION_REGISTRY_CHANGE_NOTIFIER_ID }}
-          private-key: ${{ env.K6_EXTENSION_REGISTRY_CHANGE_NOTIFIER_PEM }}
+          app-id: ${{ fromJSON(steps.get-secrets.outputs.secrets).K6_EXTENSION_REGISTRY_CHANGE_NOTIFIER_ID }}
+          private-key: ${{ fromJSON(steps.get-secrets.outputs.secrets).K6_EXTENSION_REGISTRY_CHANGE_NOTIFIER_PEM }}
           owner: ${{ github.repository_owner }}
       - name: Dispatch event
         continue-on-error: true

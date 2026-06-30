@@ -1,0 +1,111 @@
+name: Auto-update official extensions
+
+on:
+  schedule:
+    - cron: "15 6 * * *" # daily at 06:15 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
+
+      - name: Install yq
+        run: |
+          YQ_VERSION="v4.44.3"
+          wget -qO /usr/local/bin/yq "https://github.com/mikefarah/yq/releases/download/${YQ_VERSION}/yq_linux_amd64"
+          sudo chmod +x /usr/local/bin/yq
+
+      - name: Update official extensions
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+
+          UPDATED=""
+
+          # Get count of entries in registry.yaml
+          count=$(yq eval 'length' registry.yaml)
+
+          for ((i = 0; i < count; i++)); do
+            tier=$(yq eval ".[$i].tier" registry.yaml)
+            module=$(yq eval ".[$i].module" registry.yaml)
+
+            # Only process official extensions, skip k6 itself
+            if [[ "$tier" != "official" || "$module" == "go.k6.io/k6" ]]; then
+              continue
+            fi
+
+            # Derive GitHub repo from module path (e.g. github.com/grafana/xk6-sql -> grafana/xk6-sql)
+            repo=$(echo "$module" | sed 's|^github\.com/||')
+
+            echo "Checking $module ($repo)..."
+
+            # Get all releases from GitHub
+            releases=$(gh release list --repo "$repo" --limit 100 --json tagName,isPrerelease 2>/dev/null) || {
+              echo "  WARNING: failed to list releases for $repo, skipping"
+              continue
+            }
+
+            # Check if the extension already lists any pre-releases
+            has_prerelease=$(yq eval ".[$i].versions[] | select(test(\"-\"))" registry.yaml | head -1)
+
+            # Get existing versions from registry
+            existing=$(yq eval ".[$i].versions[]" registry.yaml | tr -d '"')
+
+            # Filter releases to valid semver tags, sorted ascending
+            # Include pre-releases only if the extension already has some
+            if [[ -n "$has_prerelease" ]]; then
+              candidates=$(echo "$releases" | jq -r '.[].tagName' | grep -E '^v[0-9]+\.[0-9]+\.[0-9]+' | sort -V)
+            else
+              # Exclude pre-releases: get non-prerelease tags from the JSON
+              candidates=$(echo "$releases" | jq -r '.[] | select(.isPrerelease == false) | .tagName' | grep -E '^v[0-9]+\.[0-9]+\.[0-9]+$' | sort -V)
+            fi
+
+            # Find versions present on GitHub but missing from registry
+            missing=""
+            for tag in $candidates; do
+              if ! echo "$existing" | grep -qxF "$tag"; then
+                missing="$missing $tag"
+              fi
+            done
+
+            if [[ -z "$missing" ]]; then
+              echo "  up to date"
+              continue
+            fi
+
+            # Register each missing version (sorted ascending by sort -V above)
+            for version in $missing; do
+              echo "  adding $version"
+              ./register-version.sh --module "$module" --version "$version"
+            done
+
+            UPDATED="$UPDATED\n- $module: $missing"
+          done
+
+          # Export for the commit step
+          echo "UPDATED<<EOF" >> "$GITHUB_ENV"
+          echo -e "$UPDATED" >> "$GITHUB_ENV"
+          echo "EOF" >> "$GITHUB_ENV"
+
+      - name: Commit and push
+        run: |
+          if git diff --quiet registry.yaml; then
+            echo "No changes to commit"
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add registry.yaml
+          git commit -m "Update official extension versions
+
+          Updated extensions:
+          $UPDATED"
+          git push

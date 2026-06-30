@@ -227,6 +227,8 @@ jobs:
           app-id: ${{ fromJSON(steps.get-secrets.outputs.secrets).K6_EXTENSION_REGISTRY_CHANGE_NOTIFIER_ID }}
           private-key: ${{ fromJSON(steps.get-secrets.outputs.secrets).K6_EXTENSION_REGISTRY_CHANGE_NOTIFIER_PEM }}
           owner: ${{ github.repository_owner }}
+          repositories: ${{ matrix.repo }}
+          permission-contents: write
       - name: Dispatch event
         continue-on-error: true
         uses: peter-evans/repository-dispatch@28959ce8df70de7be546dd1250a005dd32156697 # v4.0.1

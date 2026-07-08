@@ -131,3 +131,13 @@
     - mcp
   versions:
     - v0.6.1
+
+# Community extensions
+
+- module: github.com/grafana/xk6-kubernetes
+  description: A k6 extension for interacting with Kubernetes clusters while testing.
+  tier: community
+  imports:
+    - k6/x/kubernetes
+  versions:
+    - v0.12.0

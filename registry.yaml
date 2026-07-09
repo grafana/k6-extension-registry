@@ -243,3 +243,11 @@
     - httpbin
   versions:
     - "v1.0.0"
+
+- module: github.com/oshokin/xk6-kv
+  description: Mutable local test-data pools, leases, and response capture for k6
+  tier: community
+  imports:
+    - k6/x/kv
+  versions:
+    - "v1.4.30"

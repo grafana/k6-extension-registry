@@ -45,6 +45,7 @@
     - k6/x/mqtt
   versions:
     - v0.3.0
+    - v0.3.2
 
 - module: github.com/grafana/xk6-redis
   description: Extension for Redis database
@@ -54,6 +55,7 @@
   versions:
     - v0.4.0
     - v0.4.2
+    - v0.4.3
 
 - module: github.com/grafana/xk6-sql
   description: Load-test SQL Servers
@@ -72,6 +74,7 @@
   versions:
     - v0.3.0
     - v0.4.0
+    - v0.4.1
 
 - module: github.com/grafana/xk6-sql-driver-postgres
   description: xk6-sql driver extension for Postgres database support
@@ -81,6 +84,7 @@
   versions:
     - v0.2.0
     - v0.3.0
+    - v0.3.1
 
 - module: github.com/grafana/xk6-ssh
   description: Use SSH connections in your tests
@@ -90,6 +94,7 @@
   versions:
     - v0.2.0
     - v0.2.2
+    - v0.2.3
 
 - module: github.com/grafana/xk6-subcommand-agent
   description: Bootstrap an AI-assisted k6 testing workflow in any editor
@@ -99,6 +104,7 @@
   versions:
     - v0.1.2
     - v0.2.0
+    - v0.2.1
 
 - module: github.com/grafana/xk6-subcommand-explore
   description: Explore k6 extensions for Automatic Resolution
@@ -108,6 +114,7 @@
   versions:
     - v1.1.0
     - v1.2.0
+    - v1.2.1
 
 - module: github.com/grafana/xk6-docs
   description: CLI k6 docs for AI agents and users
@@ -124,6 +131,7 @@
     - k6/x/tcp
   versions:
     - v0.3.0
+    - v0.3.1
 
 - module: github.com/grafana/mcp-k6
   description: An MCP server for k6 for AI agents

@@ -124,6 +124,7 @@
     - docs
   versions:
     - v0.0.9
+    - v0.0.11
 
 - module: github.com/grafana/xk6-tcp
   description: TCP protocol support for k6

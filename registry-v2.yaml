@@ -153,3 +153,13 @@
     - k6/x/kubernetes
   versions:
     - v0.12.0
+
+- module: github.com/phymbert/xk6-sse
+  description: Server Sent Event
+  tier: community
+  imports:
+    - k6/x/sse
+  versions:
+    - v0.2.0
+
+  

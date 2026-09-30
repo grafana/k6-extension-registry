@@ -163,4 +163,10 @@
   versions:
     - v0.2.0
 
-  
+- module: github.com/Dmitry-Fedotov-Dev/xk6-sip
+  description: SIP/VoIP load and call-flow testing with scripted subscribers calling each other through the PBX under test
+  tier: community
+  imports:
+    - k6/x/sip
+  versions:
+    - v0.3.0

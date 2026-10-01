@@ -85,7 +85,7 @@ jobs:
           fi
 
       - name: Setup gomplate
-        uses: jason-dour/action-setup-gomplate@81b9ca6f49d6594a118d19f0d05f6fd05372e64c # v1.1.0
+        uses: jason-dour/action-setup-gomplate@4ff4ac60c383857fed6cba1409dfde6702f05921 # v1.2.0
         env:
           GITHUB_TOKEN: ${{github.token}}
 

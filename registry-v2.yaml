@@ -171,3 +171,10 @@
   versions:
     - v0.3.0
     - v0.4.0
+- module: github.com/atul121001/mcpload/xk6-mcpload
+  description: Load and soak test MCP (Model Context Protocol) servers
+  tier: community
+  imports:
+    - k6/x/mcpload
+  versions:
+    - v0.1.2

@@ -197,7 +197,6 @@ jobs:
       matrix:
         repo:
           - k6-extension-registry-wayback
-          - k6-extension-list
           - k6-docs
 
     runs-on: ubuntu-latest
@@ -211,24 +210,11 @@ jobs:
       - publish-prod
     if: ${{ needs.publish-prod.result == 'success' }}
     steps:
-      - id: get-secrets
-        uses: grafana/shared-workflows/actions/get-vault-secrets@2f1ddaf3ce1aa677356243d0dd584be33cfa35e3 # get-vault-secrets/v2.1
-        with:
-          export_env: false
-          # Secrets placed in the ci/repo/grafana/<repo>/<path> path in Vault
-          # Also stored in 1Password as "k6 Cloud CI/CD Secrets" (Vault is write-only)
-          repo_secrets: |
-            K6_EXTENSION_REGISTRY_CHANGE_NOTIFIER_ID=k6-extension-reg-change-notifier:app_id
-            K6_EXTENSION_REGISTRY_CHANGE_NOTIFIER_PEM=k6-extension-reg-change-notifier:private_key
       - name: Generate a token
         id: generate-token
-        uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1 # v3
+        uses: grafana/shared-workflows/actions/create-github-app-token@5bbb526b1728ca57fbe1750c4c27ab6ab06171c2 # create-github-app-token/v1.0
         with:
-          app-id: ${{ fromJSON(steps.get-secrets.outputs.secrets).K6_EXTENSION_REGISTRY_CHANGE_NOTIFIER_ID }}
-          private-key: ${{ fromJSON(steps.get-secrets.outputs.secrets).K6_EXTENSION_REGISTRY_CHANGE_NOTIFIER_PEM }}
-          owner: ${{ github.repository_owner }}
-          repositories: ${{ matrix.repo }}
-          permission-contents: write
+          github_app: k6-extension-reg-change-notifier
       - name: Dispatch event
         continue-on-error: true
         uses: peter-evans/repository-dispatch@28959ce8df70de7be546dd1250a005dd32156697 # v4.0.1
